@@ -1,14 +1,15 @@
 pre {
-  background: #eee;
+  background: #f6f6f6;
   border: none;
   border-radius: 0px;
   padding: 5px;
+  -webkit-font-smoothing: normal;
 }
 
 pre code {
   display: block; padding: 0.5em;
   color: #333;
-  background: #eee;
+  background: #f6f6f6;
 }
 
 code {
