@@ -18,30 +18,51 @@ ul, li {
   list-style-type: none;
 }
 
-a {
+a, a:visited {
   color: #a00;
   text-decoration: none;
 }
 
-a:visited, a:hover {
+a:hover {
   color: #a00;
+  text-decoration: none;
+  border-bottom: 1px dotted #222;
+}
+
+header a:hover {
+  border-bottom: none;
+}
+
+img {
+  max-width: 100%;
 }
 
 .navbar {
   padding: 10px 0 10px;
-  background: #292929;
-  box-shadow: 1px 1px 5px #999;
+  background: #222;
+  box-shadow: 1px 1px 3px rgba(25, 25, 25, 50);
   border: none;
 }
 
-.pre {
-  border-radius: none;
-  border: none;
+.banner {
+  margin-top: -30px; 
+  padding: 40px;
+  width:100%;
+  height:550px;
+  background: url(/img/casey.jpg) no-repeat;
+  background-size:100% auto;
+  background-position:center;
 }
 
-.code {
-  border-radius: none;
-  border: none;
+.banner h1 {
+  text-align: center;
+  font-size: 250%;
+  color: white;
+  text-shadow: 1px 1px 10px #222;
+}
+
+.banner .jumbotron {
+  max-width:800px;margin:0 auto;padding:20px;border-radius:0px;background:none;color:white;text-shadow:1px 1px 10px #111;text-align:center;
 }
 
 .footer {
@@ -62,4 +83,24 @@ a:visited, a:hover {
 
 .monospace {
   font-family: 'Consolas' !important;
+}
+
+@media (max-width: 770px) {
+  .banner {
+    height: 380px;
+  }
+  .banner h1 {
+    font-size: 200%;
+  }
+}
+
+@media (max-width: 515px) {
+  .banner {
+    height: 300px;
+    padding: 20px;
+  }
+
+  .banner h1 {
+    font-size: 150%;
+  }
 }
