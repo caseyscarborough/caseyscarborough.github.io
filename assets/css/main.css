@@ -73,6 +73,7 @@ img {
   background: url(/assets/img/casey.jpg) no-repeat;
   background-size:100% auto;
   background-position:center;
+  box-shadow: 1px 1px 4px #999;
 }
 
 .banner h1 {
