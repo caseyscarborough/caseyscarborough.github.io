@@ -9,7 +9,7 @@ It is very common when uploading your repositories to GitHub to include a file c
 
 When working with multiple projects on GitHub, I've noticed that it is sometimes inconvenient that you cannot view the output of your markdown until your changes are pushed up to GitHub. If you make a mistake, or something is not formatted as you'd like, this can lead to unnecessary commits. To solve this issue, I've created a small Ruby gem called [`yield`](http://caseyscarborough.github.io/yield), that allows you to view the output of your markdown rendered by [GitHub's Markdown API](http://developer.github.com/v3/markdown/). 
 
-## Installing the Gem
+### Installing the Gem
 
 Installing the gem requires Ruby v1.9.3 or greater, so be sure to have that installed before the installation. To get started with [`yield`](http://caseyscarborough.github.io/yield), you can begin by running the following command to install the latest version:
 

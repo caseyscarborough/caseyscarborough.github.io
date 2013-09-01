@@ -5,10 +5,10 @@ title: Posts
 
 <div class="container">
   <div class="row">
-    <div class="col-md-1 hidden-sm"></div>
-    <div class="col-md-10">
-      <h1>Blog Posts</h1>
-      <ul class="posts">
+    <div class="col-md-2 hidden-sm"></div>
+    <div class="col-md-8">
+      <h1>Posts</h1>
+      <ul>
         {% for post in site.posts %}
           <li><span class="meta monospace">{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
         {% endfor %}

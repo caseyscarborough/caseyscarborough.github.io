@@ -22,7 +22,7 @@ This shows the amount of user CPU time, system CPU time, the sum of the user and
 <br />
 
 
-## Benchmarking with Reports
+### Benchmarking with Reports
 
 Using the `Benchmark#measure` method is good for a quick benchmark on a simple piece of code, but typically you'll want to run multiple tests and compare the results. You can do this using the `Benchmark#bm` method.
 
@@ -64,7 +64,7 @@ downto:   1.160000   0.010000   1.170000 (  1.173509)
 <br />
 
 
-## Combatting Garbage Collection
+### Combatting Garbage Collection
 
 Your benchmarks will likely differ for each run due to memory allocation costs and garbage collection. To combat this, the `Benchmark` library contains a method called `bmbm` which runs the test multiple times. Using the example from the documentation, you can see the differences between the benchmarks:
 
@@ -96,6 +96,6 @@ This will give you a more accurate representation of your benchmarks.
 <br />
 
 
-## Resources
+### Resources
 
 [Benchmark Documentation](http://www.ruby-doc.org/stdlib-1.9.3/libdoc/benchmark/rdoc/Benchmark.html)

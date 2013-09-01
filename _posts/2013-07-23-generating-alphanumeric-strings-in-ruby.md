@@ -14,7 +14,7 @@ These methods output strings with uppercase and lowercase letters, as well as nu
 
 <pre class="nohighlight"><code>rR5clIDfNV6nNsS1jp4pkaJbF9rSiUxMVwoKHTtLqaxGeioY5qJuvYVjxJzOVRjElXoGQ9ZCY04Lif0yQAd9C</code></pre>
 
-## Method 1
+### Method 1
 
 The first method is the method I have been using for quite some time to generate random strings in
 Ruby.
@@ -28,7 +28,7 @@ when broken down. The first line creates an array of characters including a-z, A
 line 2 selects a random character from the array 100 times and joins them all as a string using 
 [`Array#join`](http://www.ruby-doc.org/core-2.0/Array.html#method-i-join).
 
-## Method 2
+### Method 2
 
 The second method is the same as method 1, but uses the [`Array#sample`](http://www.ruby-doc.org/core-2.0/Array.html#method-i-sample) method to retrieve a random
 item from the array.
@@ -40,7 +40,7 @@ item from the array.
 I decided to test this one along with method 1 to see the performance difference between `Array#sample`
 and calculating the random number.
 
-## Method 3
+### Method 3
 
 The third method is by far the simplest and easiest to read.
 
@@ -52,7 +52,7 @@ This creates a range array using the ranges from before as well as the splat ope
 Then new array of size 100 is created with all random items pulled from the array, then joined together
 as a string.
 
-## Method 4
+### Method 4
 
 This is the same method as above, but using the `map` method as opposed to `Array#new`.
 
@@ -60,7 +60,7 @@ This is the same method as above, but using the `map` method as opposed to `Arra
 (0...100).map{ range.sample }.join
 </code></pre>
 
-## Method 5
+### Method 5
 
 The last method may be a little harder to decipher at first.
 
@@ -71,7 +71,7 @@ Array.new(100){ range.sample }.join
 This method creates an array of integers that map to the ASCII values for 0-9, A-Z, and a-z, respectively, and each integer is converted into its ASCII character.
 The array is then 'sampled' 100 times and joined as a string.
 
-## On to Testing
+### On to Testing
 
 Now to test the methods using the `Benchmark` module. You can certainly do this manually, but it's not
 really necessary to re-invent the wheel. Here is the code I've written up to test the methods on generating
@@ -126,7 +126,7 @@ This shows you the output of each test with the user CPU time, the system CPU ti
 the sum of the two, and the real time. The column we are most interested in is the
 real time, or the far right column.
 
-## The Verdict
+### The Verdict
 
 After running the tests, it's pretty easy to see that method 3 is the quickest, generating a 50,000,000 character long random string in just over 7 seconds on my machine. 
 
@@ -149,7 +149,7 @@ Keep in mind with these methods that the time differences are pretty negligible 
 
 It is also worth mentioning the [`SecureRandom`](http://www.ruby-doc.org/stdlib-2.0/libdoc/securerandom/rdoc/SecureRandom.html) module in Ruby handles secure random generation much quicker than these methods.
 
-## Resources
+### Resources
 
 [Ruby `Array` Documentation](http://ruby-doc.org/core-2.0/Array.html)<br />
 [Ruby `Benchmark` Documentation](http://ruby-doc.org/stdlib-1.9.3/libdoc/benchmark/rdoc/Benchmark.html)<br />
