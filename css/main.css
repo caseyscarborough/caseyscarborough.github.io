@@ -1,0 +1,34 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  padding-top: 80px;
+  font-size: 16px;
+  font-family: 'Roboto' !important;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Roboto' !important;
+  font-weight: bold;
+}
+
+.navbar {
+  padding: 10px 0 10px;
+  background: #292929;
+  box-shadow: 1px 1px 5px #999;
+  border: none;
+}
+
+.footer {
+  margin-top: 30px;
+}
+
+.footer .info {
+  float: left;
+}
+
+.footer .social {
+  float: right;
+}

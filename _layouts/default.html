@@ -8,40 +8,54 @@
 
         <!-- Bootstrap Resources -->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+        <!-- Font Resources -->
+        <link href='//fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
         <link rel="stylesheet" href="/css/syntax.css">
         <link rel="stylesheet" href="/css/main.css">
-
     </head>
     <body>
-
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">{{ site.name }}</a></h1>
-              <a class="extra" href="/">home</a>
-              <a class="extra" href="/posts.html">posts</a>
-            </div>
-
-                {{ content }}
-
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Casey Scarborough<br />
-                  <a href="mailto:caseyscarborough@gmail.com">caseyscarborough[at]gmail[dot]com</a>
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="https://github.com/caseyscarborough/">GitHub</a><br />
-                  <a href="https://linkedin.com/in/caseyscarborough">LinkedIn</a><br />
-                </p>
-              </div>
-            </div>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
           </div>
-        </div> <!-- /container -->
+          <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+              <li><a href="/">Home</a></li>
+              <li><a href="/posts.html">Posts</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
 
+      {{ content }}
+
+      <div class="container">
+        <div class="footer">
+          <div class="info">
+            <p>
+              Casey Scarborough<br />
+              <a href="mailto:caseyscarborough@gmail.com">caseyscarborough[at]gmail[dot]com</a>
+            </p>
+          </div>
+          <div class="social">
+            <p>
+              <a href="https://github.com/caseyscarborough/">GitHub</a><br />
+              <a href="https://linkedin.com/in/caseyscarborough">LinkedIn</a><br />
+            </p>
+          </div>
+        </div>
+      </div>
     </body>
 </html>
