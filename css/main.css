@@ -62,11 +62,25 @@ img {
 }
 
 .banner .jumbotron {
-  max-width:800px;margin:0 auto;padding:20px;border-radius:0px;background:none;color:white;text-shadow:1px 1px 10px #111;text-align:center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 0px;
+  background: none;
+  color: white;
+  text-shadow: 1px 1px 10px #111;
+  text-align: center;
+}
+
+.banner a.btn, 
+.banner a:hover.btn {
+  color: white;
+  border: none;
+  padding: 15px 20px;
 }
 
 .footer {
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
 .footer .info {
@@ -94,10 +108,10 @@ img {
   }
 }
 
-@media (max-width: 515px) {
+@media (max-width: 550px) {
   .banner {
     height: 300px;
-    padding: 20px;
+    padding: 0px;
   }
 
   .banner h1 {
