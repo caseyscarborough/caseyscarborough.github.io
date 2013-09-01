@@ -27,7 +27,7 @@ After installation, from any repository with a README.md file, issue the yield c
 
 This will start up a server instance using Thin, and open your browser to [localhost:4000](http://localhost:4000). You should see something in your browser similar to the following, which is the [`README.md`](https://github.com/caseyscarborough/yield/blob/master/README.md) file for the [`yield`](http://caseyscarborough.github.io/yield) gem.
 
-![screenshot]({{ site.url }}/img/readme.png)
+![screenshot]({{ site.url }}/assets/img/readme.png)
 
 You can render markdown files that are not named `README.md` by specifying the name of the file as an argument to `yield`.
 

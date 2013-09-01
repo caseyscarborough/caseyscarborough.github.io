@@ -1,4 +1,4 @@
 name: caseyscarborough.com
 markdown: redcarpet
 pygments: false
-permalink: /:year/:month/:day/:title
+permalink: /blog/:year/:month/:day/:title
