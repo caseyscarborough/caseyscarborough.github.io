@@ -1,3 +1,4 @@
 name: caseyscarborough.com
 markdown: redcarpet
-pygments: true
+pygments: false
+permalink: /:year/:month/:day/:title

@@ -14,10 +14,33 @@ h1, h2, h3, h4 {
   font-weight: bold;
 }
 
+ul, li {
+  list-style-type: none;
+}
+
+a {
+  color: #a00;
+  text-decoration: none;
+}
+
+a:visited, a:hover {
+  color: #a00;
+}
+
 .navbar {
   padding: 10px 0 10px;
   background: #292929;
   box-shadow: 1px 1px 5px #999;
+  border: none;
+}
+
+.pre {
+  border-radius: none;
+  border: none;
+}
+
+.code {
+  border-radius: none;
   border: none;
 }
 
@@ -31,4 +54,12 @@ h1, h2, h3, h4 {
 
 .footer .social {
   float: right;
+}
+
+.meta {
+  color: #999;
+}
+
+.monospace {
+  font-family: 'Consolas' !important;
 }
