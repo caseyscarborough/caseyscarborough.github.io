@@ -14,10 +14,13 @@ You can run a local copy of this site by issuing the following commands.
 ```bash
 $ git clone https://github.com/caseyscarborough/caseyscarborough.com
 $ cd caseyscarborough.com
+$ bundle install
 $ jekyll serve --watch
 ```
 
 Then navigate to [localhost:4000](http://localhost:4000) in your web browser to see the site.
+
+This also generates the static site contents into the _site directory.
 
 ## Contributing
 
