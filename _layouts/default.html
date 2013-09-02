@@ -6,15 +6,21 @@
         <title>{{ page.title }} &middot; caseyscarborough.com</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Font Resources -->
         <link href='//fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">       
-
-        <!-- CSS Resources -->
         <link rel="icon" href="/favicon.ico?v=2" type="image/png">
-        <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/assets/css/main.css">
-        <link rel="stylesheet" href="/assets/css/syntax.css">
+
+        <!-- Compiled Resources -->
+        {% css_asset_tag global %}
+        - /_assets/css/bootstrap.min.css
+        - /_assets/css/main.css.scss
+        - /_assets/css/syntax.css.scss
+        {% endcss_asset_tag %}        {% javascript_asset_tag global %}
+        - /_assets/js/jquery-1.10.1.min.js
+        - /_assets/js/bootstrap.min.js
+        - /_assets/js/highlight.min.js
+        {% endjavascript_asset_tag %}
+        <script>hljs.initHighlightingOnLoad();</script>
 
     </head>
     <body>
@@ -46,10 +52,10 @@
           </nav>
         </div>
       </header>
-      
-      {{ content }}
 
-    </div>
+{{ content }}
+
+    </div><!-- /#wrap -->
 
     <div class="container">
       <div class="row">
@@ -70,11 +76,5 @@
       </div>
     </div>
 
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-
-    <!-- Syntax Highlighting -->
-    <script src="/assets/js/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>
