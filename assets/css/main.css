@@ -110,6 +110,10 @@ img {
   border-bottom: none;
 }
 
+.github-activity {
+  border: 1px solid #ddd;
+}
+
 .footer {
   margin-top: 50px;
   text-align: center;
