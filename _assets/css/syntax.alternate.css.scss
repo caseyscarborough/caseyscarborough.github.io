@@ -1,0 +1,74 @@
+$background: #1F2324;
+$default: #eee;
+$comment: #727169;
+$symbol: #AE85FF;
+$constant: #69D9F0;
+$dollarSign: #69D9F0;
+$keymethods: #69D9F0;
+$keywords: #F72E74;
+$string: #E6DA6B;
+$number: #AE85FF;
+
+pre {
+  width: 100%;
+  display: block;
+  background: $background;
+  border: 1px solid #ddd;
+  border-radius: 0px;
+  padding: 0px;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-family: Consolas, Menlo, Monaco !important;
+  word-wrap: normal;
+
+  code {
+    width: 100%;
+    display: block; 
+    padding: 10px;
+    color: $default;
+    background: none;
+    -webkit-font-smoothing: subpixel-antialiased;
+    font-family: Consolas, Menlo, Monaco !important;
+    font-size: 115%;
+    white-space: pre;
+    overflow: auto;
+  }
+
+  .comment, .template_comment, .diff .header, .javadoc { color: $comment; }
+  .keyword, .css .rule .keyword, .winutils, .javascript .title,
+  .nginx .title, .subst, .request, .status { color: $keywords; }
+  .number { color: $number }
+  .hexcolor, .ruby .constant { color: $constant; font-style: italic;}
+  .string, .tag .value, .phpdoc, .tex .formula { color: $string; }
+  .title, .id { color: #900; }
+  .javascript .title, .lisp .title, .clojure .title, .subst { font-weight: normal }
+  .class .title, .haskell .type, .vhdl .literal, .tex .command { color: #458; }
+  .tag, .rules .property, .django .tag .keyword { color: #fff; }
+  .tag .title { color: $keywords }
+  .attribute, .variable, .lisp .body { color: #008080 }
+  .regexp { color: #009926 }
+  .class { color: #458; }
+  .keymethods { color: $keymethods; }
+  .symbol, .ruby .symbol .string, .lisp .keyword, .tex .special, .prompt, .symbol > .identifier > .keymethods { color: $symbol }
+  .built_in, .lisp .title, .clojure .built_in { color: #0086b3 }
+  .preprocessor, .pi, .doctype, .shebang, .cdata { color: #999; }
+  .deletion { background: #fdd }
+  .addition { background: #dfd }
+  .diff .change { background: #0086b3 }
+  .chunk { color: #aaa }
+  .dollar { color: $dollarSign; }
+  .subst { color: $string;}
+  .subst .identifier { color: $default; }
+}
+
+code {
+  background: none;
+  color: #a00;
+  border-radius: 0;
+  padding: 0px;
+  font-family: Consolas, Menlo, Monaco !important;
+}
+
+
+/*.symbol { color: #af69cb; }
+.ruby .number { color: #af69cb; }
+.string { color: #dedb74; }*/
