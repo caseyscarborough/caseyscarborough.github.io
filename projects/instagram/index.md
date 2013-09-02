@@ -27,15 +27,11 @@ gem 'instagram_api'
 
 And then execute:
 
-```bash
-$ bundle
-```
+<pre class="no-highlight"><code><span class="dollar">$</span> bundle</code></pre>
 
 Or install it yourself as:
 
-```bash
-$ gem install instagram_api
-```
+<pre class="no-highlight"><code><span class="dollar">$</span> gem install instagram_api</code></pre>
 
 ## Usage
 
@@ -131,9 +127,7 @@ See the [Instagram Media Endpoints](http://instagram.com/developer/endpoints/med
 
 The following is a sample application using this gem and [Sinatra](http://sinatrarb.com). Make sure that the sinatra and instagram_api gems are installed before running it.
 
-```bash
-$ gem install sinatra instagram_api
-```
+<pre class="no-highlight"><code><span class="dollar">$</span> gem install sinatra instagram_api</code></pre>
 
 Afterwards, copy the contents of the following file into a file called sample.rb and add your client ID and client secret (retrieved by registering a new application at [http://instagram.com/developer](http://instagram.com/developer)).
 
@@ -185,9 +179,7 @@ end
 
 You can then run the application by issuing the following command from the file's directory:
 
-```bash
-$ ruby sample.rb
-```
+<pre class="no-highlight"><code><span class="dollar">$</span> ruby sample.rb</code></pre>
 
 Then navigate to [localhost:4567](http://localhost:4567) to see the application in action.
 

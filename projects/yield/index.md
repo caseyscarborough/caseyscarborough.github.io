@@ -23,9 +23,7 @@ Yield is a command line utility that generates a preview of README.md and markdo
 
 Install the gem by issuing the following command:
 
-```bash
-$ gem install yield
-```
+<pre class="no-highlight"><code><span class="dollar">$</span> gem install yield</code></pre>
 
 This will also install any necessary dependencies for the gem that are not currently installed.
 
@@ -33,17 +31,13 @@ This will also install any necessary dependencies for the gem that are not curre
 
 From the root of your project, or any folder containing a README.md file, run the following command:
 
-```bash
-$ yield
-=* Yield is serving your markdown at http://localhost:4000/
-```
+<pre class="no-highlight"><code><span class="dollar">$</span> yield
+=* Yield is serving your markdown at http://localhost:4000/</code></pre>
 
 You may also specify a path to a markdown file you'd like to render, such as:
 
-```bash
-# Render a specific file
-$ yield UPDATES.md
-```
+<pre class="highlight"><code class="bash"># Render a specific file
+<span class="dollar">$</span> yield UPDATES.md</code></pre>
 
 Then navigate to [localhost:4000](http://localhost:4000) in your browser to view the preview of the file. You can stop the server by pressing Control+C.
 
@@ -51,10 +45,8 @@ Yield also supports relative URLs in the same directory, so you can preview othe
 
 Finally, you can specify the port for the server to run on using the `-p` or `--port` option:
 
-```bash
-# Run the server on port 8080
-$ yield -p 8080
-```
+<pre class="highlight"><code class="bash"># Run the server on port 8080
+<span class="dollar">$</span> yield -p 8080</code></pre>
 
 ## Potential Errors
 
@@ -69,11 +61,9 @@ SSL_connect returned=1 errno=0 state=SSLv3 read server key exchange B: bad ecpoi
 
 This error seems to be cause by a hosed installation of OpenSSL on the system. You can resolve this error by running the following commands:
 
-```bash
-$ brew install openssl
-$ brew link openssl --force
-$ rvm reinstall 2.0.0 --with-gcc=gcc
-```
+<pre class="no-highlight"><code><span class="dollar">$</span> brew install openssl
+<span class="dollar">$</span> brew link openssl --force
+<span class="dollar">$</span> rvm reinstall 2.0.0 --with-gcc=gcc</code></pre>
 
 If this does not work for you, see the following links, which address the same issue:
 

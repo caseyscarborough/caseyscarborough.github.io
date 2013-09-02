@@ -29,13 +29,13 @@ This application uses the following system dependencies:
 
 If you'd like to run the application locally or contribute to the application, begin by cloning the application and installing necessary dependencies:
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> git clone http://github.com/caseyscarborough/slinky.git
+<pre class="no-highlight"><code><span class="dollar">$</span> git clone http://github.com/caseyscarborough/slinky.git
 <span class="dollar">$</span> cd slinky
 <span class="dollar">$</span> bundle install</code></pre>
 
 Afterwards, create and migrate the database and fire up the rails development server.
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> rake db:migrate
+<pre class="no-highlight"><code><span class="dollar">$</span> rake db:migrate
 <span class="dollar">$</span> rails server
 </code></pre>
 

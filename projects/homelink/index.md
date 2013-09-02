@@ -54,14 +54,14 @@ Running the Application
 -----------------------
 
 To run the application, download the repository and unzip it or clone the repository to your local machine using the following command:
-```
-git clone http://github.com/caseyscarborough/homelink.git
-```
+
+<pre class="no-highlight"><code><span class="dollar">$</span> git clone http://github.com/caseyscarborough/homelink.git
+<span class="dollar">$</span> cd homelink</code></pre>
+
 Run the following commands from a terminal window with the <code>homelink</code> directory as the working directory:
-```
-grails upgrade  # If your version of Grails is greater than 2.2.2
-grails run-app
-```
+
+<pre class="no-highlight"><code><span class="dollar">$</span> grails upgrade  # If your version of Grails is greater than 2.2.2
+<span class="dollar">$</span> grails run-app</code></pre>
 
 After running the commands, you can navigate to [http://localhost:8080/homelink][homelink] in your web browser to see the application in action.
 

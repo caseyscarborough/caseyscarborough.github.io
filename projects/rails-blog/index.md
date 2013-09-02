@@ -27,7 +27,7 @@ If you'd like to check out the application or contribute to it, follow the instr
 
 Clone the repository and use the bundle command to install dependencies.
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> git clone http://github.com/caseyscarborough/rails-blog.git
+<pre class="no-highlight"><code><span class="dollar">$</span> git clone http://github.com/caseyscarborough/rails-blog.git
 <span class="dollar">$</span> cd rails-blog
 <span class="dollar">$</span> bundle install
 </code></pre>
@@ -39,13 +39,13 @@ file and enter the information for your admin user's account.
 
 ```ruby
 User.create({
-  username: 'caseyscarborough',
-  email: 'casey@caseyscarborough.com',
-  first_name: 'Casey',
-  last_name: 'Scarborough',
-  password: 'password',
-  password_confirmation: 'password',
-  is_admin: true
+  :username   => 'caseyscarborough',
+  :email      => 'casey@caseyscarborough.com',
+  :first_name => 'Casey',
+  :last_name  => 'Scarborough',
+  :password   => 'password',
+  :password_confirmation => 'password',
+  :is_admin   => true
 })
 ```
 
@@ -61,7 +61,7 @@ Then proceed to migrate, create admin user, populate the database with sample da
 run the rails server. See the [lib/tasks/sample_data.rake](https://github.com/caseyscarborough/rails-blog/blob/master/lib/tasks/sample_data.rake)
 file for more info about the database population task.
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> rake db:migrate db:seed db:populate
+<pre class="no-highlight"><code><span class="dollar">$</span> rake db:migrate db:seed db:populate
 <span class="dollar">$</span> rails server
 </code></pre>
 
@@ -72,7 +72,7 @@ Then navigate to [http://localhost:3000](http://localhost:3000) in your web brow
 The tests are built using the [RSpec](http://rspec.info/) testing framework and can be run by issuing the
 following command from the project root:
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> rspec spec</code></pre>
+<pre class="no-highlight"><code><span class="dollar">$</span> rspec spec</code></pre>
 
 ## To-Do
 

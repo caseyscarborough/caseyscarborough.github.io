@@ -27,6 +27,10 @@ h1, h2, h3, h4 {
   font-weight: bold;
 }
 
+h4 {
+  margin-top: 15px;
+}
+
 ul, li {
   list-style-type: none;
   padding-left: 0px;

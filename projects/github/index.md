@@ -21,9 +21,7 @@ Full documentation for the gem can be found at [rdoc.info/gems/github_api_v3/fra
 
 To install the gem, issue the following command:
 
-```bash
-$ gem install github_api_v3
-```
+<pre class="no-highlight"><code><span class="dollar">$</span> gem install github_api_v3</code></pre>
 
 ## Usage
 
