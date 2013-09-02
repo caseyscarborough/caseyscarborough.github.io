@@ -49,13 +49,13 @@ li {
 }
 
 .project {
-  li {
-    list-style-type: disc;
-  }
+  li { list-style-type: disc; }
+  ul { padding-left: 20px; }
+}
 
-  ul {
-    padding-left: 20px;
-  }
+.post {
+  li { list-style-type: disc; }
+  ul { padding-left: 20px; }
 }
 
 a, a:visited {

@@ -67,4 +67,9 @@ That's it! The final step is to deploy your site.
 
 <pre class="highlight"><code class="bash"><span class="dollar">$</span> git push origin master</code></pre>
 
-Your repository will then be pushed to your remote server, and your files will be in the `www` directory created earlier. This will greatly increase the ease of future deployments, as well as help by keeping your site versioned.
+Your repository will then be pushed to your remote server, and your files will be in the `www` directory created earlier. This will greatly increase the ease of future deployments, as well as help by keeping your site versioned. The last step is just to make sure your server's Virtual Host configuration points to your `www` directory.
+
+### Resources
+
+* [Git](http://git-scm.org)
+* [Git Hooks](http://git-scm.com/book/ch7-3.html)
