@@ -8,7 +8,8 @@ group: Blog
   <div class="row">
     <div class="col-md-2 hidden-sm"></div>
     <div class="col-md-8">
-      <h1>Posts</h1>
+      <h1>Blog</h1>
+      <h4 class="meta">Posts that I've written.</h4>
       <ul>
         {% for post in site.posts %}
           <li><span class="meta monospace">{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
