@@ -1,21 +1,28 @@
 pre {
-  background: #f6f6f6;
-  border: none;
+  width: 100%;
+  display: block;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
   border-radius: 0px;
-  padding: 5px;
+  padding: 0px;
   -webkit-font-smoothing: normal;
   font-family: Consolas, Menlo, Monaco !important;
+  word-wrap: normal;
 
   code {
-    display: block; padding: 0.5em;
-    color: #333;
-    background: #f6f6f6;
+    width: 100%;
+    display: block; 
+    padding: 10px;
+    color: #222;
+    background: #f9f9f9;
     font-family: Consolas, Menlo, Monaco !important;
     font-size: 115%;
+    white-space: pre;
+    overflow: auto;
   }
 
   .comment, .template_comment, .diff .header, .javadoc {
-    color: #998;
+    color: #888;
     font-style: italic
   }
   .keyword, .css .rule .keyword, .winutils, .javascript .title,
