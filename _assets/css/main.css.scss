@@ -1,6 +1,9 @@
 $navbarColor: #1F2324;
 $linkColor: #a00;
 $backgroundColor: #fff;
+$btnColor: #428bca;
+$btnBorderColor: #357ebd;
+$btnHoverColor: #3276b1;
 
 html, body {
   width: 100%;
@@ -74,6 +77,14 @@ img {
   max-width: 100%;
 }
 
+.btn-primary {
+  background-color: $btnColor;
+  border-color: $btnBorderColor;
+  &:hover {
+    background-color: $btnHoverColor;
+  }
+}
+
 .navbar {
   padding: 8px 0;
   background: $navbarColor;
@@ -88,7 +99,7 @@ img {
     margin-left: 8%;
   }
   .nav .active > a {
-    border-bottom: 2px solid #a00;
+    border-bottom: 2px solid $linkColor;
     background: none;
     box-shadow: none;
   }
@@ -182,7 +193,7 @@ img {
     }
     .nav .active > a {
       border-bottom: none;
-      border-left: 3px solid #a00;
+      border-left: 3px solid $linkColor;
       margin-left: 6px;
     }
     .nav a {
