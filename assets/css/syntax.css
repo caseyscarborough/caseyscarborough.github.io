@@ -4,12 +4,15 @@ pre {
   border-radius: 0px;
   padding: 5px;
   -webkit-font-smoothing: normal;
+  font-family: Consolas, Menlo, Monaco !important;
 }
 
 pre code {
   display: block; padding: 0.5em;
   color: #333;
   background: #f6f6f6;
+  font-family: Consolas, Menlo, Monaco !important;
+  font-size: 120%;
 }
 
 code {
@@ -17,11 +20,7 @@ code {
   color: #a00;
   border-radius: 0;
   padding: 0px;
-  width: auto;
-  min-width: 0px; 
-  overflow-x:scroll;   
-  position: relative;
-  min-height: 100%;
+  font-family: Consolas, Menlo, Monaco !important;
 }
 
 pre .comment,
