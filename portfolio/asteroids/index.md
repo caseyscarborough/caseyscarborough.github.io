@@ -1,6 +1,7 @@
 ---
 layout: project
 title: Projects &middot; Asteroids
+group: Portfolio
 ---
 
 Asteroids in Java

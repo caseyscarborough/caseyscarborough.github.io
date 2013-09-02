@@ -28,14 +28,18 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Casey Scarborough</a>
+            <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
           </div>
           <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
             <ul class="nav navbar-nav">
-              <li><a href="/">Home</a></li>
-              <li><a href="/about/">About</a></li>
-              <li><a href="/portfolio/">Portfolio</a></li>
-              <li><a href="/blog/">Blog</a></li>
+            {% if page.group == "Home" %}<li class="active"><a href="/">Home</a></li>
+            {% else %}<li><a href="/">Home</a></li>{% endif %}
+            {% if page.group == "About" %}<li class="active"><a href="/about/">About</a></li>
+            {% else %}<li><a href="/about/">About</a></li>{% endif %}
+            {% if page.group == "Portfolio" %}<li class="active"><a href="/portfolio/">Portfolio</a></li>
+            {% else %}<li><a href="/portfolio/">Portfolio</a></li>{% endif %}
+            {% if page.group == "Blog" %}<li class="active"><a href="/blog/">Blog</a></li>
+            {% else %}<li><a href="/blog/">Blog</a></li>{% endif %}
             </ul>
           </nav>
         </div>
