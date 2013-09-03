@@ -29,24 +29,23 @@ body {
   padding: 0 0 60px;
 }
 
+.content {
+  display: none;
+}
 
 h1, h2, h3, h4 {
   font-family: 'Roboto' !important;
   font-weight: bold;
 }
 
-h4 {
-  margin-top: 15px;
-}
+h4 { margin-top: 15px; }
 
 ul, li {
   list-style-type: none;
   padding-left: 0px;
 }
 
-li {
-  line-height: 1.8em;
-}
+li { line-height: 1.8em; }
 
 .project {
   li { list-style-type: disc; }
@@ -61,6 +60,10 @@ li {
 a, a:visited {
   color: $linkColor;
   text-decoration: none;
+  -webkit-transition: color 0.2s ease-in-out;
+     -moz-transition: color 0.2s ease-in-out;
+       -o-transition: color 0.2s ease-in-out;
+          transition: color 0.2s ease-in-out;
 }
 
 a:hover {
@@ -73,13 +76,17 @@ header a:hover {
   border-bottom: none;
 }
 
-img {
-  max-width: 100%;
-}
+img { max-width: 100%; }
 
 .btn-primary {
   background-color: $btnColor;
   border-color: $btnBorderColor;
+  color: white;
+  font-weight: bold;
+  -webkit-transition: background-color 0.5s, border-color 0.5s;
+     -moz-transition: background-color 0.5s, border-color 0.5s;
+       -o-transition: background-color 0.5s, border-color 0.5s;
+          transition: background-color 0.5s, border-color 0.5s;
   &:hover {
     background-color: $btnHoverColor;
   }
@@ -103,9 +110,7 @@ img {
     background: none;
     box-shadow: none;
   }
-  .nav .active > a:hover {
-    background: none;
-  }
+  .nav .active > a:hover { background: none; }
 }
 
 .banner {
@@ -142,18 +147,14 @@ img {
   }
 }
 
-.github-activity {
-  border: 1px solid #ddd;
-}
+.github-activity { border: 1px solid #ddd; }
 
 .footer {
   height: 60px;
   text-align: right;
   padding-top: 20px;
 
-  a {
-    color: $linkColor;
-  }
+  a { color: $linkColor; }
 
   .icons a {
     font-size: 22px;
@@ -166,39 +167,27 @@ img {
   }
 }
 
-.meta {
-  color: #999;
-}
+.meta { color: #888; }
 
-.monospace {
-  font-family: 'Consolas' !important;
-}
+.monospace { font-family: 'Consolas' !important; -webkit-font-smoothing: subpixel-antialiased; }
 
-.justified {
-  text-align: justify;
-}
+.justified { text-align: justify; }
 
 @media (max-width: 767px) {
   .banner {
     height: 360px;
 
-    h1 {
-      font-size: 200%;
-    }
+    h1 { font-size: 200%; }
   }
 
   .navbar-inverse {
-    a.navbar-brand {
-      margin-left: 0;
-    }
+    a.navbar-brand { margin-left: 0; }
     .nav .active > a {
       border-bottom: none;
       border-left: 3px solid $linkColor;
       margin-left: 6px;
     }
-    .nav a {
-      margin-left: 9px;
-    }
+    .nav a { margin-left: 9px; }
   }
 }
 
@@ -206,12 +195,8 @@ img {
   .banner {
     height: 270px;
     padding: 0px;
-    h1 {
-      font-size: 150%;
-    }
-    a.btn {
-      padding: 10px 15px;
-    }
+    h1 { font-size: 150%; }
+    a.btn { padding: 10px 15px;}
   }
 }
 
@@ -223,11 +208,7 @@ img {
       font-size: 120%;
       margin-bottom: 20px;
     }
-    a.btn {
-      padding: 6px 10px;
-    }
-    .jumbotron {
-      padding: 10px;
-    }
+    a.btn { padding: 6px 10px; }
+    .jumbotron { padding: 10px; }
   }
 }
