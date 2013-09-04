@@ -149,6 +149,44 @@ img { max-width: 100%; }
 
 .github-activity { border: 1px solid #ddd; }
 
+#contact-name, #contact-email, #contact-message {
+  padding: 10px;
+  font-size: 24px;
+  line-height: 36px;
+  border-radius: 10px;
+  width: 70%;
+  border: 3px solid #ddd;
+  outline: none;
+  margin-bottom: 10px;
+  background: #f6f6f6;
+  -webkit-transition: background-color 0.5s, box-shadow 0.5s;
+     -moz-transition: background-color 0.5s, box-shadow 0.5s;
+       -o-transition: background-color 0.5s, box-shadow 0.5s;
+          transition: background-color 0.5s, box-shadow 0.5s;
+  &:focus {
+    background-color: white;
+    box-shadow: 0 0 10px #999;
+  }
+}
+
+#contact-message {
+  height: 200px;
+  resize: none;
+}
+
+#contact-submit {
+  outline: none;
+}
+
+.success, .warning, .error {
+  width: 70%;
+}
+
+.alert {
+  border-radius: 10px;
+  border: none;
+}
+
 .footer {
   height: 60px;
   text-align: right;
