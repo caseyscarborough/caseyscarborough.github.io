@@ -159,13 +159,17 @@ img { max-width: 100%; }
   outline: none;
   margin-bottom: 10px;
   background: #f6f6f6;
-  -webkit-transition: background-color 0.5s, box-shadow 0.5s;
-     -moz-transition: background-color 0.5s, box-shadow 0.5s;
-       -o-transition: background-color 0.5s, box-shadow 0.5s;
+  -webkit-transition: background-color 0.5s, -webkit-box-shadow 0.5s;
+     -moz-transition: background-color 0.5s, -moz-box-shadow 0.5s;
+       -o-transition: background-color 0.5s, -o-box-shadow 0.5s;
           transition: background-color 0.5s, box-shadow 0.5s;
   &:focus {
     background-color: white;
-    box-shadow: 0 0 10px #999;
+    -webkit-box-shadow: 0 0 10px #999;
+       -moz-box-shadow: 0 0 10px #999;
+            box-shadow: 0 0 10px #999;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=7, Direction=135, Color='#999999')";
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=7, Direction=135, Color='#999999');
   }
 }
 
