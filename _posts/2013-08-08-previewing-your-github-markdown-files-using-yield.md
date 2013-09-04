@@ -48,7 +48,7 @@ Check out the repository on GitHub for the latest updates and to view the source
 
 ### Resources
 
-[`yield` homepage](http://caseyscarborough.github.io/yield)<br />
+[`yield` homepage](http://caseyscarborough.com/projects/yield)<br />
 [`yield` source code on GitHub](https://github.com/caseyscarborough/yield)<br />
 [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax)<br />
 [GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown)<br />
