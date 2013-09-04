@@ -240,6 +240,9 @@ img { max-width: 100%; }
     h1 { font-size: 150%; }
     a.btn { padding: 10px 15px;}
   }
+  #contact-name, #contact-email, #contact-message, .alert {
+    width: 100%;
+  }
 }
 
 @media (max-width: 410px) {
