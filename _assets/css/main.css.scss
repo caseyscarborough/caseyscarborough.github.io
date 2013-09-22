@@ -209,6 +209,10 @@ img { max-width: 100%; }
   }
 }
 
+blockquote {
+  p {font-size: 90%;}
+  color: #999;
+}
 .meta { color: #888; }
 
 .monospace { font-family: 'Consolas' !important; -webkit-font-smoothing: subpixel-antialiased; }
