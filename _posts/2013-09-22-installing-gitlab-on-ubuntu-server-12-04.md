@@ -225,3 +225,36 @@ admin@local.host
 ```
 
 If you have any issues with the installation, feel free to leave a comment below, or check out the [GitLab Troubleshooting Guide](https://github.com/gitlabhq/gitlab-public-wiki/wiki/Trouble-Shooting-Guide).
+
+### Note
+
+On each installation I've performed with GitLab I was unable to push to the remote repository via SSH. Every time I tried, the following error occurred:
+
+<pre class="highlight"><code class="bash"><span class="dollar">$</span> git push -u origin master
+/usr/local/lib/ruby/2.0.0/net/http.rb:878:in `initialize': Connection timed out - connect(2) (Errno::ETIMEDOUT)
+  from /usr/local/lib/ruby/2.0.0/net/http.rb:878:in `open'
+  from /usr/local/lib/ruby/2.0.0/net/http.rb:878:in `block in connect'
+  from /usr/local/lib/ruby/2.0.0/timeout.rb:52:in `timeout'
+  from /usr/local/lib/ruby/2.0.0/net/http.rb:877:in `connect'
+  from /usr/local/lib/ruby/2.0.0/net/http.rb:862:in `do_start'
+  from /usr/local/lib/ruby/2.0.0/net/http.rb:851:in `start'
+  from /home/git/gitlab-shell/lib/gitlab_net.rb:62:in `get'
+  from /home/git/gitlab-shell/lib/gitlab_net.rb:17:in `allowed?'
+  from /home/git/gitlab-shell/lib/gitlab_shell.rb:60:in `validate_access'
+  from /home/git/gitlab-shell/lib/gitlab_shell.rb:23:in `exec'
+  from /home/git/gitlab-shell/bin/gitlab-shell:16:in `main'
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+</code></pre>
+
+This happened when I my SSH keys were added and everything was set up properly. After much research, I finally resolved the issue by editing the `/etc/hosts` file and replacing the following line:
+
+<pre class="highlight"><code class="bash">127.0.0.1       localhost</code></pre>
+
+with (replace `gitlab.example.com` with your server's name):
+
+<pre class="highlight"><code class="bash">127.0.0.1       gitlab.example.com</code></pre>
+
+If you encounter this issue, this should resolve it for you.
