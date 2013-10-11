@@ -19,6 +19,10 @@ body {
   background: $backgroundColor;
 }
 
+small {
+  line-height: 1em;
+}
+
 #wrap {
   min-height: 100%;
   height: auto !important;
@@ -45,7 +49,10 @@ ul, li {
   padding-left: 0px;
 }
 
-li { line-height: 1.8em; }
+li {
+  line-height: 1.4em;
+  padding-bottom: 8px;
+}
 
 .project {
   li { list-style-type: disc; }
