@@ -1,14 +1,14 @@
 $(document).ready(function() {
-  $('.content').fadeIn(400);
+  // $('.content').fadeIn(400);
 
-  // Capture link click events
-  $('a').click(function(event) {
-    link = this.href;
-    if(link.indexOf('/') === 0 && link !== document.URL) {
-      event.preventDefault();  // Prevent the default action
-      $('.content').fadeOut(400, redirectPage); // Fade out content and redirect
-    }
-  });
+  // // Capture link click events
+  // $('a').click(function(event) {
+  //   link = this.href;
+  //   if(link.indexOf('/') === 0 && link !== document.URL) {
+  //     event.preventDefault();  // Prevent the default action
+  //     $('.content').fadeOut(400, redirectPage); // Fade out content and redirect
+  //   }
+  // });
 
   function redirectPage() {
     window.location = link;
