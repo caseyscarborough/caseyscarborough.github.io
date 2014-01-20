@@ -11,13 +11,39 @@ title: Projects &middot; libcrypt
 
 libcrypt is a simple library used for encryption, hashing, and encoding in C. It is currently a work in progress.
 
+## Using the Library
+
+To use the library, include the [`crypt.h`](https://github.com/caseyscarborough/libcrypt/blob/master/crypt.h) and [`crypt.c`](https://github.com/caseyscarborough/libcrypt/blob/master/crypt.c) files in your project. Then, include the [`crypt.h`](https://github.com/caseyscarborough/libcrypt/blob/master/crypt.h) file at the top of each file you'd like to use it's methods in. See [`test.c`](https://github.com/caseyscarborough/libcrypt/blob/master/test.c) for example usage.
+
+To run the test file or the Base64 converter, run `make` from the project directory.
+
+### Base64 Converter
+
+Included in this library is a Base64 file converter utility, located in the file [`b64.c`](https://github.com/caseyscarborough/libcrypt/blob/master/b64.c). This utility will convert the contents of a file to or from Base64 encoded data.
+
+```bash
+# Build the executables
+make
+
+# Encode a file
+./b64 -e input.txt output.txt
+
+# Decode a file
+./b64 -e encoded.txt decoded.txt
+
+# Print the help menu
+./b64 -h
+```
+
 ## Methods
+
+The following methods are available in the [libcrypt](https://github.com/caseyscarborough/libcrypt) library. _Note that these methods return pre-allocated blocks of memory, and it is up to the user of the method to free the memory after use (shown below)._
 
 #### rot13
 
 This method encodes a string of text using the [ROT13](http://en.wikipedia.org/wiki/ROT13) cipher.
 
-```cpp
+```c
 char *text = "The Quick Brown Fox Jumps Over The Lazy Dog.";
 char *rot13_encoded_text = rot13(text);
 
@@ -31,7 +57,7 @@ free(rot13_encoded_text);
 
 This method encodes a string of text using the [ROT47](http://en.wikipedia.org/wiki/ROT47#Variants) cipher.
 
-```cpp
+```c
 char *text = "The Quick Brown Fox Jumps Over The Lazy Dog.";
 char *rot47_encoded_text = rot13(text);
 
@@ -45,7 +71,7 @@ free(rot47_encoded_text);
 
 This method encodes text using the [Base64](http://en.wikipedia.org/wiki/Base64) encoding scheme.
 
-```cpp
+```c
 char *text = "The Quick Brown Fox Jumps Over The Lazy Dog.";
 char *base64_encoded_text = base64_encode(text);
 printf("%s\n", base64_encoded_text);
@@ -58,7 +84,7 @@ free(base64_encoded_text);
 
 This method decodes [Base64](http://en.wikipedia.org/wiki/Base64) encoded text.
 
-```cpp
+```c
 char *text = "VGhpcyBpcyBzb21lIGR1bW15IHRleHQgdG8gYmUgZW5jb2RlZCBhbmQgZGVjb2RlZC4=";
 char *base64_decoded_text = base64_decode(text);
 printf("%s\n", base64_decoded_text);
@@ -66,7 +92,3 @@ printf("%s\n", base64_decoded_text);
 
 free(base64_decoded_text);
 ```
-
-## Using the Library
-
-To use the library, include the `crypt.h` and `crypt.c` files in your project. Then, include the `crypt.h` file at the top of each file you'd like to use it's methods in. See `test.c` for example usage.
