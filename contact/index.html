@@ -37,37 +37,40 @@ group: Contact
 <script>
 
 $(document).ready(function(){
-    $("#contact-submit").click(function() {
-      var name = $("#contact-name").val();
-      var email = $("#contact-email").val();
-      var message = $("#contact-message").val();
-      var dataString = 'name='+ name + '&email=' + email + '&message=' + message;
-      
-      if(name=='' || email=='' || message=='') {
-        displayError("All text fields are required for submission.")
-      } else if (!isValidEmailAddress(email)) {
-        displayError("You must enter a valid email address.");
-      } else {
-        $.ajax({
-          type: "post",
-          url: "contact.php",
-          data: dataString,
-          success: function(){
-            $("#contact-name").val("");
-            $("#contact-email").val("");
-            $("#contact-message").val("");
-            $('.success').fadeIn(400).show();
-            $('.error').fadeOut(200).hide();
-            setTimeout(function(){$(".success").fadeOut(500);}, 2000);
-          },
-          error: function(){
-            $('.error').fadeIn(400).show();
-            setTimeout(function(){$(".error").fadeOut(500);}, 2000);
-          }
-        });
-      }
-      return false;
-    });
+  // Autofocus the name field on page load
+  $("#contact-name").focus();
+
+  $("#contact-submit").click(function() {
+    var name = $("#contact-name").val();
+    var email = $("#contact-email").val();
+    var message = $("#contact-message").val();
+    var dataString = 'name='+ name + '&email=' + email + '&message=' + message;
+    
+    if(name=='' || email=='' || message=='') {
+      displayError("All text fields are required for submission.")
+    } else if (!isValidEmailAddress(email)) {
+      displayError("You must enter a valid email address.");
+    } else {
+      $.ajax({
+        type: "post",
+        url: "contact.php",
+        data: dataString,
+        success: function(){
+          $("#contact-name").val("");
+          $("#contact-email").val("");
+          $("#contact-message").val("");
+          $('.success').fadeIn(400).show();
+          $('.error').fadeOut(200).hide();
+          setTimeout(function(){$(".success").fadeOut(500);}, 2000);
+        },
+        error: function(){
+          $('.error').fadeIn(400).show();
+          setTimeout(function(){$(".error").fadeOut(500);}, 2000);
+        }
+      });
+    }
+    return false;
+  });
 });
 
 function isValidEmailAddress(emailAddress) {
