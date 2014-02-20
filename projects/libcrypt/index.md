@@ -9,31 +9,13 @@ title: Projects &middot; libcrypt
 <i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/libcrypt/tarball/master">Download .tar.gz</a> &nbsp; 
 <i class="icon-github"></i> <a href="https://github.com/caseyscarborough/libcrypt">View on GitHub</a>
 
-libcrypt is a simple library used for encryption, hashing, and encoding in C. It is currently a work in progress.
+libcrypt is a simple library used for encryption, hashing, and encoding in C.
 
 ## Using the Library
 
-To use the library, include the [`crypt.h`](https://github.com/caseyscarborough/libcrypt/blob/master/crypt.h) and [`crypt.c`](https://github.com/caseyscarborough/libcrypt/blob/master/crypt.c) files in your project. Then, include the [`crypt.h`](https://github.com/caseyscarborough/libcrypt/blob/master/crypt.h) file at the top of each file you'd like to use it's methods in. See [`test.c`](https://github.com/caseyscarborough/libcrypt/blob/master/test.c) for example usage.
+To use the library, include the [`crypt.h`](https://github.com/caseyscarborough/libcrypt/blob/master/src/crypt.h) and [`crypt.c`](https://github.com/caseyscarborough/libcrypt/blob/master/src/crypt.c) files in your project. Then, include the [`crypt.h`](https://github.com/caseyscarborough/libcrypt/blob/master/src/crypt.h) file at the top of each file you'd like to use it's methods in. See [`test/crypt-test.c`](https://github.com/caseyscarborough/libcrypt/blob/master/test/crypt-test.c) for example usage.
 
 To run the test file or the Base64 converter, run `make` from the project directory.
-
-### Base64 Converter
-
-Included in this library is a Base64 file converter utility, located in the file [`b64.c`](https://github.com/caseyscarborough/libcrypt/blob/master/b64.c). This utility will convert the contents of a file to or from Base64 encoded data.
-
-```bash
-# Build the executables
-make
-
-# Encode a file
-./b64 -e input.txt output.txt
-
-# Decode a file
-./b64 -e encoded.txt decoded.txt
-
-# Print the help menu
-./b64 -h
-```
 
 ## Methods
 
@@ -104,4 +86,58 @@ printf("%s\n", md5_text);
 // Outputs: e4d909c290d0fb1ca068ffaddf22cbd0
 
 free(md5_text);
+```
+
+## Utilities
+
+### Base64 Converter
+
+Included in this library is a Base64 file converter utility, located in the file [`utils/b64.c`](https://github.com/caseyscarborough/libcrypt/blob/master/utils/b64.c). This utility will convert the contents of a file to or from Base64 encoded data.
+
+```bash
+# Build the executables
+$ make && cd bin
+
+# Encode a file
+$ ./b64 -e input.txt output.txt
+
+# Decode a file
+$ ./b64 -e encoded.txt decoded.txt
+
+# Print the help menu
+$ ./b64 -h
+```
+
+### MD5 Hasher
+
+The MD5 Hasher utility is located in the file [`utils/md5.c`](https://github.com/caseyscarborough/libcrypt/blob/master/utils/md5.c). This utility will MD5 hash the contents of a file or a string.
+
+```bash
+$ make && cd bin
+
+# Hash a string
+$ ./md5 -s "The quick brown fox jumps over the lazy dog."
+e4d909c290d0fb1ca068ffaddf22cbd0
+
+# Hash a file's contents
+$ ./md5 -f sample.txt
+322a166e1402bd9ff18e1ce67fe69e61  sample.txt
+
+# Print the help menu
+$ ./md5 -h
+```
+
+Either of these compiled utilities can then be copied to somewhere in your __PATH__ to be available from anywhere.
+
+## Running the Tests
+
+Tests are written using the [Check](http://check.sourceforge.net/) unit testing framework. The tests are located at [`crypt-test.c`](https://github.com/caseyscarborough/libcrypt/blob/master/test/crypt-test.c), and can be compiled using `make test`. The check library [needs to be installed](http://check.sourceforge.net/web/install.html).
+
+```bash
+make test
+# gcc -Wall test/crypt-test.c -o test/crypt-test -lcheck
+
+test/crypt-test
+# Running suite(s): Core
+# 100%: Checks: 12, Failures: 0, Errors: 0
 ```
