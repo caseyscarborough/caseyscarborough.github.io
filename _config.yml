@@ -3,3 +3,6 @@ markdown: redcarpet
 pygments: false
 permalink: /blog/:year/:month/:day/:title
 exclude: [Gemfile, Gemfile.lock, README.md, script]
+assets:
+  js_compressor: uglifier
+  css_compressor: sass

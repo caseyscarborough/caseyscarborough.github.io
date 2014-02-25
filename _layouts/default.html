@@ -5,28 +5,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>{{ page.title }} &middot; caseyscarborough.com</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="/favicon.ico?v=2" type="image/png">
+        <link rel="icon" href="/favicon.ico" type="image/png">
 
         <!-- Stylesheets -->
-        <link href='//fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+        <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Roboto' type='text/css'>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        {% stylesheet app %}
 
         <!-- Javascripts -->
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-
-        <!-- Compiled Resources -->
-        {% css_asset_tag global %}
-        - /_assets/css/main.css.scss
-        - /_assets/css/syntax.css.scss
-        {% endcss_asset_tag %}        {% javascript_asset_tag global %}
-        - /_assets/js/highlight.min.js
-        - /_assets/js/main.js
-        {% endjavascript_asset_tag %}
+        {% javascript app %}
         <script>hljs.initHighlightingOnLoad();</script>
-
     </head>
     <body>
 

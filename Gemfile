@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
 gem 'jekyll', '~> 1.1'
-gem 'jekyll-asset-pipeline', :github => 'caseyscarborough/jekyll-asset-pipeline'
+gem 'jekyll-assets'
 gem 'sass'
 gem 'redcarpet'
+gem 'uglifier'
