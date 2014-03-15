@@ -25,7 +25,7 @@ The following methods are available in the [libcrypt](https://github.com/caseysc
 
 This method encodes a string of text using the [ROT13](http://en.wikipedia.org/wiki/ROT13) cipher.
 
-```c
+```cpp
 char *text = "The Quick Brown Fox Jumps Over The Lazy Dog.";
 char *rot13_encoded_text = rot13(text);
 
@@ -39,7 +39,7 @@ free(rot13_encoded_text);
 
 This method encodes a string of text using the [ROT47](http://en.wikipedia.org/wiki/ROT47#Variants) cipher.
 
-```c
+```cpp
 char *text = "The Quick Brown Fox Jumps Over The Lazy Dog.";
 char *rot47_encoded_text = rot13(text);
 
@@ -53,7 +53,7 @@ free(rot47_encoded_text);
 
 This method encodes text using the [Base64](http://en.wikipedia.org/wiki/Base64) encoding scheme.
 
-```c
+```cpp
 char *text = "The Quick Brown Fox Jumps Over The Lazy Dog.";
 char *base64_encoded_text = base64_encode(text);
 printf("%s\n", base64_encoded_text);
@@ -66,7 +66,7 @@ free(base64_encoded_text);
 
 This method decodes [Base64](http://en.wikipedia.org/wiki/Base64) encoded text.
 
-```c
+```cpp
 char *text = "VGhpcyBpcyBzb21lIGR1bW15IHRleHQgdG8gYmUgZW5jb2RlZCBhbmQgZGVjb2RlZC4=";
 char *base64_decoded_text = base64_decode(text);
 printf("%s\n", base64_decoded_text);
@@ -79,7 +79,7 @@ free(base64_decoded_text);
 
 This method hashes a given string using the [MD5](http://en.wikipedia.org/wiki/MD5) hashing algorithm.
 
-```c
+```cpp
 char *text = "The quick brown fox jumps over the lazy dog."
 char *md5_text = md5(text);
 printf("%s\n", md5_text);
@@ -92,10 +92,11 @@ free(md5_text);
 
 This method This method generates a version 4 [Universally Unique Identifier](http://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_.28random.29), which is randomly generated.
 
-```c
-char *uuid = generate_uuid();
+```cpp
+char *uufid = generate_uuid();
 printf("%s\n", uuid);
 // Outputs 3586BD54-55C8-42D8-BE0E-74308A5B9D22
+
 free(uuid);
 ```
 
