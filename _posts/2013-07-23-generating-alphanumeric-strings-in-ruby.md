@@ -6,7 +6,7 @@ categories: [programming, ruby]
 ---
 
 In multiple projects I've worked on, I've occasionally had the need to generate a random alphanumeric string
-using Ruby. There are multiple ways to do this, but my [previous post](/2013/07/22/benchmarking-your-ruby-code/) on benchmarking led me to question the efficiency of how I'd been doing it. In this post, I'll show and 
+using Ruby. There are multiple ways to do this, but my [previous post](/blog/2013/07/22/benchmarking-your-ruby-code/) on benchmarking led me to question the efficiency of how I'd been doing it. In this post, I'll show and 
 explain a few different methods, as well as benchmark them and give the results. The methods in this post are
 not completely conclusive on ways to generate strings, just a few that I've come up with.
 
