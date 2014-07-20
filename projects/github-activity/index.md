@@ -9,79 +9,43 @@ title: Projects &middot; GitHub Activity Stream
 <i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/github-activity/tarball/master">Download .tar.gz</a> &nbsp; 
 <i class="icon-github"></i> <a href="https://github.com/caseyscarborough/github-activity">View on GitHub</a>
 
-This repository is an small Rails app that creates an embeddable widget to display a user's public activity or repository list on GitHub. It displays a user's username, name, photo, and a specified number of recent activity updates.
+# GitHub Activity Stream Widget
 
-To see a demo of the widget, click [here](http://ghactivity.com/caseyscarborough).
+This is a small Javascript plugin that creates a stream of your recent GitHub activity. It displays the user's name, username, photo, and a list of each individual activity type. Click [here](https://caseyscarborough.github.io/github-activity) for a demo.
 
-To see how it will look for another account, you can update the URL string with your username (or someone else's).
+A sample image of the activity stream is shown below:
 
-Here is a sample screenshot of the widget:
+![](https://raw.githubusercontent.com/caseyscarborough/github-activity/gh-pages/images/matz.png)
 
-<p align="center"><img src="/assets/img/github-activity.png" title="GitHub Activity Stream for @matz" width="594" /></p>
+### Dependencies
 
-## Embedding the Widget
-
-To embed the widget on your site to show your GitHub activity stream, add the following HTML into your webpage, filling in your username and limit where necessary.
-
-The **username** parameter is required to use the widget, but the **limit** parameter is not. If the **limit** is not specified, it will default to the latest 30 activity events.
-
-**With Specific Limit**
+The two dependencies for the plugin are the [Mustache](https://github.com/janl/mustache.js/) templating library and [FontAwesome](http://fontawesome.io) (if you want the icons to show). You can include these along with the scripts for the plugin in the head of your page with the following HTML:
 
 ```html
-<iframe src="http://ghactivity.com/username/limit" frameborder="0" width="100%" height="400px"></iframe>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" href="github-activity.min.css">
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+<script type="text/javascript" src="github-activity.min.js"></script>
 ```
 
-**Without Specific Limit**
+## Usage
+
+To use the library, begin by creating a new div with an id in the body of your page:
 
 ```html
-<iframe src="http://ghactivity.com/username" frameborder="0" width="100%" height="400px"></iframe>
+<div id="feed"></div>
 ```
 
-To embed the widget to show a list of your repositories, add /repos after your username, shown below. The **username** parameter is required to show repositories, but the **limit** parameter is not.
+Then call the feed method via Javascript:
 
-**With Specific Limit**
-
-```html
-<iframe src="http://ghactivity.com/username/repos/limit" frameborder="0" width="100%" height="400px"></iframe>
+```js
+GitHubActivity.feed({ username: "your-username", selector: "#feed" });
 ```
 
-**Show All Repositories**
+## Credits
 
-```html
-<iframe src="http://ghactivity.com/username/repos" frameborder="0" width="100%" height="400px"></iframe>
-```
-
-Also be sure to change the values for the width and height if you need to.
-
-## Contributing to the Application
-
-If you'd like to contribute to the application or run a local copy, clone the repository, and run bundle install.
-
-```bash
-$ git clone https://github.com/caseyscarborough/github-activity.git
-$ cd github-activity
-$ bundle install
-```
-
-Afterwards, rename the example application.yml file to application.yml and fill in the values in the file where necessary. Then fire up the rails server.
-
-```bash
-$ mv config/application.example.yml config/application.yml
-$ rails s
-```
-
-Note: You don't need a GitHub client_id and client_secret to run the application, you will just be [rate limited](http://developer.github.com/v3/#rate-limiting) to 60 requests per hour.
-
-## To Do
-
-### More event types for Public Activity feed!
-
-The application is currently missing the following [event types](http://developer.github.com/v3/activity/events/types/):
-
-* [DownloadEvent](http://developer.github.com/v3/activity/events/types/#downloadevent)
-* [ForkApplyEvent](http://developer.github.com/v3/activity/events/types/#forkapplyevent)
-* [TeamAddEvent](http://developer.github.com/v3/activity/events/types/#teamaddevent)
-
+* [MD5 Methods](http://www.myersdaily.org/joseph/javascript/md5-text.html)
 
 ## Fork and Enjoy
 
