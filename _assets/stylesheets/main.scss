@@ -1,5 +1,3 @@
-//= require syntax
-
 $navbarColor: #1F2324;
 $linkColor: #a00;
 $backgroundColor: #fff;
@@ -156,7 +154,11 @@ img { max-width: 100%; }
   }
 }
 
-.github-activity { border: 1px solid #ddd; }
+#github-activity {
+  width: 700px;
+  height: 600px;
+  margin-bottom: 20px;
+}
 
 #contact-name, #contact-email, #contact-message {
   padding: 10px;
