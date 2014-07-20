@@ -5,9 +5,9 @@ title: Projects &middot; libcrypt
 
 # libcrypt
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/libcrypt/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/libcrypt/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/libcrypt">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/libcrypt/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/libcrypt/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/libcrypt">View on GitHub</a>
 
 libcrypt is a simple library used for encryption, hashing, and encoding in C.
 

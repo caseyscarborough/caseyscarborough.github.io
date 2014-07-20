@@ -5,9 +5,9 @@ title: Projects &middot; Yield Gem
 
 # Yield
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/yield/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/yield/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/yield">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/yield/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/yield/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/yield">View on GitHub</a>
 
 [![Gem Version](https://badge.fury.io/rb/yield.png)](http://badge.fury.io/rb/yield) [![Code Climate](https://codeclimate.com/github/caseyscarborough/yield.png)](https://codeclimate.com/github/caseyscarborough/yield)
 

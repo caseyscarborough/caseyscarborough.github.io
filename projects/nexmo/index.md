@@ -5,9 +5,9 @@ title: Projects &middot; Nexmo Grails Plugin
 
 # Nexmo Grails Plugin
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/nexmo/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/nexmo/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/nexmo">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/nexmo/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/nexmo/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/nexmo">View on GitHub</a>
 
 This plugin gives any Grails application the ability to send SMS messages and outgoing phone calls with text-to-speech using [Nexmo's API](https://www.nexmo.com/).
 

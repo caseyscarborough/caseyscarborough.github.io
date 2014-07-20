@@ -5,9 +5,9 @@ title: Projects &middot; Colorizer
 
 # Colorizer
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/groovy-colorizer/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/groovy-colorizer/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/groovy-colorizer">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/groovy-colorizer/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/groovy-colorizer/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/groovy-colorizer">View on GitHub</a>
 
 
 This repository is a Groovy library for colorizing terminal output.

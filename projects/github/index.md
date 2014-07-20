@@ -5,9 +5,9 @@ title: Projects &middot; GitHub API v3
 
 # GitHub API v3 
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/github/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/github/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/github">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/github/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/github/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/github">View on GitHub</a>
 
 [![Gem Version](https://badge.fury.io/rb/github_api_v3.png)](http://badge.fury.io/rb/github_api_v3) [![Code Climate](https://codeclimate.com/github/caseyscarborough/github.png)](https://codeclimate.com/github/caseyscarborough/github) [![Build Status](https://travis-ci.org/caseyscarborough/github.png?branch=master)](https://travis-ci.org/caseyscarborough/github)
 

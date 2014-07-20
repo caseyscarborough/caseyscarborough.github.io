@@ -7,9 +7,9 @@ group: Portfolio
 Asteroids in Java
 =================
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/j-asteroids/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/j-asteroids/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/j-asteroids">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/j-asteroids/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/j-asteroids/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/j-asteroids">View on GitHub</a>
 
 This is an bare bones implementation of the classic Asteroids video arcade game using the Java programming language.
 

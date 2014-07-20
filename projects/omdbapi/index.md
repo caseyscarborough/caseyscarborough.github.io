@@ -5,9 +5,9 @@ title: Projects &middot; OMDBAPI Gem
 
 # omdbapi
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/omdbapi/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/omdbapi/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/omdbapi">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/omdbapi/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/omdbapi/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/omdbapi">View on GitHub</a>
 
 [![Gem Version](https://badge.fury.io/rb/omdbapi.png)](http://badge.fury.io/rb/omdbapi)
 

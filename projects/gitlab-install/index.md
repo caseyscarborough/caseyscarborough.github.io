@@ -5,9 +5,9 @@ title: Projects &middot; GitLab Automated Installation
 
 # GitLab Automated Installation
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/gitlab-install/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/gitlab-install/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/gitlab-install">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/gitlab-install/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/gitlab-install/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/gitlab-install">View on GitHub</a>
 
 This project contains scripts that will perform automated installation of [GitLab](http://gitlab.org) on your server. These scripts work best on a freshly installed system, with no additions.
 

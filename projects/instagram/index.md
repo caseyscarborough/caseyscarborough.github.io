@@ -5,9 +5,9 @@ title: Projects &middot; Instagram API
 
 # Instagram API
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/instagram/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/instagram/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/instagram">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/instagram/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/instagram/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/instagram">View on GitHub</a>
 
 [![Gem Version](https://badge.fury.io/rb/instagram_api.png)](http://badge.fury.io/rb/instagram_api) [![Code Climate](https://codeclimate.com/github/caseyscarborough/instagram.png)](https://codeclimate.com/github/caseyscarborough/instagram) [![Build Status](https://travis-ci.org/caseyscarborough/instagram.png?branch=master)](https://travis-ci.org/caseyscarborough/instagram)
 

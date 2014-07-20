@@ -5,9 +5,9 @@ title: Projects &middot; Slinky Web Application
 
 # Slinky Web Application
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/slinky/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/slinky/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/slinky">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/slinky/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/slinky/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/slinky">View on GitHub</a>
 
 Slinky is a URL Shortener web application written using Ruby 2.0 and Rails 3.2.13.
 

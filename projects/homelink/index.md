@@ -6,9 +6,9 @@ title: Projects &middot; HomeLink
 HomeLink Web Application
 ========================
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/homelink/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/homelink/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/homelink">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/homelink/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/homelink/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/homelink">View on GitHub</a>
 
 HomeLink is a web application used to create to-do lists, shopping lists, reminders, and chores for a group of users connected as a 'family'. It is written using the Grails web framework.
 

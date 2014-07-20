@@ -5,9 +5,9 @@ title: Projects &middot; Rails Blog
 
 # Rails Blog
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/rails-blog/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/rails-blog/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/rails-blog">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/rails-blog/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/rails-blog/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/rails-blog">View on GitHub</a>
 
 This is a full-featured blog engine built using Rails 4.0 and Ruby 2.0.
 

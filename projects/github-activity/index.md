@@ -5,9 +5,9 @@ title: Projects &middot; GitHub Activity Stream
 
 # GitHub Activity Stream Widget
 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/github-activity/zipball/master">Download .zip</a> &nbsp; 
-<i class="icon-cloud-download"></i> <a href="https://github.com/caseyscarborough/github-activity/tarball/master">Download .tar.gz</a> &nbsp; 
-<i class="icon-github"></i> <a href="https://github.com/caseyscarborough/github-activity">View on GitHub</a>
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/github-activity/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/github-activity/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/github-activity">View on GitHub</a>
 
 # GitHub Activity Stream Widget
 
