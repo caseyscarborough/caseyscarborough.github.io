@@ -15,4 +15,6 @@ $(function() {
   ga('send', 'pageview');
 
   hljs.initHighlightingOnLoad();
+
+  $(".tooltip-link").tooltip();
 });
