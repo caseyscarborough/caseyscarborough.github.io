@@ -4,8 +4,8 @@ This repository holds the contents of my personal site, [caseyscarborough.com](h
 
 ## Dependencies
 
-* Ruby 2.0.0
-* [jekyll](http://jekyllrb.com)
+* Ruby
+* [middleman](http://jekyllrb.com)
 
 ## Usage
 
@@ -15,10 +15,10 @@ You can run a local copy of this site by issuing the following commands.
 $ git clone https://github.com/caseyscarborough/caseyscarborough.com
 $ cd caseyscarborough.com
 $ bundle install
-$ jekyll serve --watch
+$ middleman
 ```
 
-Then navigate to [localhost:4000](http://localhost:4000) in your web browser to see the site.
+Then navigate to [localhost:4567](http://localhost:4567) in your web browser to see the site.
 
 This also generates the static site contents into the _site directory.
 
