@@ -56,4 +56,4 @@ Pandoc has a [ton of options](http://johnmacfarlane.net/pandoc/README.html#optio
 * `--variable mainfont=`: Specifies the main font to use. Requires `xelatex` or `lualatex` engine.
 * `--variable geometry:margin=1in`: Manually set the margin widths.
 
-Click [here](/lib/pandoc.pdf) to check out this post compiled to a PDF using Pandoc and [the corresponding markdown](/lib/pandoc.md).
+Click [here](/lib/pandoc.pdf) to check out this post compiled to a PDF using Pandoc and [the corresponding markdown](/lib/pandoc.txt).
