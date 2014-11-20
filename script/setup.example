@@ -1,1 +1,6 @@
-setup.example
+#!/bin/bash
+
+mkdir -p build && cd build
+
+git init
+git remote add prod ssh://user@server:port/path
