@@ -1,0 +1,89 @@
+---
+layout: project
+title: Projects &middot; Rails Blog
+group: Projects
+---
+
+# Rails Blog
+
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/rails-blog/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/rails-blog/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/rails-blog">View on GitHub</a>
+
+This is a full-featured blog engine built using Rails 4.0 and Ruby 2.0.
+
+A working copy of the application can be seen at [rails-blog.caseyscarborough.com](http://rails-blog.caseyscarborough.com).
+
+## Dependencies
+
+The application uses the following system dependencies:
+
+* Ruby 2.0.0 (possibly 1.9.3, but not tested)
+* Rails 4.0.0
+* Other gems listed in [Gemfile](https://github.com/caseyscarborough/rails-blog/blob/master/Gemfile)
+
+## Installing the application
+
+If you'd like to check out the application or contribute to it, follow the instructions below.
+
+Clone the repository and use the bundle command to install dependencies.
+
+<pre class="no-highlight"><code><span class="dollar">$</span> git clone http://github.com/caseyscarborough/rails-blog.git
+<span class="dollar">$</span> cd rails-blog
+<span class="dollar">$</span> bundle install
+</code></pre>
+
+## Configuring the application
+
+First, you'll want to edit the [db/seeds.rb](https://github.com/caseyscarborough/rails-blog/blob/master/db/seeds.rb)
+file and enter the information for your admin user's account.
+
+<pre class="highlight"><code class="ruby">User.create({
+  :username   => 'caseyscarborough',
+  :email      => 'casey@caseyscarborough.com',
+  :first_name => 'Casey',
+  :last_name  => 'Scarborough',
+  :password   => 'password',
+  :password_confirmation => 'password',
+  :is_admin   => true
+})
+</code></pre>
+Update the [config/config.yml](https://github.com/caseyscarborough/rails-blog/blob/master/config/config.yml)
+file with the information about your blog (this step is optional).
+
+<pre class="highlight"><code class="yaml">title: Rails Blog
+author: Casey Scarborough
+</code></pre>
+Then proceed to migrate, create admin user, populate the database with sample data (optional), and
+run the rails server. See the [lib/tasks/sample_data.rake](https://github.com/caseyscarborough/rails-blog/blob/master/lib/tasks/sample_data.rake)
+file for more info about the database population task.
+
+<pre class="no-highlight"><code><span class="dollar">$</span> rake db:migrate db:seed db:populate
+<span class="dollar">$</span> rails server
+</code></pre>
+
+Then navigate to [http://localhost:3000](http://localhost:3000) in your web browser to see the application in action.
+
+## Running the tests
+
+The tests are built using the [RSpec](http://rspec.info/) testing framework and can be run by issuing the
+following command from the project root:
+
+<pre class="no-highlight"><code><span class="dollar">$</span> rspec spec</code></pre>
+
+## To-Do
+
+* Come up with a suitable name for the project. Possible: Zen?
+* Add tags to posts.
+* Implement one-to-many relationship with User to Posts.
+* Develop admin 'dashboard'.
+
+## Contributing
+
+Please feel free to contribute to the application by following the steps below:
+
+1. [Fork it](https://github.com/caseyscarborough/rails-blog/fork)
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request

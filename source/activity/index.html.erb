@@ -1,0 +1,25 @@
+---
+title: Activity
+group: Activity
+---
+
+<br>
+<script>
+$(function() {
+  GitHubActivity.feed({
+    username: "caseyscarborough",
+    selector: "#github-activity"
+  });
+});
+</script>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 hidden-sm"></div>
+    <div class="col-md-8">
+    <h1>Activity</h1>
+    <h4 class="meta">A stream of my recent GitHub activity.</h4><br>
+    <!-- <iframe class="github-activity" src="http://ghactivity.com/caseyscarborough" frameborder="0" width="100%" height="500px"></iframe> -->
+    <div id="github-activity"></div>
+    </div>
+  </div>
+</div>

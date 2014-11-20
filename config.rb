@@ -51,6 +51,11 @@ set :images_dir, 'images'
 
 ignore '*.yml'
 
+activate :blog do |blog|
+  blog.sources = "blog/posts/{year}-{month}-{day}-{title}.html"
+  blog.permalink = "blog/{year}/{month}/{day}/{title}/index.html"
+end
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment

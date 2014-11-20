@@ -1,0 +1,20 @@
+---
+title: Blog
+group: Blog
+---
+
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 hidden-sm"></div>
+    <div class="col-md-8">
+      <h1>Blog</h1>
+      <h4 class="meta">Posts that I've written.</h4>
+      <ul>
+      <% blog.articles.each do |article| %>
+      <li><span class="monospace"><%= article.date.strftime("%d %b %Y") %></span> &raquo; <a href="<%= article.url %>"><%= article.title %></a></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
