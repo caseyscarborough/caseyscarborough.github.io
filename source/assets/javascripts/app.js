@@ -1,5 +1,8 @@
 //= require jquery
 //= require bootstrap-sprockets
+//= require vendor/mustache.min
+//= require vendor/jquery.validate.min
+//= require vendor/highlight.min
 //= require github-activity
 
 $(function() {
