@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem 'middleman'
+gem "middleman", "~>3.3.2"
 
 # Live-reloading plugin
 gem "middleman-livereload", "~> 3.1.0"

@@ -5,6 +5,9 @@ $btnColor: #428bca;
 $btnBorderColor: #357ebd;
 $btnHoverColor: #3276b1;
 
+@import "compass";
+@import "bootstrap";
+
 html, body {
   width: 100%;
   height: 100%;

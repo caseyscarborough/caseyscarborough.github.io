@@ -1,3 +1,5 @@
+//= require jquery
+//= require bootstrap-sprockets
 //= require github-activity
 
 $(function() {
