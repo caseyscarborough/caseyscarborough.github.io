@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ ! -d "build/.git" ]; then
+  echo "Please run the setup script before first deployment."
+  exit
+fi
+
+middleman build
+
+cd build
+
+git add . --all
+git commit -m "Deployment `date`"
+git push prod +master
