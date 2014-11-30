@@ -179,7 +179,7 @@ The following are some examples of common custom migrations:
     
     changeSet(author: "Casey Scarborough", id: "201404020907-rename-column") {
         renameTable(oldTableName: "rooms", newTableName: "room")
-        renameColumn(tableName: "room", columnName: "room_number", newColumnName: "room_no")
+        renameColumn(tableName: "room", oldColumnName: "room_number", newColumnName: "room_no")
         confirm "Successfully renamed table and column."
     }
 }
