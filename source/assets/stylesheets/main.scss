@@ -290,6 +290,16 @@ blockquote {
 
 .justified { text-align: justify; }
 
+pre, code {
+  border-radius: 0;
+  border: none;
+  background-color: #f5f5f5;
+}
+
+code {
+  color: $linkColor;
+}
+
 @media (max-width: 767px) {
   .banner {
     height: 360px;
