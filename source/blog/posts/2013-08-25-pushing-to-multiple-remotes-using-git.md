@@ -26,6 +26,7 @@ You will be greeted with your Git configuration (most likely using vim). Add the
 to the bottom of the file with the URLs from each remote repository you'd like to push to.
 
 <small>.git/config</small>
+
 <pre class="highlight"><code>[core]
   repositoryformatversion = 0
   filemode = true
