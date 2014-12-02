@@ -10,5 +10,5 @@ middleman build
 cd build
 
 git add . --all
-git commit -m "Deployment `date`"
-git push prod +master
+git commit -m "$1"
+git push origin +master
