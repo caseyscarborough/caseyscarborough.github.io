@@ -5,10 +5,14 @@ if [ ! -d "build/.git" ]; then
   exit
 fi
 
+git add . --all
+git commit -m "$1" --allow-empty
+git push origin develop
+
 middleman build
 
 cd build
 
 git add . --all
-git commit -m "$1"
+git commit -m "$1" --allow-empty
 git push origin +master
