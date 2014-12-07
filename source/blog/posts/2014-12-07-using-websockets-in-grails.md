@@ -86,7 +86,7 @@ class ChatroomEndpoint implements ServletContextListener {
   }
 
   /**
-   * This message is executed when a client sends a message to the
+   * This method is executed when a client sends a message to the
    * websocket endpoint. It sets the first message that the user sends
    * as the user's username, and treats all others as a message to
    * the chatroom.
