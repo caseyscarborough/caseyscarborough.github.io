@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Projects &middot; GitHub Activity Stream &middot; caseyscarborough.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+
+    <link href="/assets/stylesheets/app-8f4ca708.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/javascripts/app-693e4d68.js" type="text/javascript"></script>
+</head>
+    <body>
+
+    <div id="wrap">
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
+    </div>
+    <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class='active'><a href="/projects/">Projects</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/activity/">Activity</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+      <div class="content">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 hidden-sm"></div>
+            <div class="col-md-8">
+              <div class="project justified">
+                <h1>GitHub Activity Stream Widget</h1>
+
+<p><i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/github-activity/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/github-activity/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/github-activity">View on GitHub</a></p>
+
+<p>This is a small Javascript plugin that creates a stream of your recent GitHub activity. It displays the user&#39;s name, username, photo, and a list of each individual activity type. Click <a href="https://caseyscarborough.github.io/github-activity">here</a> for a demo.</p>
+
+<p>A sample image of the activity stream is shown below:</p>
+
+<p><img src="https://raw.githubusercontent.com/caseyscarborough/github-activity/gh-pages/images/matz.png" /></p>
+
+<h3>Dependencies</h3>
+
+<p>The two dependencies for the plugin are the <a href="https://github.com/janl/mustache.js/">Mustache</a> templating library and <a href="http://fontawesome.io">FontAwesome</a> (if you want the icons to show). You can include these along with the scripts for the plugin in the head of your page with the following HTML:</p>
+
+<pre><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;github-activity.min.css&quot;&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;github-activity.min.js&quot;&gt;
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>To use the library, begin by creating a new div with an id in the body of your page:</p>
+
+<pre><code class="html">&lt;div id=&quot;feed&quot;&gt;&lt;/div&gt;
+</code></pre>
+
+<p>Then call the feed method via Javascript:</p>
+
+<pre><code class="js">GitHubActivity.feed({ username: &quot;your-username&quot;, selector: &quot;#feed&quot; });
+</code></pre>
+
+<h2>Credits</h2>
+
+<ul>
+<li><a href="http://www.myersdaily.org/joseph/javascript/md5-text.html">MD5 Methods</a></li>
+</ul>
+
+<h2>Fork and Enjoy</h2>
+
+<p>Please feel free to contribute to the application by following the steps below:</p>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am &#39;Add some feature&#39;</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-sm"></div>
+    <div class="col-md-6">
+      <div class="footer">
+        <p class="pull-left icons">
+          <a target="_blank" class="tooltip-link" title="Email" href="mailto:caseyscarborough@gmail.com"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="GitHub" href="https://github.com/caseyscarborough/"><i class="fa fa-github"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="BitBucket" href="https://bitbucket.org/caseyscarborough/"><i class="fa fa-bitbucket"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="LinkedIn" href="https://linkedin.com/in/caseyscarborough"><i class="fa fa-linkedin"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="Google+" href="https://plus.google.com/103526747321763836028?rel=author"><i class="fa fa-google-plus"></i></a>
+        </p>
+        <p class="pull-right">
+          <small class="meta">Contribute to this site on <a target="_blank" href="https://github.com/caseyscarborough/caseyscarborough.github.io">GitHub</a>.</small><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </body>
+</html>

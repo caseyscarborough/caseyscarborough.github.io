@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Projects &middot; Colorizer &middot; caseyscarborough.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+
+    <link href="/assets/stylesheets/app-8f4ca708.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/javascripts/app-693e4d68.js" type="text/javascript"></script>
+</head>
+    <body>
+
+    <div id="wrap">
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
+    </div>
+    <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class='active'><a href="/projects/">Projects</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/activity/">Activity</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+      <div class="content">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 hidden-sm"></div>
+            <div class="col-md-8">
+              <div class="project justified">
+                <h1>Colorizer</h1>
+
+<p><i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/groovy-colorizer/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/groovy-colorizer/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/groovy-colorizer">View on GitHub</a></p>
+
+<p>This repository is a Groovy library for colorizing terminal output.</p>
+
+<h2>Installation</h2>
+
+<p>Download the <a href="http://dl.bintray.com/caseyscarborough/groovy-plugins/colorizer.jar">JAR file</a> and add it to your classpath, or clone the project and build the JAR yourself:</p>
+
+<pre><code class="bash">$ git clone https://github.com/caseyscarborough/groovy-colorizer
+$ cd groovy-colorizer
+$ ./gradlew build
+</code></pre>
+
+<h2>Usage</h2>
+
+<p>Add colors to your strings using the syntax <code>[blue]foo [red]bar</code>. Then colorize them using the <a href="https://github.com/caseyscarborough/groovy-colorizer/blob/master/src/main/groovy/com/caseyscarborough/colorizer/Colorizer.groovy#L80"><code>Colorizer#colorize</code></a> method. You can change the background color by using an underscore before the color, like so: <code>[_lightBlue][black]hello</code>.</p>
+
+<pre><code class="groovy">import com.caseyscarborough.colorizer.Colorizer
+
+def sentence = &quot;[blue]Hello [_yellow][red]world!&quot;
+println Colorizer.colorize(sentence)
+</code></pre>
+
+<p>In addition to this, mixin methods have been created on the Groovy String class to allow you to call the color names as methods on a String. These methods can also be chained. To use these methods, you must first call <a href="https://github.com/caseyscarborough/groovy-colorizer/blob/master/src/main/groovy/com/caseyscarborough/colorizer/Colorizer.groovy#L72"><code>Colorizer#initializeMixins()</code></a>.</p>
+
+<pre><code class="groovy">// Add the methods to the String metaclass
+Colorizer.initializeMixins()
+
+&quot;Hello, world!&quot;.red()  // Outputs the string red
+&quot;Foo&quot;._darkGray()      // Outputs the string with dark gray background
+&quot;Bar&quot;.black()._white() // Outputs black text on white background
+</code></pre>
+
+<p>The following are the colors that can be used for text and background coloring:</p>
+
+<ul>
+<li>default</li>
+<li>black</li>
+<li>red</li>
+<li>green</li>
+<li>yellow</li>
+<li>blue</li>
+<li>magenta</li>
+<li>cyan</li>
+<li>lightGray</li>
+<li>darkGray</li>
+<li>lightRed</li>
+<li>lightGreen</li>
+<li>lightYellow</li>
+<li>lightBlue</li>
+<li>lightMagenta</li>
+<li>lightCyan</li>
+<li>white</li>
+</ul>
+
+<h2>Testing</h2>
+
+<pre><code class="bash">$ ./gradlew test
+</code></pre>
+
+<h2>Credits</h2>
+
+<p>Inspired by <a href="https://github.com/mitchellh/colorstring">colorstring</a> for Go.</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-sm"></div>
+    <div class="col-md-6">
+      <div class="footer">
+        <p class="pull-left icons">
+          <a target="_blank" class="tooltip-link" title="Email" href="mailto:caseyscarborough@gmail.com"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="GitHub" href="https://github.com/caseyscarborough/"><i class="fa fa-github"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="BitBucket" href="https://bitbucket.org/caseyscarborough/"><i class="fa fa-bitbucket"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="LinkedIn" href="https://linkedin.com/in/caseyscarborough"><i class="fa fa-linkedin"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="Google+" href="https://plus.google.com/103526747321763836028?rel=author"><i class="fa fa-google-plus"></i></a>
+        </p>
+        <p class="pull-right">
+          <small class="meta">Contribute to this site on <a target="_blank" href="https://github.com/caseyscarborough/caseyscarborough.github.io">GitHub</a>.</small><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </body>
+</html>

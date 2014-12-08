@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Compiling Beautiful Documents with Pandoc &middot; caseyscarborough.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+
+    <link href="/assets/stylesheets/app-8f4ca708.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/javascripts/app-693e4d68.js" type="text/javascript"></script>
+</head>
+    <body>
+
+    <div id="wrap">
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
+    </div>
+    <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/activity/">Activity</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+      <div class="content">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 hidden-sm"></div>
+            <div class="col-md-8">
+              <h2>Compiling Beautiful Documents with Pandoc</h2>
+              <p class="meta">03 Oct 2013 &middot; By <a href="mailto:caseyscarborough@gmail.com">Casey Scarborough</a></p>
+
+              <div class="post">
+                <p>I was recently introduced to a remarkable tool called <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>. If you haven&#39;t heard of this yet, it can greatly expand your documentation formats and abilities. It essentially is a tool to convert markup from one format to another, and it supports hundreds of combinations of formats. A (large) diagram is available <a href="http://johnmacfarlane.net/pandoc/diagram.png">here</a> that displays all of the different available format conversions.</p>
+
+<p>In this post, I&#39;d like to walk through installing Pandoc and compiling a document.</p>
+
+<h2>Installing Pandoc</h2>
+
+<p>To install Pandoc, begin by visiting the <a href="http://johnmacfarlane.net/pandoc/installing.html">Downloads</a> page on the project&#39;s homepage. You&#39;ll need to install the version of Pandoc that is compatible with your operating system, as well as a compatible version of LaTeX.</p>
+
+<p>After the installation, you should be able to execute the following command in your terminal:</p>
+
+<pre><code class="bash">$ pandoc --version
+</code></pre>
+
+<p>If Pandoc is properly installed, then you&#39;ll receive a message with the version that you&#39;ve installed, along with some other useful information.</p>
+
+<h2>Starting a Document</h2>
+
+<p>Pandoc has support for many different formats, but I&#39;ve found writing documents using <a href="http://en.wikipedia.org/wiki/Markdown">Markdown</a> and converting them to the format you require makes life quite easy. Open up your favorite text editor and add the following to it.</p>
+
+<pre><code>% Getting Started with Pandoc
+% Oct. 3, 2013
+
+This is a test of [Pandoc](http://johnmacfarlane.net/pandoc/).
+
+## Second level header
+
+* This is a bulleted list.
+  - item a
+  - item b
+
+### Third level header
+
+&gt; _Wow, this is awesome!_
+
+Pandoc is the __greatest__.
+</code></pre>
+
+<p>Save the file as <code>pandoc_test.md</code> in the directory of your choice, and fire up the terminal. <code>cd</code> to the folder containing your markdown file and issue the following command:</p>
+
+<pre><code class="bash">$ pandoc pandoc_test.md -o pandoc_test.pdf
+</code></pre>
+
+<p>This will generate a PDF of the previously written <code>pandoc_test.md</code> markdown file in the same directory. This is the general output for any format that you&#39;d like to convert to, such as <code>.docx</code>, <code>.pdf</code>, <code>.epub</code>, <code>.md</code>, <code>.html</code>, and <code>.tex</code> to name a few.</p>
+
+<h2>Useful Options</h2>
+
+<p>Pandoc has a <a href="http://johnmacfarlane.net/pandoc/README.html#options">ton of options</a>, but here are a few that I&#39;ve found useful:</p>
+
+<ul>
+<li><code>--toc</code>: Generates a table of contents at the beginning of the document</li>
+<li><code>--latex-engine</code>: Specifies the LaTeX engine of your choice such as <code>xelatex</code>, <code>lualatex</code>, or <code>pdflatex</code> (default).</li>
+<li><code>--variable mainfont=</code>: Specifies the main font to use. Requires <code>xelatex</code> or <code>lualatex</code> engine.</li>
+<li><code>--variable geometry:margin=1in</code>: Manually set the margin widths.</li>
+</ul>
+
+<p>Click <a href="/lib/pandoc.pdf">here</a> to check out this post compiled to a PDF using Pandoc and <a href="/lib/pandoc.txt">the corresponding markdown</a>.</p>
+
+              </div>
+              <br>
+                <div class="comments">
+                  <div id="disqus_thread"></div>
+                  <script type="text/javascript">
+                    var disqus_shortname = 'caseyscarboroughcom'; 
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-sm"></div>
+    <div class="col-md-6">
+      <div class="footer">
+        <p class="pull-left icons">
+          <a target="_blank" class="tooltip-link" title="Email" href="mailto:caseyscarborough@gmail.com"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="GitHub" href="https://github.com/caseyscarborough/"><i class="fa fa-github"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="BitBucket" href="https://bitbucket.org/caseyscarborough/"><i class="fa fa-bitbucket"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="LinkedIn" href="https://linkedin.com/in/caseyscarborough"><i class="fa fa-linkedin"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="Google+" href="https://plus.google.com/103526747321763836028?rel=author"><i class="fa fa-google-plus"></i></a>
+        </p>
+        <p class="pull-right">
+          <small class="meta">Contribute to this site on <a target="_blank" href="https://github.com/caseyscarborough/caseyscarborough.github.io">GitHub</a>.</small><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+    </body>
+</html>

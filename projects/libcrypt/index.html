@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Projects &middot; libcrypt &middot; caseyscarborough.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+
+    <link href="/assets/stylesheets/app-8f4ca708.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/javascripts/app-693e4d68.js" type="text/javascript"></script>
+</head>
+    <body>
+
+    <div id="wrap">
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
+    </div>
+    <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class='active'><a href="/projects/">Projects</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/activity/">Activity</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+      <div class="content">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 hidden-sm"></div>
+            <div class="col-md-8">
+              <div class="project justified">
+                <h1>libcrypt</h1>
+
+<p><i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/libcrypt/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/libcrypt/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/libcrypt">View on GitHub</a></p>
+
+<p>libcrypt is a simple library used for encryption, hashing, and encoding in C. It is currently a work in progress.</p>
+
+<h2>Using the Library</h2>
+
+<p>To use the library, include the <a href="https://github.com/caseyscarborough/libcrypt/blob/master/src/crypt.h"><code>crypt.h</code></a> and <a href="https://github.com/caseyscarborough/libcrypt/blob/master/src/crypt.c"><code>crypt.c</code></a> files in your project. Then, include the <a href="https://github.com/caseyscarborough/libcrypt/blob/master/src/crypt.h"><code>crypt.h</code></a> file at the top of each file you&#39;d like to use it&#39;s methods in. See <a href="https://github.com/caseyscarborough/libcrypt/blob/master/test/crypt-test.c"><code>test/crypt-test.c</code></a> for example usage.</p>
+
+<p>To run the test file or the Base64 converter, run <code>make</code> from the project directory.</p>
+
+<h2>Methods</h2>
+
+<p>The following methods are available in the <a href="https://github.com/caseyscarborough/libcrypt">libcrypt</a> library. <em>Note that these methods return pre-allocated blocks of memory, and it is up to the user of the method to free the memory after use (shown below).</em></p>
+
+<h4>rot13</h4>
+
+<p>This method encodes a string of text using the <a href="http://en.wikipedia.org/wiki/ROT13">ROT13</a> cipher.</p>
+
+<pre><code class="c">char *text = &quot;The Quick Brown Fox Jumps Over The Lazy Dog.&quot;;
+char *rot13_encoded_text = rot13(text);
+
+printf(&quot;%s\n&quot;, rot13_encoded_text);
+// Outputs: Gur Dhvpx Oebja Sbk Whzcf Bire Gur Ynml Qbt.
+
+free(rot13_encoded_text);
+</code></pre>
+
+<h4>rot47</h4>
+
+<p>This method encodes a string of text using the <a href="http://en.wikipedia.org/wiki/ROT47#Variants">ROT47</a> cipher.</p>
+
+<pre><code class="c">char *text = &quot;The Quick Brown Fox Jumps Over The Lazy Dog.&quot;;
+char *rot47_encoded_text = rot13(text);
+
+printf(&quot;%s\n&quot;, rot47_encoded_text);
+// Outputs: %96 &quot;F:4&lt; qC@H? u@I yF&gt;AD ~G6C %96 {2KJ s@8]
+
+free(rot47_encoded_text);
+</code></pre>
+
+<h4>base64_encode</h4>
+
+<p>This method encodes text using the <a href="http://en.wikipedia.org/wiki/Base64">Base64</a> encoding scheme.</p>
+
+<pre><code class="c">char *text = &quot;The Quick Brown Fox Jumps Over The Lazy Dog.&quot;;
+char *base64_encoded_text = base64_encode(text);
+printf(&quot;%s\n&quot;, base64_encoded_text);
+// Outputs: VGhlIFF1aWNrIEJyb3duIEZveCBKdW1wcyBPdmVyIFRoZSBMYXp5IERvZy4=
+
+free(base64_encoded_text);
+</code></pre>
+
+<h4>base64_decode</h4>
+
+<p>This method decodes <a href="http://en.wikipedia.org/wiki/Base64">Base64</a> encoded text.</p>
+
+<pre><code class="c">char *text = &quot;VGhpcyBpcyBzb21lIGR1bW15IHRleHQgdG8gYmUgZW5jb2RlZCBhbmQgZGVjb2RlZC4=&quot;;
+char *base64_decoded_text = base64_decode(text);
+printf(&quot;%s\n&quot;, base64_decoded_text);
+// Outputs: This is some dummy text to be encoded and decoded.
+
+free(base64_decoded_text);
+</code></pre>
+
+<h4>md5</h4>
+
+<p>This method hashes a given string using the <a href="http://en.wikipedia.org/wiki/MD5">MD5</a> hashing algorithm.</p>
+
+<pre><code class="c">char *text = &quot;The quick brown fox jumps over the lazy dog.&quot;
+char *md5_text = md5(text);
+printf(&quot;%s\n&quot;, md5_text);
+// Outputs: e4d909c290d0fb1ca068ffaddf22cbd0
+
+free(md5_text);
+</code></pre>
+
+<h4>generate_uuid</h4>
+
+<p>This method This method generates a version 4 <a href="http://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_.28random.29">Universally Unique Identifier</a>, which is randomly generated.</p>
+
+<pre><code class="c">char *uuid = generate_uuid();
+printf(&quot;%s\n&quot;, uuid);
+// Outputs 3586BD54-55C8-42D8-BE0E-74308A5B9D22
+
+free(uuid);
+</code></pre>
+
+<h2>Utilities</h2>
+
+<h3>Base64 Converter</h3>
+
+<p>Included in this library is a Base64 file converter utility, located in the file <a href="https://github.com/caseyscarborough/libcrypt/blob/master/utils/b64.c"><code>utils/b64.c</code></a>. This utility will convert the contents of a file to or from Base64 encoded data.</p>
+
+<pre><code class="bash"># Build the executables
+$ make &amp;&amp; cd bin
+
+# Encode a file
+$ ./b64 -e input.txt output.txt
+
+# Decode a file
+$ ./b64 -e encoded.txt decoded.txt
+
+# Print the help menu
+$ ./b64 -h
+</code></pre>
+
+<h3>MD5 Hasher</h3>
+
+<p>The MD5 Hasher utility is located in the file <a href="https://github.com/caseyscarborough/libcrypt/blob/master/utils/md5.c"><code>utils/md5.c</code></a>. This utility will MD5 hash the contents of a file or a string.</p>
+
+<pre><code class="bash">$ make &amp;&amp; cd bin
+
+# Hash a string
+$ ./md5 -s &quot;The quick brown fox jumps over the lazy dog.&quot;
+e4d909c290d0fb1ca068ffaddf22cbd0
+
+# Hash a file&#39;s contents
+$ ./md5 -f sample.txt
+322a166e1402bd9ff18e1ce67fe69e61  sample.txt
+
+# Print the help menu
+$ ./md5 -h
+</code></pre>
+
+<p>Either of these compiled utilities can then be copied to somewhere in your <strong>PATH</strong> to be available from anywhere.</p>
+
+<h2>Running the Tests</h2>
+
+<p>Tests are written using the <a href="http://check.sourceforge.net/">Check</a> unit testing framework. The tests are located at <a href="https://github.com/caseyscarborough/libcrypt/blob/master/test/crypt-test.c"><code>crypt-test.c</code></a>, and can be compiled using <code>make test</code>. The check library <a href="http://check.sourceforge.net/web/install.html">needs to be installed</a>.</p>
+
+<pre><code class="bash">make test
+# gcc -Wall test/crypt-test.c -o test/crypt-test -lcheck
+
+test/crypt-test
+# Running suite(s): Core
+# 100%: Checks: 12, Failures: 0, Errors: 0
+</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-sm"></div>
+    <div class="col-md-6">
+      <div class="footer">
+        <p class="pull-left icons">
+          <a target="_blank" class="tooltip-link" title="Email" href="mailto:caseyscarborough@gmail.com"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="GitHub" href="https://github.com/caseyscarborough/"><i class="fa fa-github"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="BitBucket" href="https://bitbucket.org/caseyscarborough/"><i class="fa fa-bitbucket"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="LinkedIn" href="https://linkedin.com/in/caseyscarborough"><i class="fa fa-linkedin"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="Google+" href="https://plus.google.com/103526747321763836028?rel=author"><i class="fa fa-google-plus"></i></a>
+        </p>
+        <p class="pull-right">
+          <small class="meta">Contribute to this site on <a target="_blank" href="https://github.com/caseyscarborough/caseyscarborough.github.io">GitHub</a>.</small><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </body>
+</html>

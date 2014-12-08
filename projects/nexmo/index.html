@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Projects &middot; Nexmo Grails Plugin &middot; caseyscarborough.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+
+    <link href="/assets/stylesheets/app-8f4ca708.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/javascripts/app-693e4d68.js" type="text/javascript"></script>
+</head>
+    <body>
+
+    <div id="wrap">
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
+    </div>
+    <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class='active'><a href="/projects/">Projects</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/activity/">Activity</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+      <div class="content">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 hidden-sm"></div>
+            <div class="col-md-8">
+              <div class="project justified">
+                <h1>Nexmo Grails Plugin</h1>
+
+<p><i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/nexmo/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/nexmo/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/nexmo">View on GitHub</a></p>
+
+<p>This plugin gives any Grails application the ability to send SMS messages and outgoing phone calls with text-to-speech using <a href="https://www.nexmo.com/">Nexmo&#39;s API</a>.</p>
+
+<h2>Installation</h2>
+
+<p>You can add this plugin to your application by adding the following to your <code>BuildConfig.groovy file</code>:</p>
+
+<pre><code class="groovy">plugins {
+  compile &quot;:nexmo:1.0&quot; // Add this line
+}
+</code></pre>
+
+<h2>Methods</h2>
+
+<h4><a href="https://github.com/caseyscarborough/nexmo/blob/master/grails-app/services/grails/plugin/nexmo/NexmoService.groovy#L30"><strong>sendSms(String to, String text, String from)</strong></a></h4>
+
+<p>This method allows you to send an SMS message to a mobile number.</p>
+
+<ul>
+<li>Parameters
+
+<ul>
+<li><strong>to</strong> - The mobile number in international format</li>
+<li><strong>text</strong> - Body of the text message (with a maximum length of 3200 characters)</li>
+<li><strong>from</strong> (optional) - The number to send from, defaults to the <code>default_from</code> number in <a href="https://github.com/caseyscarborough/nexmo/blob/master/grails-app/conf/NexmoConfig.groovy"><code>NexmoConfig.groovy</code></a>.</li>
+</ul></li>
+<li>Returns
+
+<ul>
+<li><strong>status</strong> - The status code of the message</li>
+<li><strong>id</strong> - The ID of the message</li>
+</ul></li>
+</ul>
+
+<h4><a href="https://github.com/caseyscarborough/nexmo/blob/master/grails-app/services/grails/plugin/nexmo/NexmoService.groovy#L67"><strong>call(String to, String text, String from)</strong></a></h4>
+
+<p>This method uses text-to-speech to call your recipient and deliver a message.</p>
+
+<ul>
+<li>Parameters
+
+<ul>
+<li><strong>to</strong> - The phone number to send the call to, in International Format</li>
+<li><strong>text</strong> - The message to deliver during the call</li>
+<li><strong>from</strong> (optional) - The number to send the call from. Must be a voice enabled inbound number associated with your account</li>
+</ul></li>
+<li>Returns
+
+<ul>
+<li><strong>status</strong> - The status code of the message</li>
+<li><strong>id</strong> - The ID of the message</li>
+</ul></li>
+</ul>
+
+<h2>Usage</h2>
+
+<p>Set the configuration in your <code>Config.groovy</code> file, as shown below:</p>
+
+<pre><code class="groovy">nexmo {
+  api {
+    key    = &quot;abcde123&quot; // Your Nexmo API Key
+    secret = &quot;fghij456&quot; // Your Nexmo API Secret
+  }
+
+  sms {
+    default_from = &quot;15005551234&quot; // Your default from telephone number for SMS
+  }
+}
+</code></pre>
+
+<p>You can then proceed to use the plugin in a Grails controller or service by injecting the NexmoService bean, and calling the <code>sendSms</code> method.</p>
+
+<h3>Example</h3>
+
+<pre><code class="groovy">class ExampleController {
+
+  // Inject the service
+  def nexmoService
+
+  def index() {
+    def smsResult
+    def callResult
+
+    try {
+      // Send the message &quot;What&#39;s up?&quot; to 1-500-123-4567
+      smsResult  = nexmoService.sendSms(&quot;15001234567&quot;, &quot;What&#39;s up?&quot;)
+
+      // Call the number and tell them a message
+      callResult = nexmoService.call(&quot;15001234567&quot;, &quot;Have a great day! Goodbye.&quot;)
+
+    catch (NexmoException e) {
+      // Handle error if failure
+    }
+  }
+}
+</code></pre>
+
+<p>Here is an example response:</p>
+
+<pre><code class="groovy">// SMS
+[ status: &quot;0&quot;, id: &quot;00000125&quot; ]
+
+// Call
+[ status: &quot;0&quot;, id: &quot;14b75f2246e7c1a17d345449a20d93e5&quot; ]
+</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-sm"></div>
+    <div class="col-md-6">
+      <div class="footer">
+        <p class="pull-left icons">
+          <a target="_blank" class="tooltip-link" title="Email" href="mailto:caseyscarborough@gmail.com"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="GitHub" href="https://github.com/caseyscarborough/"><i class="fa fa-github"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="BitBucket" href="https://bitbucket.org/caseyscarborough/"><i class="fa fa-bitbucket"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="LinkedIn" href="https://linkedin.com/in/caseyscarborough"><i class="fa fa-linkedin"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="Google+" href="https://plus.google.com/103526747321763836028?rel=author"><i class="fa fa-google-plus"></i></a>
+        </p>
+        <p class="pull-right">
+          <small class="meta">Contribute to this site on <a target="_blank" href="https://github.com/caseyscarborough/caseyscarborough.github.io">GitHub</a>.</small><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </body>
+</html>

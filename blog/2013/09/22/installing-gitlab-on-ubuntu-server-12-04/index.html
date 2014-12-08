@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Installing GitLab on Ubuntu Server 12.04 &middot; caseyscarborough.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+
+    <link href="/assets/stylesheets/app-8f4ca708.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/javascripts/app-693e4d68.js" type="text/javascript"></script>
+</head>
+    <body>
+
+    <div id="wrap">
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
+    </div>
+    <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/activity/">Activity</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+      <div class="content">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 hidden-sm"></div>
+            <div class="col-md-8">
+              <h2>Installing GitLab on Ubuntu Server 12.04</h2>
+              <p class="meta">22 Sep 2013 &middot; By <a href="mailto:caseyscarborough@gmail.com">Casey Scarborough</a></p>
+
+              <div class="post">
+                <p>If you are an avid user of <a href="http://git-scm.com/">Git</a> like myself, it is likely that you&#39;ve used a service such as <a href="https://github.com">GitHub</a> or <a href="https://bitbucket.org">BitBucket</a> to share your Git repositories and collaborate with others. I recently stumbled upon <a href="http://gitlab.org">GitLab</a>. GitLab is an open source project management, code hosting, and collaboration application, very similar to GitHub, that you can install and run securely on your own server! I won&#39;t go into all the details about how awesome this is, as I&#39;m sure if you&#39;re here, you&#39;re eager to get it up and running. I&#39;ve written this blog post to work through some common issues that I&#39;ve had with the installation and to provide a smooth, easy way to get it installed on your server. The following installation will be performed on a freshly installed copy on <a href="http://www.ubuntu.com/download/server">Ubuntu Server 12.04</a>.</p>
+
+<h3>Requirements</h3>
+
+<p>The officially supported operating systems for GitLab are Ubuntu Linux and Debian/GNU Linux, although it should work on many others. I&#39;ve installed this with pretty much the same results on Debian 6 and Ubuntu Server.</p>
+
+<p>A processor with <strong>4 cores</strong> is recommended, but if you won&#39;t have a lot of users, 2 cores should be sufficient.</p>
+
+<p>The following are the memory requirements:</p>
+
+<ul>
+<li>768MB is the minimal memory size and supports up to 100 users</li>
+<li><strong>1GB is the recommended memory size</strong> and supports up to 1,000 users</li>
+<li>1.5GB supports up to 10,000 users</li>
+</ul>
+
+<h3>Installing Required Packages</h3>
+
+<p>The first step when booting up your install is to set a root password and update the machine.</p>
+
+<pre><code class="bash"># Set the root password
+$ sudo passwd root
+
+# Enter root, update the system, and install requirements.
+$ su
+$ apt-get update -y
+$ apt-get upgrade -y
+$ apt-get install -y build-essential zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev curl git-core openssh-server redis-server checkinstall libxml2-dev libxslt-dev libcurl4-openssl-dev libicu-dev
+
+# Set VIM as the default editor (optional, nano is the default)
+$ update-alternatives --set editor /usr/bin/vim.basic
+</code></pre>
+
+<p>You can then exit the root shell by typing <code>exit</code>. Next you&#39;ll want to ensure you have the proper Python installation (which comes by default with Ubuntu Server), and install the python-docutils to support reStructuredText markdown.</p>
+
+<pre><code class="bash"># Make sure you have at least Python 2.5, but not 3.x$ python --version
+Python 2.7.3
+
+$ sudo apt-get install python-docutils -y
+</code></pre>
+
+<p>Now on to download and compile Ruby, then install the <a href="http://bundler.io">Bundler Gem</a>.</p>
+
+<pre><code class="bash">$ mkdir /tmp/ruby &amp;&amp; cd /tmp/ruby$ curl --progress ftp://ftp.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p247.tar.gz | tar xz
+$ cd ruby-2.0.0-p247
+$ ./configure
+$ make &amp;&amp; sudo make install  # This will take a while!
+$ sudo gem install bundler --no-ri --no-rdoc
+</code></pre>
+
+<h3>Setting Up the Git User</h3>
+
+<p>The simplest part of the installation is setting up the user to manage the application. Run the following command:</p>
+
+<pre><code class="bash">$ sudo adduser --disabled-login --gecos &#39;GitLab&#39; git```
+
+### Setting Up the Database
+
+The next step is to set up the database. GitLab recommends using [MySQL](https://www.mysql.com/), which we will be using here.
+
+&gt; Note: If you&#39;d like to use [PostgreSQL](http://www.postgresql.org/), see this [link](https://github.com/gitlabhq/gitlabhq/blob/master/doc/install/databases.md#postgresql).
+
+Install the database and set up the root password.
+
+```bash
+$ sudo apt-get install -y mysql-server mysql-client libmysqlclient-dev
+</code></pre>
+
+<p>Then login to MySQL server with your password and create the database and user. </p>
+
+<blockquote>
+<p>Note: Make sure that you do not type the <code>mysql&gt;</code> prompt, and that you replace the password with one of your own.</p>
+</blockquote>
+
+<pre><code class="bash">$ mysql -u root -p
+
+# Create the user.
+mysql&gt; CREATE USER &#39;gitlab&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;Password1&#39;;
+
+# Create the database.
+mysql&gt; CREATE DATABASE IF NOT EXISTS `gitlabhq_production` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`;
+
+# Grant the user priveleges to the database.
+mysql&gt; GRANT SELECT, LOCK TABLES, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER ON `gitlabhq_production`.* TO &#39;gitlab&#39;@&#39;localhost&#39;;
+
+# Exit.
+mysql&gt; \q
+</code></pre>
+
+<h3>Update Git</h3>
+
+<p>GitLab requires a Git version 1.7.10 or greater. We&#39;ll need to update that. Issue the following commands:</p>
+
+<pre><code class="bash">$ sudo apt-get install -y python-software-properties$ sudo add-apt-repository ppa:git-core/ppa
+$ sudo apt-get update
+$ sudo apt-get install -y git
+</code></pre>
+
+<h3>Installing GitLab Shell</h3>
+
+<p>Now we&#39;ll install the GitLab Shell, GitLab&#39;s replacement for Gitolite.</p>
+
+<pre><code class="bash">$ cd /home/git
+
+# Clone the repository
+$ sudo -u git -H git clone https://github.com/gitlabhq/gitlab-shell.git
+$ cd gitlab-shell
+
+# Checkout the latest version
+$ sudo -u git -H git checkout v1.7.1
+$ sudo -u git -H cp config.yml.example config.yml
+
+# Edit the configuration file and update gitlab_url with something like &#39;http://yourdomain.com/&#39;
+$ sudo -u git -H editor config.yml
+
+# Run the installation
+$ sudo -u git -H ./bin/install
+</code></pre>
+
+<h3>Installing GitLab</h3>
+
+<p>Now, onto the main event. The following steps will walk you through installing the actual GitLab application.</p>
+
+<pre><code class="bash">$ cd /home/git
+
+# Clone the repository
+$ sudo -u git -H git clone https://github.com/gitlabhq/gitlabhq.git gitlab
+$ cd /home/git/gitlab
+
+# Checkout the latest stable release
+$ sudo -u git -H git checkout 6-1-stable
+
+# Rename the config file and edit the domain name to your machine&#39;s name.
+$ sudo -u git -H cp config/gitlab.yml.example config/gitlab.yml
+$ sudo -u git -H editor config/gitlab.yml
+
+# Rename the Unicorn config file.
+$ sudo -u git -H cp config/unicorn.rb.example config/unicorn.rb
+</code></pre>
+
+<p>The next step is to update permissions and create the satellites folder. I&#39;m leaving the bash prompt out of these so that you can copy-paste all commands and they will just run in order.</p>
+
+<pre><code class="bash"># Create satellites directory and update permissions.sudo -u git -H mkdir /home/git/gitlab-satellites
+sudo chown -R git log/
+sudo chown -R git tmp/
+sudo chmod -R u+rwX log/
+sudo chmod -R u+rwX tmp/
+sudo -u git -H mkdir tmp/pids/
+sudo -u git -H mkdir tmp/sockets/
+sudo chmod -R u+rwX tmp/pids/
+sudo chmod -R u+rwX tmp/sockets/
+sudo -u git -H mkdir public/uploads
+sudo chmod -R u+rwX public/uploads
+
+# Set up the Git configuration.
+sudo -u git -H git config --global user.name &quot;GitLab&quot;
+sudo -u git -H git config --global user.email &quot;gitlab@localhost&quot;
+sudo -u git -H git config --global core.autocrlf input
+</code></pre>
+
+<p>Now you&#39;ll want to configure the database. Rename the database.yml file and edit the file with the proper username and password that you created for the MySQL connection. The username should be <em>gitlab</em> and whatever password you specified.</p>
+
+<pre><code class="bash">$ sudo -u git cp config/database.yml.mysql config/database.yml$ sudo -u git -H editor config/database.yml
+$ sudo -u git -H chmod o-rwx config/database.yml
+</code></pre>
+
+<p>Then install the required gems.</p>
+
+<pre><code class="bash">$ cd /home/git/gitlab$ sudo gem install charlock_holmes --version &#39;0.6.9.4&#39;
+$ sudo -u git -H bundle install --deployment --without development test postgres aws
+</code></pre>
+
+<h3>Initialize the Application</h3>
+
+<p>Now you can proceed to initialize the database and to activate GitLab&#39;s features, as well as make it start on system bootup. Type <code>yes</code> at the prompt to continue with this command.</p>
+
+<pre><code class="bash">$ sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production
+
+# Download the init script.
+$ sudo cp lib/support/init.d/gitlab /etc/init.d/gitlab
+$ sudo chmod +x /etc/init.d/gitlab
+
+# Make GitLab start on bootup.
+$ sudo update-rc.d gitlab defaults 21
+</code></pre>
+
+<p>Now just to check the status of your application and start the GitLab instance.</p>
+
+<pre><code class="bash">$ sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production$ sudo service gitlab start
+
+# Make sure everything is green!
+$ sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
+</code></pre>
+
+<h3>Setting up Nginx</h3>
+
+<p>The final step is to install your webserver and have it serve your application. The officially supported webserver for GitLab is Nginx, so we&#39;ll be using that.</p>
+
+<pre><code class="bash">$ sudo apt-get install -y nginx$ sudo cp lib/support/nginx/gitlab /etc/nginx/sites-available/gitlab
+$ sudo ln -s /etc/nginx/sites-available/gitlab /etc/nginx/sites-enabled/gitlab
+
+# Edit the site file with your domain name.
+$ sudo editor /etc/nginx/sites-available/gitlab
+
+# Then restart the server!
+$ sudo service nginx restart
+</code></pre>
+
+<h3>Finishing Up</h3>
+
+<p>You should now navigate in your browser to the URL of your GitLab server. If your server does not yet have an <a href="http://en.wikipedia.org/wiki/Fully_qualified_domain_name">FQDN</a>, you can get this by running the <code>ifconfig</code> command on your server. If all went well, you should be greeted with the GitLab login page! You can then proceed to login with the default credentials:</p>
+
+<pre><code>admin@local.host
+5iveL!fe
+</code></pre>
+
+<p>If you have any issues with the installation, feel free to leave a comment below, or check out the <a href="https://github.com/gitlabhq/gitlab-public-wiki/wiki/Trouble-Shooting-Guide">GitLab Troubleshooting Guide</a>.</p>
+
+<h3>Note</h3>
+
+<p>On each installation I&#39;ve performed with GitLab I was unable to push to the remote repository via SSH. Every time I tried, the following error occurred:</p>
+
+<pre><code class="bash">$ git push -u origin master/usr/local/lib/ruby/2.0.0/net/http.rb:878:in `initialize&#39;: Connection timed out - connect(2) (Errno::ETIMEDOUT)
+  from /usr/local/lib/ruby/2.0.0/net/http.rb:878:in `open&#39;
+  from /usr/local/lib/ruby/2.0.0/net/http.rb:878:in `block in connect&#39;
+  from /usr/local/lib/ruby/2.0.0/timeout.rb:52:in `timeout&#39;
+  from /usr/local/lib/ruby/2.0.0/net/http.rb:877:in `connect&#39;
+  from /usr/local/lib/ruby/2.0.0/net/http.rb:862:in `do_start&#39;
+  from /usr/local/lib/ruby/2.0.0/net/http.rb:851:in `start&#39;
+  from /home/git/gitlab-shell/lib/gitlab_net.rb:62:in `get&#39;
+  from /home/git/gitlab-shell/lib/gitlab_net.rb:17:in `allowed?&#39;
+  from /home/git/gitlab-shell/lib/gitlab_shell.rb:60:in `validate_access&#39;
+  from /home/git/gitlab-shell/lib/gitlab_shell.rb:23:in `exec&#39;
+  from /home/git/gitlab-shell/bin/gitlab-shell:16:in `main&#39;
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+</code></pre>
+
+<p>This happened when I my SSH keys were added and everything was set up properly. After much research, I finally resolved the issue by editing the <code>/etc/hosts</code> file and replacing the following line:</p>
+
+<pre><code class="bash">127.0.0.1       localhost
+</code></pre>
+
+<p>with (replace <code>gitlab.example.com</code> with your server&#39;s name):</p>
+
+<pre><code class="bash">127.0.0.1       gitlab.example.com
+</code></pre>
+
+<p>If you encounter this issue, this should resolve it for you.</p>
+
+              </div>
+              <br>
+                <div class="comments">
+                  <div id="disqus_thread"></div>
+                  <script type="text/javascript">
+                    var disqus_shortname = 'caseyscarboroughcom'; 
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-sm"></div>
+    <div class="col-md-6">
+      <div class="footer">
+        <p class="pull-left icons">
+          <a target="_blank" class="tooltip-link" title="Email" href="mailto:caseyscarborough@gmail.com"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="GitHub" href="https://github.com/caseyscarborough/"><i class="fa fa-github"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="BitBucket" href="https://bitbucket.org/caseyscarborough/"><i class="fa fa-bitbucket"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="LinkedIn" href="https://linkedin.com/in/caseyscarborough"><i class="fa fa-linkedin"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="Google+" href="https://plus.google.com/103526747321763836028?rel=author"><i class="fa fa-google-plus"></i></a>
+        </p>
+        <p class="pull-right">
+          <small class="meta">Contribute to this site on <a target="_blank" href="https://github.com/caseyscarborough/caseyscarborough.github.io">GitHub</a>.</small><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+    </body>
+</html>

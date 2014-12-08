@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Pushing to Multiple Remote Repositories Using Git &middot; caseyscarborough.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+
+    <link href="/assets/stylesheets/app-8f4ca708.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/javascripts/app-693e4d68.js" type="text/javascript"></script>
+</head>
+    <body>
+
+    <div id="wrap">
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
+    </div>
+    <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/activity/">Activity</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+      <div class="content">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 hidden-sm"></div>
+            <div class="col-md-8">
+              <h2>Pushing to Multiple Remote Repositories Using Git</h2>
+              <p class="meta">25 Aug 2013 &middot; By <a href="mailto:caseyscarborough@gmail.com">Casey Scarborough</a></p>
+
+              <div class="post">
+                <p>When using Git for version control, many people use <a href="https://github.com">GitHub</a> as a place to hold remote
+repositories, and push their repositories there. I recently started using <a href="https://bitbucket.org">BitBucket</a>
+also, and wanted to be able to simultaneously update my GitHub and BitBucket repositories when changes were made.</p>
+
+<p>To begin, rename your current remote (most likely named <em>origin</em>) to a different name. I&#39;d rename this to the
+name of the service you are using, such as <em>github</em> or <em>bitbucket</em>.</p>
+
+<pre><code class="bash">git remote rename origin github
+</code></pre>
+
+<p>You can then add the remote for your second remote repository, in this case, a BitBucket repository.</p>
+
+<pre><code class="bash">git remote add bitbucket git@bitbucket.org:username/example.git
+</code></pre>
+
+<p>Afterwards, you&#39;ll want to set up your <em>origin</em> remote to push to both of these. Issue the following command:</p>
+
+<pre><code class="bash">git config -e
+</code></pre>
+
+<p>You will be greeted with your Git configuration (most likely using vim). Add the <code>[remote &quot;origin&quot;]</code> section
+to the bottom of the file with the URLs from each remote repository you&#39;d like to push to.</p>
+
+<p><small>.git/config</small></p>
+
+<pre><code>[core]
+  repositoryformatversion = 0
+  filemode = true
+  bare = false
+  logallrefupdates = true
+  ignorecase = true
+  precomposeunicode = false
+[branch &quot;master&quot;]
+  remote = github
+  merge = refs/heads/master
+[remote &quot;github&quot;]
+  url = git@github.com:username/repo.git
+  fetch = +refs/heads/*:refs/remotes/github/*
+[remote &quot;bitbucket&quot;]
+  url = git@bitbucket.org:username/repo.git
+  fetch = +refs/heads/*:refs/remotes/bitbucket/*
+[remote &quot;origin&quot;]
+  url = git@github.com:username/repo.git
+  url = git@bitbucket.org:username/repo.git
+</code></pre>
+
+<p>You can then push to both repositories by issuing:</p>
+
+<pre><code class="bash">git push origin master
+</code></pre>
+
+<p>Or to a single one by issuing either of these commands:</p>
+
+<pre><code class="bash">git push github master
+git push bitbucket master
+</code></pre>
+
+              </div>
+              <br>
+                <div class="comments">
+                  <div id="disqus_thread"></div>
+                  <script type="text/javascript">
+                    var disqus_shortname = 'caseyscarboroughcom'; 
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-sm"></div>
+    <div class="col-md-6">
+      <div class="footer">
+        <p class="pull-left icons">
+          <a target="_blank" class="tooltip-link" title="Email" href="mailto:caseyscarborough@gmail.com"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="GitHub" href="https://github.com/caseyscarborough/"><i class="fa fa-github"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="BitBucket" href="https://bitbucket.org/caseyscarborough/"><i class="fa fa-bitbucket"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="LinkedIn" href="https://linkedin.com/in/caseyscarborough"><i class="fa fa-linkedin"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="Google+" href="https://plus.google.com/103526747321763836028?rel=author"><i class="fa fa-google-plus"></i></a>
+        </p>
+        <p class="pull-right">
+          <small class="meta">Contribute to this site on <a target="_blank" href="https://github.com/caseyscarborough/caseyscarborough.github.io">GitHub</a>.</small><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+    </body>
+</html>

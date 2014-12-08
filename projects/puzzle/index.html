@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Projects &middot; Java Sliding Puzzle Solver &middot; caseyscarborough.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+
+    <link href="/assets/stylesheets/app-8f4ca708.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/javascripts/app-693e4d68.js" type="text/javascript"></script>
+</head>
+    <body>
+
+    <div id="wrap">
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
+    </div>
+    <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class='active'><a href="/projects/">Projects</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/activity/">Activity</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+      <div class="content">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 hidden-sm"></div>
+            <div class="col-md-8">
+              <div class="project justified">
+                <h1>Java Sliding Puzzle Solver</h1>
+
+<p><i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/puzzle/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/puzzle/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/puzzle">View on GitHub</a></p>
+
+<p>This application is a small command line utility used to solve the 8-puzzle game. This implementation uses the <a href="http://en.wikipedia.org/wiki/A*_search_algorithm">A * Search algorithm</a> to find the goal state. The <a href="http://en.wikipedia.org/wiki/Taxicab_geometry">Manhattan distance</a> is used to calculate the <a href="http://en.wikipedia.org/wiki/Heuristic_function">heuristic</a> of the puzzle at each state. This project was written for the senior level Artificial Intelligence class at my university. An example of an initial state and goal state of the 8-puzzle game are shown below.</p>
+
+<p><strong>Initial State</strong>:</p>
+
+<table>
+<tr><td>7</td><td>2</td><td>3</td></tr>
+<tr><td>4</td><td>6</td><td>5</td></tr>
+<tr><td>1</td><td> </td><td>8</td></tr>
+</table>
+
+<p><strong>Goal State</strong>:</p>
+
+<table>
+<tr><td>1</td><td>2</td><td>3</td></tr>
+<tr><td>4</td><td>5</td><td>6</td></tr>
+<tr><td>7</td><td>8</td><td> </td></tr>
+</table>
+
+<h2>Dependencies</h2>
+
+<p>This is a Java project using Maven. The two dependencies you&#39;ll need are:</p>
+
+<ul>
+<li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">Java JDK</a></li>
+<li><a href="http://maven.apache.org">Maven</a></li>
+</ul>
+
+<h2>Usage</h2>
+
+<p>Being by cloning the repository, or downloading the repository as a zip file.</p>
+
+<pre><code class="bash">$ git clone https://github.com/caseyscarborough/puzzle.git &amp;&amp; cd puzzle
+</code></pre>
+
+<p>Once you&#39;ve retrieved the repository and are in the project&#39;s directory, you can package the project using Maven and run it manually using the following commands:</p>
+
+<pre><code class="bash">$ mvn package -P cli-dist
+$ java -cp target/Puzzle.jar com.caseyscarborough.puzzle.Puzzle
+</code></pre>
+
+<p>If you are on a UNIX-based system, run <code>script/build</code> to package the application using Maven and <code>script/puzzle</code> to run the application:</p>
+
+<pre><code class="bash">$ script/build
+$ script/puzzle
+</code></pre>
+
+<blockquote>
+<p><em>Note: This may require you to chmod the scripts make them executable:</em> <code>chmod u+x script/*</code></p>
+</blockquote>
+
+<p>The application will then <em>block</em> and allow you to input a sliding puzzle in the following format:</p>
+
+<pre><code class="bash">0 1 2
+4 5 3
+7 6 8
+</code></pre>
+
+<p>Zeros or blank spaces can be used for the input of the application, meaning all of these inputs are valid:</p>
+
+<pre><code class="bash">1 5 2        4 1 2          4 3        0 1 2
+4 0 3        5 8          1 7 6        4 5 3
+7 6 8        7 3 6        8 2 5        7 6 8
+</code></pre>
+
+<h3>Optional Parameters</h3>
+
+<p>You have the option to give two optional parameters. The first is a filename to read from, and the second is a filename to write the output solution to.</p>
+
+<p>Windows:</p>
+
+<pre><code>&gt; java -cp target\Puzzle.jar com.caseyscarborough.puzzle.Puzzle in.txt out.txt
+</code></pre>
+
+<p>Mac OS X/Linux:</p>
+
+<pre><code class="bash">$ script/puzzle in.txt out.txt
+</code></pre>
+
+<h3>Input File Format</h3>
+
+<p>The format of the input file should match the same as the input you&#39;d give on the console. This means three lines, with three numbers, each separated by a space. See below:</p>
+
+<pre><code class="bash">4 1 2
+5 3 6
+0 7 8
+</code></pre>
+
+<h2>Sample Puzzles to Test</h2>
+
+<p>The following are some sample puzzles to test the application out with.</p>
+
+<pre><code class="bash">0 5 2
+1 8 3
+4 7 6
+
+4 1 2
+5 8 3
+7 0 6
+
+Note: This one takes a minute!
+7 2 3
+4 6 5
+1 8 0
+
+These are not solvable.
+1 2 3
+4 5 6
+8 7 0
+
+1 5 0
+3 2 8
+4 6 7
+</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-sm"></div>
+    <div class="col-md-6">
+      <div class="footer">
+        <p class="pull-left icons">
+          <a target="_blank" class="tooltip-link" title="Email" href="mailto:caseyscarborough@gmail.com"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="GitHub" href="https://github.com/caseyscarborough/"><i class="fa fa-github"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="BitBucket" href="https://bitbucket.org/caseyscarborough/"><i class="fa fa-bitbucket"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="LinkedIn" href="https://linkedin.com/in/caseyscarborough"><i class="fa fa-linkedin"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="Google+" href="https://plus.google.com/103526747321763836028?rel=author"><i class="fa fa-google-plus"></i></a>
+        </p>
+        <p class="pull-right">
+          <small class="meta">Contribute to this site on <a target="_blank" href="https://github.com/caseyscarborough/caseyscarborough.github.io">GitHub</a>.</small><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </body>
+</html>

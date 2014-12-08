@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Projects &middot; GitHub API v3 &middot; caseyscarborough.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+
+    <link href="/assets/stylesheets/app-8f4ca708.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/javascripts/app-693e4d68.js" type="text/javascript"></script>
+</head>
+    <body>
+
+    <div id="wrap">
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
+    </div>
+    <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class='active'><a href="/projects/">Projects</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/activity/">Activity</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+      <div class="content">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 hidden-sm"></div>
+            <div class="col-md-8">
+              <div class="project justified">
+                <h1>GitHub API v3</h1>
+
+<p><i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/github/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/github/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/github">View on GitHub</a></p>
+
+<p><a href="http://badge.fury.io/rb/github_api_v3"><img alt="Gem Version" src="https://badge.fury.io/rb/github_api_v3.png" /></a> <a href="https://codeclimate.com/github/caseyscarborough/github"><img alt="Code Climate" src="https://codeclimate.com/github/caseyscarborough/github.png" /></a> <a href="https://travis-ci.org/caseyscarborough/github"><img alt="Build Status" src="https://travis-ci.org/caseyscarborough/github.png?branch=master" /></a></p>
+
+<p>This is a simple and easy to use wrapper for GitHub&#39;s v3 API. Knowing a little about <a href="http://developer.github.com/">GitHub&#39;s API</a> will aid in its use, but is not necessary. Nearly all methods of the API have been implemented, but there are a few left to go.</p>
+
+<h2>Documentation</h2>
+
+<p>Full documentation for the gem can be found at <a href="http://rdoc.info/gems/github_api_v3/frames">rdoc.info/gems/github<em>api</em>v3/frames</a>. I strongly recommend checking it out, as the library is very well documented.</p>
+
+<h2>Installation</h2>
+
+<p>To install the gem, issue the following command:</p>
+
+<pre><code class="bash">gem install github_api_v3
+</code></pre>
+
+<h2>Usage</h2>
+
+<pre><code class="ruby">require &#39;github_api_v3&#39;
+</code></pre>
+
+<h3>Unauthenticated Requests</h3>
+
+<p>There are multiple different unauthenticated requests to the API. These are performed when no credentials are given, and are shown below starting with <code>GitHub</code>. Unauthenticated methods can certainly be called from an authenticated client, and this is recommended as to not reach the hourly <a href="http://developer.github.com/v3/#rate-limiting">rate limit</a>.</p>
+
+<h3>Authenticated Requests</h3>
+
+<p>Some methods, such as retrieving private repos or emails, require authentication. To create one of these requests, you&#39;ll need to pass in your login and access token. You can create a personal access token on your <a href="https://github.com/settings/applications">account page</a>.</p>
+
+<pre><code class="ruby"># Create a new client using username and access token.
+client = GitHub.client(
+  :login =&gt; &#39;username&#39;,
+  :access_token =&gt; &#39;bf215181b5140522137b3d4f6b73544a&#39;
+)
+
+# Authenticated methods
+client.emails # =&gt; [&quot;email@example.com&quot;, &quot;email2@example.com&quot;]
+client.repos  # =&gt; #&lt;Array:0x007fb8aa0d1a00&gt;
+client.follow(&#39;matz&#39;) # =&gt; true
+client.user   # =&gt; #&lt;Hash:0x007fb8a9109d70&gt;
+</code></pre>
+
+<p>Anytime a method is shown below starting with <code>client</code>, it is an authenticated method.</p>
+
+<h3>Sample usage</h3>
+
+<p>The following sections are some sample usages of the library for parts of the API that I consider to be very useful. The methods in this section are not comprehensive, but aim to give a nice overview of some usage of this library.</p>
+
+<h4>Users</h4>
+
+<p>The following are some sample usages of the Users module.</p>
+
+<pre><code class="ruby"># Retrieve a single user&#39;s information.
+user = GitHub.user(&#39;caseyscarborough&#39;)
+user.login     # =&gt; &quot;caseyscarborough&quot;
+user.name      # =&gt; &quot;Casey Scarborough&quot;
+user.html_url  # =&gt; &quot;https://github.com/caseyscarborough&quot;
+user.following # =&gt; 23
+
+# Retrieve an array of all GitHub users.
+GitHub.users
+
+# Retrieve all emails for an authenticated user.
+client.emails
+
+# Follow/unfollow a user.
+client.follow(&#39;caseyscarborough&#39;)
+client.unfollow(&#39;caseyscarborough&#39;)
+
+# Check if a user follows another user.
+GitHub.follows?(&#39;caseyscarborough&#39;,&#39;matz&#39;)
+
+# Get a list of an unauthenticated user&#39;s followers.
+GitHub.followers(&#39;caseyscarborough&#39;)
+
+# Get a list of an authenticated user&#39;s followers.
+client.followers
+
+# Get a list of user&#39;s a user is following.
+GitHub.following(&#39;caseyscarborough&#39;)
+
+# Check if authenticated user is following another user.
+client.following?(&#39;caseyscarborough&#39;)
+# =&gt; true
+
+# Retrieve events for a user.
+GitHub.events(&#39;caseyscarborough&#39;)
+
+# Retrieve notifications for a user.
+client.notifications
+
+# Retrieve repositories watching/starring for a user.
+client.watching
+client.starring
+
+# Retrieve a client&#39;s rate limit.
+GitHub.rate_limit
+client.rate_limit
+
+# etc...
+</code></pre>
+
+<p>You can find the available attributes <a href="http://developer.github.com/v3/users/#get-a-single-user">here</a>. Check the <a href="http://rdoc.info/gems/github_api_v3/GitHub/Client/Users">Users documentation</a> for the gem for a complete list and more examples.</p>
+
+<h4>Repositories</h4>
+
+<p>The following are some sample usages for the Repos module.</p>
+
+<pre><code class="ruby"># Retrieve repositories for an unauthenticated/authenticated user.
+GitHub.repos(&#39;caseyscarborough&#39;)
+client.repos
+
+# Retrieve all public repositories on GitHub.
+GitHub.all_repos
+
+# Retrieve a specific repository.
+GitHub.repo(&#39;owner&#39;,&#39;repo-name&#39;)
+
+# Create a new repository.
+client.create_repo(&#39;new-repo&#39;, :description =&gt; &#39;New repository.&#39;, :private =&gt; true)
+
+# Delete a repository.
+client.delete_repo(&#39;repo-name&#39;)
+
+# Retrieve a repository&#39;s contributors/languages/tags/branches/collaborators.
+GitHub.contributors(&#39;caseyscarborough&#39;,&#39;github&#39;)
+GitHub.languages(&#39;caseyscarborough&#39;,&#39;github&#39;)
+GitHub.tags(&#39;caseyscarborough&#39;,&#39;github&#39;)
+GitHub.branches(&#39;caseyscarborough&#39;,&#39;github&#39;)
+GitHub.collaborators(&#39;caseyscarborough&#39;,&#39;github&#39;)
+
+# Get a specific branch from a repository (master shown below).
+GitHub.branch(&#39;caseyscarborough&#39;,&#39;github&#39;,&#39;master&#39;)
+
+# Add/remove collaborator from a repository.
+client.add_collaborator(&#39;owner&#39;,&#39;repo-name&#39;,&#39;user-to-add&#39;)
+client.remove_collaborator(&#39;owner&#39;,&#39;repo-name&#39;,&#39;user-to-remove&#39;)
+
+# Subscribe/unsubscribe/star/unstar a repository.
+client.subscribe(&#39;caseyscarborough&#39;,&#39;github&#39;)
+client.unsubscribe(&#39;caseyscarborough&#39;,&#39;github&#39;)
+client.star(&#39;caseyscarborough&#39;,&#39;github&#39;)
+client.unstar(&#39;caseyscarborough&#39;,&#39;github&#39;)
+
+# etc...
+</code></pre>
+
+<p>For a full list with descriptions, see the <a href="http://rdoc.info/gems/github_api_v3/GitHub/Client/Repos">Repos documentation</a> for the gem.</p>
+
+<h4>Events</h4>
+
+<p>The following are some sample usages of the Events module.</p>
+
+<pre><code class="ruby"># Retrieve all events for a user.
+GitHub.user_events(&#39;caseyscarborough&#39;)
+
+# Retrieve all public events for a user.
+GitHub.public_user_events(&#39;caseyscarborough&#39;)
+
+# Retrieve all public GitHub events.
+GitHub.public_events
+
+# Retrieve all events for a repository.
+GitHub.repo_events(&#39;owner&#39;,&#39;repo-name&#39;)
+
+# Retrieve public events for an organization.
+GitHub.organization_events(&#39;ruby&#39;)
+
+# etc...
+</code></pre>
+
+<p>Check out the <a href="http://rdoc.info/gems/github_api_v3/GitHub/Client/Events">Events documentation</a> for a comprehensive list of methods.</p>
+
+<h4>Gists</h4>
+
+<p>The following are sample uses for the Gists module.</p>
+
+<pre><code class="ruby"># Retrieve all gists for a user.
+GitHub.gists(&#39;caseyscarborough&#39;)
+
+# Retrieve all gists for the authenticated user.
+client.gists
+
+# Retrieve all public gists.
+GitHub.gists
+
+# Retrieve a gist by it&#39;s ID.
+GitHub.gist(1234567)
+
+# Create a new gist.
+client.create_gist(
+  # Hash of files to include.
+  :files =&gt; { &quot;file1.txt&quot; =&gt; { :content =&gt; &quot;File contents&quot; } }, 
+  :description =&gt; &quot;Gist description.&quot;, 
+  :public =&gt; &quot;false&quot;
+)
+
+# Check if a gist is starred.
+client.gist_starred?(1234567)
+# =&gt; true
+
+# Star/unstar/fork/delete a gist
+client.star_gist(1234567)
+client.unstar_gist(1234567)
+client.fork_gist(1234567)
+client.delete_gist(1234567)
+
+# etc...
+</code></pre>
+
+<p>Check out the <a href="http://rdoc.info/gems/github_api_v3/GitHub/Client/Gists">Gist documentation</a> for more information.</p>
+
+<h4>Markdown</h4>
+
+<p>You can render any markdown test using the markdown method.</p>
+
+<pre><code class="ruby"># Render a string to markdown.
+GitHub.markdown(&#39;# Markdown text!&#39;)
+
+# Render a file&#39;s contents to markdown.
+GitHub.markdown(File.read(&#39;markdown.md&#39;))
+</code></pre>
+
+<h4>Gitignore</h4>
+
+<p>You can retrieve .gitignore templates using the Gitignore API as well.</p>
+
+<pre><code class="ruby"># Retrieve a list of all available .gitignore templates.
+GitHub.gitignore_list
+# =&gt; [&quot;Actionscript&quot;, &quot;Android&quot;, &quot;C&quot;, &quot;C++&quot;, &quot;CSharp&quot;...]
+
+# Retrieve a specific template.
+GitHub.gitignore(&quot;Ruby&quot;)
+# =&gt; {&quot;name&quot;=&gt;&quot;Ruby&quot;, &quot;source&quot;=&gt;&quot;*.gem\n*.rbc\n.bundle...}
+</code></pre>
+
+<h4>Authorizations</h4>
+
+<p>The Authorizations OAuth API requires that a user use <em>basic authentication</em>. This means that you&#39;ll need to instantiate a client using your username and password, as opposed to the username and access token. You&#39;ll then be able to use the Authorizations API methods on  that client. See below:</p>
+
+<pre><code class="ruby">client = GitHub.client(:login =&gt; &#39;username&#39;, :password =&gt; &#39;password&#39;)
+
+# List your authorizations.
+client.authorizations
+
+# Retrieve a single authorization by its ID.
+client.authorization(123)
+
+# Create a new authorization.
+client.create_authorization(
+  :note =&gt; &#39;New authorization&#39;,
+  # The authorized applications ID and secret
+  :client_id =&gt; &#39;ab0487b031b18f9286a6&#39;,
+  :client_secret =&gt; &#39;9d667c2b7fae7a329f32b6df17926154&#39;
+)
+
+# Update an existing authorization.
+client.update_authorization(
+  123, # The authorization&#39;s ID.
+  :note =&gt; &#39;Updated authorization&#39;,
+  :note_url =&gt; &#39;http://anyrandomurl.com&#39;
+)
+
+# Delete an authorization by it&#39;s ID.
+client.delete_authorization(123)
+</code></pre>
+
+<p>For a full overview of the Authorizations API check out the <a href="http://rdoc.info/gems/github_api_v3/GitHub/Client/OAuth">OAuth documentation</a>.</p>
+
+<h4>Contents API</h4>
+
+<p>The Contents API methods are used to retrieve, create, update, and delete files in a repository. File contents that are retrieved are Base64 encoded. Some example methods are shown below:</p>
+
+<pre><code class="ruby"># Get the contents of the README file.
+GitHub.contents(&#39;caseyscarborough&#39;, &#39;github&#39;)
+
+# Retrieve the contents of a file or directory.
+GitHub.contents(
+  &#39;caseyscarborough&#39;, # Repository owner.
+  &#39;github&#39;,           # Repository name.
+  &#39;lib&#39;,              # File/directory path. Defaults to the root of repository.
+  &#39;master&#39;            # Reference or branch. Defaults to master.
+)
+
+# Create a new file.
+client.create_file(
+  &#39;caseyscarborough&#39;,                    # Repository owner.
+  &#39;github&#39;,                              # Repository name.
+  :path      =&gt; &#39;lib/new_file.txt&#39;,      # Path to file.
+  :message   =&gt; &#39;Add lib/new_file.txt.&#39;, # Commit message.
+  :content   =&gt; &#39;This is a test file.&#39;,  # File contents.
+  :committer =&gt; { :name =&gt; &#39;Casey Scarborough&#39;, :email =&gt; &#39;casey@example.com&#39; }
+)
+
+# Update an existing file.
+client.update_file(
+  &#39;caseyscarborough&#39;,                          # Repository owner.
+  &#39;github&#39;,                                    # Repository name.
+  :path      =&gt; &#39;lib/update_file.txt&#39;,         # File path.
+  :message   =&gt; &#39;Update lib/update_file.txt.&#39;, # Commit message.
+  :content   =&gt; &#39;This is a test file.&#39;,        # New file contents.
+  :sha       =&gt; &#39;329688480d39049927147c162b9d2deaf885005f&#39;, # SHA of file.
+  :committer =&gt; { :name =&gt; &#39;Casey Scarborough&#39;, :email =&gt; &#39;casey@example.com&#39; }
+)
+
+# Delete an existing file.
+client.delete_file(
+  &#39;caseyscarborough&#39;,                        # Repository owner.
+  &#39;github&#39;,                                  # Repository name.
+  :path      =&gt; &#39;lib/delete_me.txt&#39;,         # File path.
+  :message   =&gt; &#39;Delete lib/delete_me.txt.&#39;, # Commit message.
+  :sha       =&gt; &#39;329688480d39049927147c162b9d2deaf885005f&#39;, # SHA of file.
+  :committer =&gt; { :name =&gt; &#39;Casey Scarborough&#39;, :email =&gt; &#39;casey@example.com&#39; }
+)
+</code></pre>
+
+<p>As you can see, the Commits API methods are not as intuitive as the rest of the API, so the <a href="http://rdoc.info/gems/github_api_v3/GitHub/Client/Contents">documentation</a> is very useful.</p>
+
+<h4>Conclusion</h4>
+
+<p>And if you&#39;ve made it this far, you can check out the last method to get a little piece of random wisdom from GitHub.</p>
+
+<pre><code class="ruby">GitHub.octocat
+# =&gt;
+          &quot;MMM.           .MMM
+           MMMMMMMMMMMMMMMMMMM
+           MMMMMMMMMMMMMMMMMMM      _____________________
+          MMMMMMMMMMMMMMMMMMMMM    |                     |
+         MMMMMMMMMMMMMMMMMMMMMMM   | Design for failure. |
+        MMMMMMMMMMMMMMMMMMMMMMMM   |_   _________________|
+        MMMM::- -:::::::- -::MMMM    |/
+         MM~:~   ~:::::~   ~:~MM
+    .. MMMMM::. .:::+:::. .::MMMMM ..
+          .MM::::: ._. :::::MM.
+             MMMM;:::::;MMMM
+      -MM        MMMMMMM
+      ^  M+     MMMMMMMMM
+          MMMMMMM MM MM MM
+               MM MM MM MM
+               MM MM MM MM
+            .~~MM~MM~MM~MM~~.
+         ~~~~MM:~MM~~~MM~:MM~~~~
+        ~~~~~~==~==~~~==~==~~~~~~
+         ~~~~~~==~==~==~==~~~~~~
+             :~==~==~==~==~~&quot;
+
+# Or create your own wisdom.
+GitHub.octocat(&#39;Wisdom.&#39;)
+</code></pre>
+
+<h2>Supported Ruby Versions</h2>
+
+<p>Currently these are the supported Ruby versions:</p>
+
+<ul>
+<li>Ruby 1.9.2</li>
+<li>Ruby 1.9.3</li>
+<li>Ruby 2.0.0</li>
+</ul>
+
+<h2>To Do</h2>
+
+<p>Any functionality of the API listed at <a href="http://developer.github.com/">developer.github.com</a> that hasn&#39;t currently been implemented.</p>
+
+<p>Some main missing functionality:</p>
+
+<ul>
+<li><p>A good bit of the <a href="http://developer.github.com/v3/repos/">Repos API</a>, such as:</p>
+
+<ul>
+<li>Hooks</li>
+<li>Forks</li>
+<li>Keys</li>
+<li>Downloads</li>
+<li>etc.</li>
+</ul></li>
+<li><p>Add support for Ruby 1.8.7.</p></li>
+</ul>
+
+<h2>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am &#39;Add some feature&#39;</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-sm"></div>
+    <div class="col-md-6">
+      <div class="footer">
+        <p class="pull-left icons">
+          <a target="_blank" class="tooltip-link" title="Email" href="mailto:caseyscarborough@gmail.com"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="GitHub" href="https://github.com/caseyscarborough/"><i class="fa fa-github"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="BitBucket" href="https://bitbucket.org/caseyscarborough/"><i class="fa fa-bitbucket"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="LinkedIn" href="https://linkedin.com/in/caseyscarborough"><i class="fa fa-linkedin"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="Google+" href="https://plus.google.com/103526747321763836028?rel=author"><i class="fa fa-google-plus"></i></a>
+        </p>
+        <p class="pull-right">
+          <small class="meta">Contribute to this site on <a target="_blank" href="https://github.com/caseyscarborough/caseyscarborough.github.io">GitHub</a>.</small><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </body>
+</html>

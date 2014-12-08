@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Dead Simple XML and JSON Parsing in Ruby &middot; caseyscarborough.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+
+    <link href="/assets/stylesheets/app-8f4ca708.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/javascripts/app-693e4d68.js" type="text/javascript"></script>
+</head>
+    <body>
+
+    <div id="wrap">
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
+    </div>
+    <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/activity/">Activity</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+      <div class="content">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 hidden-sm"></div>
+            <div class="col-md-8">
+              <h2>Dead Simple XML and JSON Parsing in Ruby</h2>
+              <p class="meta">02 Aug 2013 &middot; By <a href="mailto:caseyscarborough@gmail.com">Casey Scarborough</a></p>
+
+              <div class="post">
+                <p>Parsing large or complicated XML or JSON files is never fun, and just plain sucks. There are quite a few options for parsing XML or JSON in Ruby, such as <a href="http://www.germane-software.com/software/rexml/">REXML</a> or <a href="http://nokogiri.org/">Nokogiri</a> for XML, and <a href="http://www.ruby-doc.org/stdlib-2.0/libdoc/json/rdoc/JSON.html">JSON</a> in Ruby&#39;s Standard Library, none of which are very spectacular. I recently stumbled on the rubygem <a href="https://github.com/jnunemaker/crack">Crack</a>, which is a combination of the JSON parser for Rails and the XML parser for Merb, combined and managed by GitHub user <a href="https://github.com/jnunemaker">jnunemaker</a>. This little gem will parse any XML or JSON, returning the result as a Ruby hash. This is much nicer and cleaner than the other options in my opinion (mainly XML), that return the result as an odd structure that is usually annoying to find your way through.</p>
+
+<p>Take the following XML for an example:</p>
+
+<pre><code class="xml">&lt;menu&gt;
+  &lt;food&gt;
+    &lt;name&gt;Waffles&lt;/name&gt;
+    &lt;price&gt;5.95&lt;/price&gt;
+  &lt;/food&gt;
+  &lt;food&gt;
+    &lt;name&gt;French Toast&lt;/name&gt;
+    &lt;price&gt;4.50&lt;/price&gt;
+  &lt;/food&gt;
+&lt;/menu&gt;
+</code></pre>
+
+<p>And it&#39;s equivalent JSON:</p>
+
+<pre><code class="json">{
+  &quot;menu&quot;: {
+    &quot;food&quot;: [
+      {
+        &quot;name&quot;: &quot;Waffles&quot;,
+        &quot;price&quot;: &quot;5.95&quot;
+      },
+      {
+        &quot;name&quot;: &quot;French Toast&quot;,
+        &quot;price&quot;: &quot;4.50&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+
+<p>These XML and JSON files can be parsed and the result returned as a Ruby hash with the following code:</p>
+
+<pre><code class="ruby">require &#39;crack&#39; # XML and JSON parsingrequire &#39;crack/json&#39; # Only JSON parsing
+require &#39;crack/xml&#39; # Only XML parsing
+
+response = Crack::XML.parse(File.read(&#39;food.xml&#39;))
+# =&gt; {&quot;menu&quot;=&gt;{&quot;food&quot;=&gt;[{&quot;name&quot;=&gt;&quot;Waffles&quot;, &quot;price&quot;=&gt;&quot;5.95&quot;}, {&quot;name&quot;=&gt;&quot;French Toast&quot;, &quot;price&quot;=&gt;&quot;4.50&quot;}]}}
+
+response = Crack::JSON.parse(File.read(&#39;food.json&#39;))
+# =&gt; {&quot;menu&quot;=&gt;{&quot;food&quot;=&gt;[{&quot;name&quot;=&gt;&quot;Waffles&quot;, &quot;price&quot;=&gt;&quot;5.95&quot;}, {&quot;name&quot;=&gt;&quot;French Toast&quot;, &quot;price&quot;=&gt;&quot;4.50&quot;}]}}
+</code></pre>
+
+<p>These examples are obviously simple for the sake of this post, but this gem makes life so much simpler when parsing larger and more complicated XML or JSON.</p>
+
+<p>You can install the <a href="https://github.com/jnunemaker/crack">Crack</a> gem by issuing the following command:</p>
+
+<pre><code class="bash">gem install crack
+</code></pre>
+
+<h3>Resources</h3>
+
+<p><a href="http://rdoc.info/github/jnunemaker/crack">Crack Documentation</a><br />
+<a href="https://github.com/jnunemaker/crack">Crack Source on GitHub</a><br />
+<a href="http://www.ruby-doc.org/stdlib-2.0/libdoc/json/rdoc/JSON.html">JSON Std-Lib Documentation</a></p>
+
+              </div>
+              <br>
+                <div class="comments">
+                  <div id="disqus_thread"></div>
+                  <script type="text/javascript">
+                    var disqus_shortname = 'caseyscarboroughcom'; 
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-sm"></div>
+    <div class="col-md-6">
+      <div class="footer">
+        <p class="pull-left icons">
+          <a target="_blank" class="tooltip-link" title="Email" href="mailto:caseyscarborough@gmail.com"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="GitHub" href="https://github.com/caseyscarborough/"><i class="fa fa-github"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="BitBucket" href="https://bitbucket.org/caseyscarborough/"><i class="fa fa-bitbucket"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="LinkedIn" href="https://linkedin.com/in/caseyscarborough"><i class="fa fa-linkedin"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="Google+" href="https://plus.google.com/103526747321763836028?rel=author"><i class="fa fa-google-plus"></i></a>
+        </p>
+        <p class="pull-right">
+          <small class="meta">Contribute to this site on <a target="_blank" href="https://github.com/caseyscarborough/caseyscarborough.github.io">GitHub</a>.</small><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+    </body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Projects &middot; Instagram API &middot; caseyscarborough.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+
+    <link href="/assets/stylesheets/app-8f4ca708.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/javascripts/app-693e4d68.js" type="text/javascript"></script>
+</head>
+    <body>
+
+    <div id="wrap">
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
+    </div>
+    <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li class='active'><a href="/projects/">Projects</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/activity/">Activity</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+      <div class="content">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 hidden-sm"></div>
+            <div class="col-md-8">
+              <div class="project justified">
+                <h1>Instagram API</h1>
+
+<p><i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/instagram/zipball/master">Download .zip</a> &nbsp; 
+<i class="fa fa-cloud-download"></i> <a href="https://github.com/caseyscarborough/instagram/tarball/master">Download .tar.gz</a> &nbsp; 
+<i class="fa fa-github"></i> <a href="https://github.com/caseyscarborough/instagram">View on GitHub</a></p>
+
+<p><a href="http://badge.fury.io/rb/instagram_api"><img alt="Gem Version" src="https://badge.fury.io/rb/instagram_api.png" /></a> <a href="https://codeclimate.com/github/caseyscarborough/instagram"><img alt="Code Climate" src="https://codeclimate.com/github/caseyscarborough/instagram.png" /></a> <a href="https://travis-ci.org/caseyscarborough/instagram"><img alt="Build Status" src="https://travis-ci.org/caseyscarborough/instagram.png?branch=master" /></a></p>
+
+<p>This gem is a simple and easy to use wrapper for Instagram&#39;s API.</p>
+
+<h2>Documentation</h2>
+
+<p>The documentation for this gem can be found at <a href="http://rdoc.info/gems/instagram_api">rdoc.info/gems/instagram_api</a>.</p>
+
+<h2>Installation</h2>
+
+<p>Add this line to your application&#39;s Gemfile:</p>
+
+<pre><code class="ruby">gem &#39;instagram_api&#39;
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre><code class="bash">$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code class="bash">$ gem install instagram_api
+</code></pre>
+
+<h2>Usage</h2>
+
+<pre><code class="ruby">require &#39;instagram_api&#39;
+</code></pre>
+
+<p>All methods in Instagram&#39;s API require some kind of authentication. You can retrieve any public data by using just your client ID, but it is recommended to authorize yourself (and your users) using an access_token. You can get your client ID and client secret by visiting <a href="http://instagram.com/developer">http://instagram.com/developer</a>.</p>
+
+<pre><code class="ruby"># Instantiate a new client.
+client = Instagram.client(
+  :client_id     =&gt; &#39;2bfe9d72a4aae8f06a31025b7536be80&#39;,
+  :client_secret =&gt; &#39;9d667c2b7fae7a329f32b6df17926154&#39;,
+  :callback_url  =&gt; &#39;http://example.com/&#39;
+)
+
+# Visit the authorization URL in your browser and login.
+client.authorize_url
+# =&gt; &quot;https://api.instagram.com/oauth/authorize/?client_id=2bfe9d72a4aae8f06a31025b7536be80&amp;redirect_uri=http://example.com/&amp;response_type=code&quot;
+
+# Retrieve the code from the URL parameters and use it to get an access token.
+client.get_access_token(&#39;88fb89ab65454da2a06f2c6dacd09436&#39;)
+# =&gt; &#39;1313345.3fedf64.a0fcb7f40e02fe3da50500&#39;
+</code></pre>
+
+<p>The last method, <code>get_access_token</code>, will return your access token as well as set it for your client. You can then access any method in the API using your client.</p>
+
+<p>Alternatively, after you or your user have authenticated, you can reinstantiate your client using the previously returned access token.</p>
+
+<pre><code class="ruby">client = Instagram.client(:access_token =&gt; &#39;1313345.3fedf64.a0fcb7f40e02fe3da50500&#39;)
+</code></pre>
+
+<h3>Users API Methods</h3>
+
+<p>You can access various information about Instagram users by using the following methods:</p>
+
+<pre><code class="ruby"># Get a user information by id or username.
+client.user(16500486)
+client.user(&#39;caseyscarborough&#39;)
+
+# Get the authenticated user&#39;s information.
+client.user
+
+# Search for a user by username.
+client.search(&#39;github&#39;)
+
+# Retrieve an authenticated user&#39;s feed.
+client.feed
+
+# Get a user&#39;s recent updates.
+client.recent(16500486)
+
+# Retrieve an authenticated user&#39;s updates.
+client.recent
+
+# Get an authenticated user&#39;s liked photos/videos.
+client.liked
+</code></pre>
+
+<p>See the <a href="http://instagram.com/developer/endpoints/users/">Instagram User Endpoints</a> for more information.</p>
+
+<h3>Media API Methods</h3>
+
+<p>You can retrieve media information by using the following methods:</p>
+
+<pre><code class="ruby"># Get information about a media object by its ID.
+client.media(42020)
+
+# Search for a media item by latitude and longitude (required),
+# with distance constraints (default 1000 meters).
+client.media_search(:lat =&gt; &quot;48.858844&quot;, :lng =&gt; &quot;2.294351&quot;)
+client.media_search(:lat =&gt; &quot;48.858844&quot;, :lng =&gt; &quot;2.294351&quot;, :distance =&gt; 2000)
+
+# Search with Unix timestamp constraints.
+client.media_search(
+  :lat =&gt; &quot;48.858844&quot;,
+  :lng =&gt; &quot;2.294351&quot;,
+  :min_timestamp =&gt; 1357020000,
+  :max_timestamp =&gt; 1375246800
+)
+
+# Get a list of popular media at the moment.
+client.popular_media
+</code></pre>
+
+<p>See the <a href="http://instagram.com/developer/endpoints/media/">Instagram Media Endpoints</a> for more information.</p>
+
+<h2>Sample Application</h2>
+
+<p>The following is a sample application using this gem and <a href="http://sinatrarb.com">Sinatra</a>. Make sure that the sinatra and instagram_api gems are installed before running it.</p>
+
+<pre><code class="bash">$ gem install sinatra instagram_api
+</code></pre>
+
+<p>Afterwards, copy the contents of the following file into a file called sample.rb and add your client ID and client secret (retrieved by registering a new application at <a href="http://instagram.com/developer">http://instagram.com/developer</a>).</p>
+
+<pre><code class="ruby">require &#39;sinatra&#39;
+require &#39;instagram_api&#39;
+
+# Go to http://instagram.com/developer to get your client ID and client secret.
+CLIENT_ID = &quot;YOUR CLIENT ID&quot;
+CLIENT_SECRET = &quot;YOUR CLIENT SECRET&quot;
+
+# Set the redirect uri for your application to the following:
+REDIRECT_URI = &quot;http://localhost:4567/callback&quot;
+
+client = Instagram.client(
+  :client_id =&gt; CLIENT_ID,
+  :client_secret =&gt; CLIENT_SECRET,
+  :callback_url =&gt; REDIRECT_URI
+)
+
+get &#39;/&#39; do
+  output = &#39;&lt;h2&gt;Popular Media&lt;/h2&gt;&#39;
+  client.popular_media.data.each do |p|
+    output &lt;&lt; &quot;&lt;a href=&#39;#{p.link}&#39;&gt;&lt;img src=&#39;#{p.images.thumbnail.url}&#39;&gt;&lt;/a&gt;&amp;nbsp;&quot;
+  end
+  output &lt;&lt; &#39;&lt;br /&gt;&lt;h3&gt;&lt;a href=&quot;/auth&quot;&gt;Click here&lt;/a&gt; to authenticate with Instagram.&lt;/h3&gt;&#39;
+  output
+end
+
+get &#39;/auth&#39; do
+  redirect client.authorize_url
+end
+
+get &#39;/callback&#39; do
+  client.get_access_token(params[:code])
+  redirect &#39;/dashboard&#39;
+end
+
+get &#39;/dashboard&#39; do
+  user = client.user
+  output = &quot;&lt;h2&gt;#{user.data.username}&#39;s feed&lt;/h2&gt;&quot;
+  client.feed.data.each do |f|
+    output &lt;&lt; &quot;&lt;a href=&#39;#{f.link}&#39;&gt;&lt;img src=&#39;#{f.images.low_resolution.url}&#39;&gt;&lt;/a&gt;&lt;br /&gt;
+    &lt;img src=&#39;#{f.user.profile_picture}&#39; width=&#39;20&#39;&gt;&amp;nbsp;#{f.user.username}&lt;br /&gt;&lt;br /&gt;&quot;
+  end
+  output
+end
+</code></pre>
+
+<p>You can then run the application by issuing the following command from the file&#39;s directory:</p>
+
+<pre><code class="bash">$ ruby sample.rb
+</code></pre>
+
+<p>Then navigate to <a href="http://localhost:4567">localhost:4567</a> to see the application in action.</p>
+
+<p>You can view/download this file <a href="https://gist.github.com/caseyscarborough/6331272">here</a>.</p>
+
+<h2>Supported Ruby Versions</h2>
+
+<p>These are the currently supported Ruby versions:</p>
+
+<ul>
+<li>Ruby 1.8.7</li>
+<li>Ruby 1.9.2</li>
+<li>Ruby 1.9.3</li>
+<li>Ruby 2.0.0</li>
+</ul>
+
+<p>This library may work on other versions of Ruby, but these are the versions that the library is tested against.</p>
+
+<h2>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am &#39;Add some feature&#39;</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-sm"></div>
+    <div class="col-md-6">
+      <div class="footer">
+        <p class="pull-left icons">
+          <a target="_blank" class="tooltip-link" title="Email" href="mailto:caseyscarborough@gmail.com"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="GitHub" href="https://github.com/caseyscarborough/"><i class="fa fa-github"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="BitBucket" href="https://bitbucket.org/caseyscarborough/"><i class="fa fa-bitbucket"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="LinkedIn" href="https://linkedin.com/in/caseyscarborough"><i class="fa fa-linkedin"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="Google+" href="https://plus.google.com/103526747321763836028?rel=author"><i class="fa fa-google-plus"></i></a>
+        </p>
+        <p class="pull-right">
+          <small class="meta">Contribute to this site on <a target="_blank" href="https://github.com/caseyscarborough/caseyscarborough.github.io">GitHub</a>.</small><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </body>
+</html>
