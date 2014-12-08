@@ -22,23 +22,32 @@ The documentation for this gem can be found at [rdoc.info/gems/instagram_api](ht
 
 Add this line to your application's Gemfile:
 
-<pre class="highlight"><code class="ruby">gem 'instagram_api'
-</code></pre>
+```ruby
+gem 'instagram_api'
+```
+
 And then execute:
 
-<pre class="no-highlight"><code><span class="dollar">$</span> bundle</code></pre>
+```bash
+$ bundle
+```
 
 Or install it yourself as:
 
-<pre class="no-highlight"><code><span class="dollar">$</span> gem install instagram_api</code></pre>
+```bash
+$ gem install instagram_api
+```
 
 ## Usage
 
-<pre class="highlight"><code class="ruby">require 'instagram_api'
-</code></pre>
+```ruby
+require 'instagram_api'
+```
+
 All methods in Instagram's API require some kind of authentication. You can retrieve any public data by using just your client ID, but it is recommended to authorize yourself (and your users) using an access_token. You can get your client ID and client secret by visiting [http://instagram.com/developer](http://instagram.com/developer).
 
-<pre class="highlight"><code class="ruby"># Instantiate a new client.
+```ruby
+# Instantiate a new client.
 client = Instagram.client(
   :client_id     => '2bfe9d72a4aae8f06a31025b7536be80',
   :client_secret => '9d667c2b7fae7a329f32b6df17926154',
@@ -52,18 +61,22 @@ client.authorize_url
 # Retrieve the code from the URL parameters and use it to get an access token.
 client.get_access_token('88fb89ab65454da2a06f2c6dacd09436')
 # => '1313345.3fedf64.a0fcb7f40e02fe3da50500'
-</code></pre>
+```
+
 The last method, `get_access_token`, will return your access token as well as set it for your client. You can then access any method in the API using your client.
 
 Alternatively, after you or your user have authenticated, you can reinstantiate your client using the previously returned access token.
 
-<pre class="highlight"><code class="ruby">client = Instagram.client(:access_token => '1313345.3fedf64.a0fcb7f40e02fe3da50500')
-</code></pre>
+```ruby
+client = Instagram.client(:access_token => '1313345.3fedf64.a0fcb7f40e02fe3da50500')
+```
+
 ### Users API Methods
 
 You can access various information about Instagram users by using the following methods:
 
-<pre class="highlight"><code class="ruby"># Get a user information by id or username.
+```ruby
+# Get a user information by id or username.
 client.user(16500486)
 client.user('caseyscarborough')
 
@@ -84,14 +97,16 @@ client.recent
 
 # Get an authenticated user's liked photos/videos.
 client.liked
-</code></pre>
+```
+
 See the [Instagram User Endpoints](http://instagram.com/developer/endpoints/users/) for more information.
 
 ### Media API Methods
 
 You can retrieve media information by using the following methods:
 
-<pre class="highlight"><code class="ruby"># Get information about a media object by its ID.
+```ruby
+# Get information about a media object by its ID.
 client.media(42020)
 
 # Search for a media item by latitude and longitude (required),
@@ -109,18 +124,22 @@ client.media_search(
 
 # Get a list of popular media at the moment.
 client.popular_media
-</code></pre>
+```
+
 See the [Instagram Media Endpoints](http://instagram.com/developer/endpoints/media/) for more information.
 
 ## Sample Application
 
 The following is a sample application using this gem and [Sinatra](http://sinatrarb.com). Make sure that the sinatra and instagram_api gems are installed before running it.
 
-<pre class="no-highlight"><code><span class="dollar">$</span> gem install sinatra instagram_api</code></pre>
+```bash
+$ gem install sinatra instagram_api
+```
 
 Afterwards, copy the contents of the following file into a file called sample.rb and add your client ID and client secret (retrieved by registering a new application at [http://instagram.com/developer](http://instagram.com/developer)).
 
-<pre class="highlight"><code class="ruby">require 'sinatra'
+```ruby
+require 'sinatra'
 require 'instagram_api'
 
 # Go to http://instagram.com/developer to get your client ID and client secret.
@@ -163,10 +182,13 @@ get '/dashboard' do
   end
   output
 end
-</code></pre>
+```
+
 You can then run the application by issuing the following command from the file's directory:
 
-<pre class="no-highlight"><code><span class="dollar">$</span> ruby sample.rb</code></pre>
+```bash
+$ ruby sample.rb
+```
 
 Then navigate to [localhost:4567](http://localhost:4567) to see the application in action.
 

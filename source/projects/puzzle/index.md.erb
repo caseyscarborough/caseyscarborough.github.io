@@ -14,17 +14,20 @@ This application is a small command line utility used to solve the 8-puzzle game
 
 __Initial State__:
 
+<table>
+<tr><td>7</td><td>2</td><td>3</td></tr>
+<tr><td>4</td><td>6</td><td>5</td></tr>
+<tr><td>1</td><td> </td><td>8</td></tr>
+</table>
 
-<pre class="highlight"><code class="bash">7 2 3
-4 6 5
-1   8
-</code></pre>
 __Goal State__:
 
-<pre class="highlight"><code class="bash">1 2 3
-4 5 6
-7 8
-</code></pre>
+<table>
+<tr><td>1</td><td>2</td><td>3</td></tr>
+<tr><td>4</td><td>5</td><td>6</td></tr>
+<tr><td>7</td><td>8</td><td> </td></tr>
+</table>
+
 ## Dependencies
 
 This is a Java project using Maven. The two dependencies you'll need are:
@@ -36,57 +39,74 @@ This is a Java project using Maven. The two dependencies you'll need are:
 
 Being by cloning the repository, or downloading the repository as a zip file.
 
-<pre class="highlight"><code class="bash">$ git clone https://github.com/caseyscarborough/puzzle.git && cd puzzle
-</code></pre>
+```bash
+$ git clone https://github.com/caseyscarborough/puzzle.git && cd puzzle
+```
+
 Once you've retrieved the repository and are in the project's directory, you can package the project using Maven and run it manually using the following commands:
 
-<pre class="highlight"><code class="bash">$ mvn package -P cli-dist
+```bash
+$ mvn package -P cli-dist
 $ java -cp target/Puzzle.jar com.caseyscarborough.puzzle.Puzzle
-</code></pre>
+```
+
 If you are on a UNIX-based system, run `script/build` to package the application using Maven and `script/puzzle` to run the application:
 
-<pre class="highlight"><code class="bash">$ script/build
+```bash
+$ script/build
 $ script/puzzle
-</code></pre>
+```
+
 > _Note: This may require you to chmod the scripts make them executable:_ `chmod u+x script/*`
 
 The application will then _block_ and allow you to input a sliding puzzle in the following format:
 
-<pre class="highlight"><code class="bash">0 1 2
+```bash
+0 1 2
 4 5 3
 7 6 8
-</code></pre>
+```
+
 Zeros or blank spaces can be used for the input of the application, meaning all of these inputs are valid:
 
-<pre class="highlight"><code class="bash">1 5 2        4 1 2          4 3        0 1 2
+```bash
+1 5 2        4 1 2          4 3        0 1 2
 4 0 3        5 8          1 7 6        4 5 3
 7 6 8        7 3 6        8 2 5        7 6 8
-</code></pre>
+```
+
 ### Optional Parameters
 
 You have the option to give two optional parameters. The first is a filename to read from, and the second is a filename to write the output solution to.
 
 Windows:
 
-</code></pre>> java -cp target\Puzzle.jar com.caseyscarborough.puzzle.Puzzle in.txt out.txt
-</code></pre>
+```
+> java -cp target\Puzzle.jar com.caseyscarborough.puzzle.Puzzle in.txt out.txt
+```
+
 Mac OS X/Linux:
 
-<pre class="highlight"><code class="bash">$ script/puzzle in.txt out.txt
-</code></pre>
+```bash
+$ script/puzzle in.txt out.txt
+```
+
 ### Input File Format
 
 The format of the input file should match the same as the input you'd give on the console. This means three lines, with three numbers, each separated by a space. See below:
 
-<pre class="highlight"><code class="bash">4 1 2
+```bash
+4 1 2
 5 3 6
 0 7 8
-</code></pre>
+```
+
 ## Sample Puzzles to Test
 
 The following are some sample puzzles to test the application out with.
 
-<pre class="highlight"><code class="bash">0 5 2
+```bash
+0 5 2
 1 8 3
 4 7 6
 
@@ -107,4 +127,4 @@ These are not solvable.
 1 5 0
 3 2 8
 4 6 7
-</code></pre>
+```

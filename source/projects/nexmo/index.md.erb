@@ -12,6 +12,16 @@ group: Projects
 
 This plugin gives any Grails application the ability to send SMS messages and outgoing phone calls with text-to-speech using [Nexmo's API](https://www.nexmo.com/).
 
+## Installation
+
+You can add this plugin to your application by adding the following to your `BuildConfig.groovy file`:
+
+```groovy
+plugins {
+  compile ":nexmo:1.0" // Add this line
+}
+```
+
 ## Methods
 
 #### [__sendSms(String to, String text, String from)__](https://github.com/caseyscarborough/nexmo/blob/master/grails-app/services/grails/plugin/nexmo/NexmoService.groovy#L30)
@@ -42,7 +52,8 @@ This method uses text-to-speech to call your recipient and deliver a message.
 
 Set the configuration in your `Config.groovy` file, as shown below:
 
-<pre class="highlight"><code class="groovy">nexmo {
+```groovy
+nexmo {
   api {
     key    = "abcde123" // Your Nexmo API Key
     secret = "fghij456" // Your Nexmo API Secret
@@ -52,12 +63,14 @@ Set the configuration in your `Config.groovy` file, as shown below:
     default_from = "15005551234" // Your default from telephone number for SMS
   }
 }
-</code></pre>
+```
+
 You can then proceed to use the plugin in a Grails controller or service by injecting the NexmoService bean, and calling the `sendSms` method.
 
 ### Example
 
-<pre class="highlight"><code class="groovy">class ExampleController {
+```groovy
+class ExampleController {
 
   // Inject the service
   def nexmoService
@@ -78,21 +91,14 @@ You can then proceed to use the plugin in a Grails controller or service by inje
     }
   }
 }
-</code></pre>
+```
+
 Here is an example response:
 
-<pre class="highlight"><code class="groovy">// SMS
+```groovy
+// SMS
 [ status: "0", id: "00000125" ]
 
 // Call
 [ status: "0", id: "14b75f2246e7c1a17d345449a20d93e5" ]
-</code></pre>
-## Contributing
-
-Please feel free to contribute to the project by following the options below.
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+```

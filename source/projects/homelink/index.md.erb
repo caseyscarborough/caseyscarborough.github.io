@@ -32,7 +32,8 @@ Dependencies
 
 For the development environment, the application uses the default Grails in-memory database, H2. The MySQL database can also be set up if desired by creating a database locally, then changing the dataSource settings on lines 15-38 of the <code>DataSource.groovy</code> file located in the application's <code>grails-app/conf/</code> directory. The settings for MySQL are shown below:
 
-<pre class="highlight"><code class="groovy">dataSource {
+```groovy
+dataSource {
   dbCreate = "create-drop" // Can be changed to 'create', 'update', or 'validate'
   url = "jdbc:mysql://localhost:3306/homelink"
   driverClassName = "com.mysql.jdbc.Driver"
@@ -48,19 +49,20 @@ For the development environment, the application uses the default Grails in-memo
     maxWait = 10000
   }
 }
-</code></pre>
+```
+
 Running the Application
 -----------------------
 
 To run the application, download the repository and unzip it or clone the repository to your local machine using the following command:
-
-<pre class="no-highlight"><code><span class="dollar">$</span> git clone http://github.com/caseyscarborough/homelink.git
-<span class="dollar">$</span> cd homelink</code></pre>
-
+```
+git clone http://github.com/caseyscarborough/homelink.git
+```
 Run the following commands from a terminal window with the <code>homelink</code> directory as the working directory:
-
-<pre class="no-highlight"><code><span class="dollar">$</span> grails upgrade  # If your version of Grails is greater than 2.2.2
-<span class="dollar">$</span> grails run-app</code></pre>
+```
+grails upgrade  # If your version of Grails is greater than 2.2.2
+grails run-app
+```
 
 After running the commands, you can navigate to [http://localhost:8080/homelink][homelink] in your web browser to see the application in action.
 
@@ -87,7 +89,8 @@ The todos section is very similar in layout to the shopping section. You can cre
 
 If you'd like the application to send emails, you must change the settings for the mail plugin in the <code>grails-app/conf/Config.groovy</code> file around line 70 (shown below). 
 
-<pre class="highlight"><code class="groovy">grails {
+```groovy
+grails {
   mail {
     host = "smtp.gmail.com"
     port = 465
@@ -99,7 +102,8 @@ If you'd like the application to send emails, you must change the settings for t
          "mail.smtp.socketFactory.fallback":"false"]
   }
 }
-</code></pre>These settings are currently set up for a Gmail account, and the only settings you need to change are the username and password fields. Change these to your Gmail address and password and users will be able receive automated emails from the application.
+```
+These settings are currently set up for a Gmail account, and the only settings you need to change are the username and password fields. Change these to your Gmail address and password and users will be able receive automated emails from the application.
 
 View more information on using the mail plugin at [http://grails.org/plugin/mail][grails-mail].
 

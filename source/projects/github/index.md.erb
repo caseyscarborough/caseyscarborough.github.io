@@ -22,12 +22,15 @@ Full documentation for the gem can be found at [rdoc.info/gems/github_api_v3/fra
 
 To install the gem, issue the following command:
 
-<pre class="no-highlight"><code><span class="dollar">$</span> gem install github_api_v3</code></pre>
+```bash
+gem install github_api_v3
+```
 
 ## Usage
 
-<pre class="highlight"><code class="ruby">require 'github_api_v3'
-</code></pre>
+```ruby
+require 'github_api_v3'
+```
 
 ### Unauthenticated Requests
 
@@ -37,7 +40,8 @@ There are multiple different unauthenticated requests to the API. These are perf
 
 Some methods, such as retrieving private repos or emails, require authentication. To create one of these requests, you'll need to pass in your login and access token. You can create a personal access token on your [account page](https://github.com/settings/applications).
 
-<pre class="highlight"><code class="ruby"># Create a new client using username and access token.
+```ruby
+# Create a new client using username and access token.
 client = GitHub.client(
   :login => 'username',
   :access_token => 'bf215181b5140522137b3d4f6b73544a'
@@ -45,10 +49,10 @@ client = GitHub.client(
 
 # Authenticated methods
 client.emails # => ["email@example.com", "email2@example.com"]
-client.repos  # => #&lt;Array:0x007fb8aa0d1a00&gt;
+client.repos  # => #<Array:0x007fb8aa0d1a00>
 client.follow('matz') # => true
-client.user   # => #&lt;Hash:0x007fb8a9109d70&gt;
-</code></pre>
+client.user   # => #<Hash:0x007fb8a9109d70>
+```
 
 Anytime a method is shown below starting with `client`, it is an authenticated method.
 
@@ -60,7 +64,8 @@ The following sections are some sample usages of the library for parts of the AP
 
 The following are some sample usages of the Users module.
 
-<pre class="highlight"><code class="ruby"># Retrieve a single user's information.
+```ruby
+# Retrieve a single user's information.
 user = GitHub.user('caseyscarborough')
 user.login     # => "caseyscarborough"
 user.name      # => "Casey Scarborough"
@@ -108,13 +113,16 @@ GitHub.rate_limit
 client.rate_limit
 
 # etc...
-</code></pre>You can find the available attributes [here](http://developer.github.com/v3/users/#get-a-single-user). Check the [Users documentation](http://rdoc.info/gems/github_api_v3/GitHub/Client/Users) for the gem for a complete list and more examples.
+```
+
+You can find the available attributes [here](http://developer.github.com/v3/users/#get-a-single-user). Check the [Users documentation](http://rdoc.info/gems/github_api_v3/GitHub/Client/Users) for the gem for a complete list and more examples.
 
 #### Repositories
 
 The following are some sample usages for the Repos module.
 
-<pre class="highlight"><code class="ruby"># Retrieve repositories for an unauthenticated/authenticated user.
+```ruby
+# Retrieve repositories for an unauthenticated/authenticated user.
 GitHub.repos('caseyscarborough')
 client.repos
 
@@ -151,14 +159,16 @@ client.star('caseyscarborough','github')
 client.unstar('caseyscarborough','github')
 
 # etc...
-</code></pre>
+```
+
 For a full list with descriptions, see the [Repos documentation](http://rdoc.info/gems/github_api_v3/GitHub/Client/Repos) for the gem.
 
 #### Events
 
 The following are some sample usages of the Events module.
 
-<pre class="highlight"><code class="ruby"># Retrieve all events for a user.
+```ruby
+# Retrieve all events for a user.
 GitHub.user_events('caseyscarborough')
 
 # Retrieve all public events for a user.
@@ -174,14 +184,16 @@ GitHub.repo_events('owner','repo-name')
 GitHub.organization_events('ruby')
 
 # etc...
-</code></pre>
+```
+
 Check out the [Events documentation](http://rdoc.info/gems/github_api_v3/GitHub/Client/Events) for a comprehensive list of methods.
 
 #### Gists
 
 The following are sample uses for the Gists module.
 
-<pre class="highlight"><code class="ruby"># Retrieve all gists for a user.
+```ruby
+# Retrieve all gists for a user.
 GitHub.gists('caseyscarborough')
 
 # Retrieve all gists for the authenticated user.
@@ -212,35 +224,42 @@ client.fork_gist(1234567)
 client.delete_gist(1234567)
 
 # etc...
-</code></pre>Check out the [Gist documentation](http://rdoc.info/gems/github_api_v3/GitHub/Client/Gists) for more information.
+```
+
+Check out the [Gist documentation](http://rdoc.info/gems/github_api_v3/GitHub/Client/Gists) for more information.
 
 #### Markdown
 
 You can render any markdown test using the markdown method.
 
-<pre class="highlight"><code class="ruby"># Render a string to markdown.
+```ruby
+# Render a string to markdown.
 GitHub.markdown('# Markdown text!')
 
 # Render a file's contents to markdown.
 GitHub.markdown(File.read('markdown.md'))
-</code></pre>
+```
+
 #### Gitignore
 
 You can retrieve .gitignore templates using the Gitignore API as well.
 
-<pre class="highlight"><code class="ruby"># Retrieve a list of all available .gitignore templates.
+```ruby
+# Retrieve a list of all available .gitignore templates.
 GitHub.gitignore_list
 # => ["Actionscript", "Android", "C", "C++", "CSharp"...]
 
 # Retrieve a specific template.
 GitHub.gitignore("Ruby")
 # => {"name"=>"Ruby", "source"=>"*.gem\n*.rbc\n.bundle...}
-</code></pre>
+```
+
 #### Authorizations
 
 The Authorizations OAuth API requires that a user use _basic authentication_. This means that you'll need to instantiate a client using your username and password, as opposed to the username and access token. You'll then be able to use the Authorizations API methods on  that client. See below:
 
-<pre class="highlight"><code class="ruby">client = GitHub.client(:login => 'username', :password => 'password')
+```ruby
+client = GitHub.client(:login => 'username', :password => 'password')
 
 # List your authorizations.
 client.authorizations
@@ -265,14 +284,16 @@ client.update_authorization(
 
 # Delete an authorization by it's ID.
 client.delete_authorization(123)
-</code></pre>
+```
+
 For a full overview of the Authorizations API check out the [OAuth documentation](http://rdoc.info/gems/github_api_v3/GitHub/Client/OAuth).
 
 #### Contents API
 
 The Contents API methods are used to retrieve, create, update, and delete files in a repository. File contents that are retrieved are Base64 encoded. Some example methods are shown below:
 
-<pre class="highlight"><code class="ruby"># Get the contents of the README file.
+```ruby
+# Get the contents of the README file.
 GitHub.contents('caseyscarborough', 'github')
 
 # Retrieve the contents of a file or directory.
@@ -313,14 +334,16 @@ client.delete_file(
   :sha       => '329688480d39049927147c162b9d2deaf885005f', # SHA of file.
   :committer => { :name => 'Casey Scarborough', :email => 'casey@example.com' }
 )
-</code></pre>
+```
+
 As you can see, the Commits API methods are not as intuitive as the rest of the API, so the [documentation](http://rdoc.info/gems/github_api_v3/GitHub/Client/Contents) is very useful.
 
 #### Conclusion
 
 And if you've made it this far, you can check out the last method to get a little piece of random wisdom from GitHub.
 
-<pre class="highlight"><code class="ruby">GitHub.octocat
+```ruby
+GitHub.octocat
 # =>
           "MMM.           .MMM
            MMMMMMMMMMMMMMMMMMM
@@ -346,7 +369,8 @@ And if you've made it this far, you can check out the last method to get a littl
 
 # Or create your own wisdom.
 GitHub.octocat('Wisdom.')
-</code></pre>
+```
+
 ## Supported Ruby Versions
 
 Currently these are the supported Ruby versions:

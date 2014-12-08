@@ -16,10 +16,9 @@ The application can be used and seen at [http://slnky.me/](http://slnky.me). The
 
 ![alt text][screenshot]
 
-## Dependencies
+# Dependencies
 
 This application uses the following system dependencies:
-
 * Ruby 2.0.0 (possibly 1.9.3, but not tested)
 * Rails 3.2.13
 * PostgreSQL for production (not needed for development or testing)
@@ -30,15 +29,18 @@ This application uses the following system dependencies:
 
 If you'd like to run the application locally or contribute to the application, begin by cloning the application and installing necessary dependencies:
 
-<pre class="no-highlight"><code><span class="dollar">$</span> git clone http://github.com/caseyscarborough/slinky.git
-<span class="dollar">$</span> cd slinky
-<span class="dollar">$</span> bundle install</code></pre>
+```bash
+git clone http://github.com/caseyscarborough/slinky.git
+cd slinky
+bundle install
+```
 
 Afterwards, create and migrate the database and fire up the rails development server.
 
-<pre class="no-highlight"><code><span class="dollar">$</span> rake db:migrate
-<span class="dollar">$</span> rails server
-</code></pre>
+```bash
+rake db:migrate
+rails server
+```
 
 Afterwards, navigate to [http://localhost:3000](http://localhost:3000) in your web browser to see the application in action.
 
@@ -46,7 +48,8 @@ Afterwards, navigate to [http://localhost:3000](http://localhost:3000) in your w
 
 If you'd like to generate sample data for a user, you can do so by editing the [lib/tasks/sample_data.rake](https://github.com/caseyscarborough/slinky/blob/master/lib/tasks/sample_data.rake) file.
 
-<pre class="highlight"><code class="ruby"># Generate first user, typically the one you'll use.
+```ruby
+# Generate first user, typically the one you'll use.
 User.create(
   first_name: 'Casey', 
   last_name: 'Scarborough',
@@ -67,20 +70,24 @@ User.all.each do |user|
     )
   end
 end
-</code></pre>
+```
+
 Afterwards, you can add the sample data to the database by running the following command:
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> rake db:populate</code></pre>
+```bash
+rake db:populate
+```
 
 ## Running the Test Suite
 The tests are built using the [RSpec](http://rspec.info/) testing framework and can be run by issuing the following commands from the project root:
 
-<pre class="highlight"><code class="bash"># Prepare the database for testing
-<span class="dollar">$</span> rake db:test:prepare
+```bash
+# Prepare the database for testing
+rake db:test:prepare
 
 # Run the tests
-<span class="dollar">$</span> rspec spec/
-</code></pre>
+rspec spec/
+```
 
 ## To-Do
 

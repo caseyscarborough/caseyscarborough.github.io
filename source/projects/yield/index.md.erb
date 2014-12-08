@@ -24,7 +24,9 @@ Yield is a command line utility that generates a preview of README.md and markdo
 
 Install the gem by issuing the following command:
 
-<pre class="no-highlight"><code><span class="dollar">$</span> gem install yield</code></pre>
+```bash
+$ gem install yield
+```
 
 This will also install any necessary dependencies for the gem that are not currently installed.
 
@@ -32,13 +34,17 @@ This will also install any necessary dependencies for the gem that are not curre
 
 From the root of your project, or any folder containing a README.md file, run the following command:
 
-<pre class="no-highlight"><code><span class="dollar">$</span> yield
-=* Yield is serving your markdown at http://localhost:4000/</code></pre>
+```bash
+$ yield
+=* Yield is serving your markdown at http://localhost:4000/
+```
 
 You may also specify a path to a markdown file you'd like to render, such as:
 
-<pre class="highlight"><code class="bash"># Render a specific file
-<span class="dollar">$</span> yield UPDATES.md</code></pre>
+```bash
+# Render a specific file
+$ yield UPDATES.md
+```
 
 Then navigate to [localhost:4000](http://localhost:4000) in your browser to view the preview of the file. You can stop the server by pressing Control+C.
 
@@ -46,8 +52,10 @@ Yield also supports relative URLs in the same directory, so you can preview othe
 
 Finally, you can specify the port for the server to run on using the `-p` or `--port` option:
 
-<pre class="highlight"><code class="bash"># Run the server on port 8080
-<span class="dollar">$</span> yield -p 8080</code></pre>
+```bash
+# Run the server on port 8080
+$ yield -p 8080
+```
 
 ## Potential Errors
 
@@ -55,14 +63,18 @@ Finally, you can specify the port for the server to run on using the `-p` or `--
 
 You may receive the following OpenSSL error after navigating to [localhost:4000](http://localhost:4000) on Mac OS X 10.8.
 
-</code></pre>OpenSSL::SSL::SSLError at /
+```
+OpenSSL::SSL::SSLError at /
 SSL_connect returned=1 errno=0 state=SSLv3 read server key exchange B: bad ecpoint
-</code></pre>
+```
+
 This error seems to be cause by a hosed installation of OpenSSL on the system. You can resolve this error by running the following commands:
 
-<pre class="no-highlight"><code><span class="dollar">$</span> brew install openssl
-<span class="dollar">$</span> brew link openssl --force
-<span class="dollar">$</span> rvm reinstall 2.0.0 --with-gcc=gcc</code></pre>
+```bash
+$ brew install openssl
+$ brew link openssl --force
+$ rvm reinstall 2.0.0 --with-gcc=gcc
+```
 
 If this does not work for you, see the following links, which address the same issue:
 
@@ -75,7 +87,7 @@ If you receive an OpenSSL "certificate verify failed" error on Windows after lau
 
 1. Download [http://curl.haxx.se/ca/cacert.pem](http://curl.haxx.se/ca/cacert.pem) and save it to C:\cacert.pem.
 2. Go to Computer -> Advanced Settings -> Environment Variables and create a new System Variable:<br />
-  **Variable**: SSL\_CERT\_FILE<br />
+  **Variable**: SSL_CERT_FILE<br />
   **Value**: C:\cacert.pem.
 4. Restart all command prompt windows and reissue the `yield` command.  
 

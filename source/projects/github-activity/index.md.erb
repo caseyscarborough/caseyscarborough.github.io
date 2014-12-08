@@ -20,23 +20,27 @@ A sample image of the activity stream is shown below:
 
 The two dependencies for the plugin are the [Mustache](https://github.com/janl/mustache.js/) templating library and [FontAwesome](http://fontawesome.io) (if you want the icons to show). You can include these along with the scripts for the plugin in the head of your page with the following HTML:
 
-<pre class="highlight"><code class="html">&lt;link rel=&quot;stylesheet&quot; href=&quot;//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css&quot;&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;github-activity.min.css&quot;&gt;
+```html
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<link rel="stylesheet" href="github-activity.min.css">
 
-&lt;script type=&quot;text/javascript&quot; src=&quot;//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;github-activity.min.js&quot;&gt;
-</code></pre>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+<script type="text/javascript" src="github-activity.min.js">
+```
 
 ## Usage
 
 To use the library, begin by creating a new div with an id in the body of your page:
 
-<pre class="highlight"><code class="">&lt;div id=&quot;feed&quot;&gt;&lt;/div&gt;
-</code></pre>
+```html
+<div id="feed"></div>
+```
+
 Then call the feed method via Javascript:
 
-<pre class="highlight"><code class="js">GitHubActivity.feed({ username: "your-username", selector: "#feed" });
-</code></pre>
+```js
+GitHubActivity.feed({ username: "your-username", selector: "#feed" });
+```
 
 ## Credits
 
