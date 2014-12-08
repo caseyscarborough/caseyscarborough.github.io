@@ -12,14 +12,16 @@ When developing a web application, it is often important to make structural chan
 The first step is to add the dependency for the [Grails Database Migration Plugin](http://grails.org/plugin/database-migration) to your `BuildConfig.groovy` file.
 
 ```groovy
-plugins {  runtime ":database-migration:1.3.8"
+plugins {
+  runtime ":database-migration:1.3.8"
 }
 ```
 
 Then, in your `DataSource.groovy` file, you'll want to disable Grails' automatic update of your database for all environments:
 
 ```java
-environments {  development {
+environments {
+  development {
     dataSource {
       // Change this:
       dbCreate = "create-drop"
