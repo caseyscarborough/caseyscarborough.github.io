@@ -23,43 +23,45 @@ The following are the memory requirements:
 
 The first step when booting up your install is to set a root password and update the machine.
 
-<pre class="highlight"><code class="bash"># Set the root password
-<span class="dollar">$</span> sudo passwd root<br>
+```bash
+# Set the root password
+$ sudo passwd root
+
 # Enter root, update the system, and install requirements.
-<span class="dollar">$</span> su
-<span class="dollar">$</span> apt-get update -y
-<span class="dollar">$</span> apt-get upgrade -y<br>
-<span class="dollar">$</span> apt-get install -y build-essential zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev curl git-core openssh-server redis-server checkinstall libxml2-dev libxslt-dev libcurl4-openssl-dev libicu-dev
+$ su
+$ apt-get update -y
+$ apt-get upgrade -y
+$ apt-get install -y build-essential zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev libncurses5-dev libffi-dev curl git-core openssh-server redis-server checkinstall libxml2-dev libxslt-dev libcurl4-openssl-dev libicu-dev
 
 # Set VIM as the default editor (optional, nano is the default)
-<span class="dollar">$</span> update-alternatives --set editor /usr/bin/vim.basic
-</code></pre>
+$ update-alternatives --set editor /usr/bin/vim.basic
+```
 
 You can then exit the root shell by typing `exit`. Next you'll want to ensure you have the proper Python installation (which comes by default with Ubuntu Server), and install the python-docutils to support reStructuredText markdown.
 
-<pre class="highlight"><code class="bash"># Make sure you have at least Python 2.5, but not 3.x
-<span class="dollar">$</span> python --version
+```bash
+# Make sure you have at least Python 2.5, but not 3.x$ python --version
 Python 2.7.3
 
-<span class="dollar">$</span> sudo apt-get install python-docutils -y
-</code></pre>
+$ sudo apt-get install python-docutils -y
+```
 
 Now on to download and compile Ruby, then install the [Bundler Gem](http://bundler.io).
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> mkdir /tmp/ruby && cd /tmp/ruby
-<span class="dollar">$</span> curl --progress ftp://ftp.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p247.tar.gz | tar xz
-<span class="dollar">$</span> cd ruby-2.0.0-p247
-<span class="dollar">$</span> ./configure
-<span class="dollar">$</span> make && sudo make install  # This will take a while!
-<span class="dollar">$</span> sudo gem install bundler --no-ri --no-rdoc
-</code></pre>
+```bash
+$ mkdir /tmp/ruby && cd /tmp/ruby$ curl --progress ftp://ftp.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p247.tar.gz | tar xz
+$ cd ruby-2.0.0-p247
+$ ./configure
+$ make && sudo make install  # This will take a while!
+$ sudo gem install bundler --no-ri --no-rdoc
+```
 
 ### Setting Up the Git User
 
 The simplest part of the installation is setting up the user to manage the application. Run the following command:
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> sudo adduser --disabled-login --gecos 'GitLab' git
-</code></pre>
+```bash
+$ sudo adduser --disabled-login --gecos 'GitLab' git```
 
 ### Setting Up the Database
 
@@ -69,13 +71,17 @@ The next step is to set up the database. GitLab recommends using [MySQL](https:/
 
 Install the database and set up the root password.
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> sudo apt-get install -y mysql-server mysql-client libmysqlclient-dev</code></pre>
+```bash
+$ sudo apt-get install -y mysql-server mysql-client libmysqlclient-dev
+```
 
 Then login to MySQL server with your password and create the database and user. 
 
 > Note: Make sure that you do not type the `mysql> ` prompt, and that you replace the password with one of your own.
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> mysql -u root -p
+```bash
+$ mysql -u root -p
+
 # Create the user.
 mysql> CREATE USER 'gitlab'@'localhost' IDENTIFIED BY 'Password1';
 
@@ -87,65 +93,67 @@ mysql> GRANT SELECT, LOCK TABLES, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, A
 
 # Exit.
 mysql> \q
-</code></pre>
+```
 
 ### Update Git
 
 GitLab requires a Git version 1.7.10 or greater. We'll need to update that. Issue the following commands:
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> sudo apt-get install -y python-software-properties
-<span class="dollar">$</span> sudo add-apt-repository ppa:git-core/ppa
-<span class="dollar">$</span> sudo apt-get update
-<span class="dollar">$</span> sudo apt-get install -y git
-</code></pre>
+```bash
+$ sudo apt-get install -y python-software-properties$ sudo add-apt-repository ppa:git-core/ppa
+$ sudo apt-get update
+$ sudo apt-get install -y git
+```
 
 ### Installing GitLab Shell
 
 Now we'll install the GitLab Shell, GitLab's replacement for Gitolite.
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> cd /home/git
+```bash
+$ cd /home/git
 
 # Clone the repository
-<span class="dollar">$</span> sudo -u git -H git clone https://github.com/gitlabhq/gitlab-shell.git
-<span class="dollar">$</span> cd gitlab-shell
+$ sudo -u git -H git clone https://github.com/gitlabhq/gitlab-shell.git
+$ cd gitlab-shell
 
 # Checkout the latest version
-<span class="dollar">$</span> sudo -u git -H git checkout v1.7.1
-<span class="dollar">$</span> sudo -u git -H cp config.yml.example config.yml
+$ sudo -u git -H git checkout v1.7.1
+$ sudo -u git -H cp config.yml.example config.yml
 
 # Edit the configuration file and update gitlab_url with something like 'http://yourdomain.com/'
-<span class="dollar">$</span> sudo -u git -H editor config.yml
+$ sudo -u git -H editor config.yml
 
 # Run the installation
-<span class="dollar">$</span> sudo -u git -H ./bin/install
-</code></pre>
+$ sudo -u git -H ./bin/install
+```
 
 
 ### Installing GitLab
 
 Now, onto the main event. The following steps will walk you through installing the actual GitLab application.
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> cd /home/git
+```bash
+$ cd /home/git
 
 # Clone the repository
-<span class="dollar">$</span> sudo -u git -H git clone https://github.com/gitlabhq/gitlabhq.git gitlab
-<span class="dollar">$</span> cd /home/git/gitlab
+$ sudo -u git -H git clone https://github.com/gitlabhq/gitlabhq.git gitlab
+$ cd /home/git/gitlab
 
 # Checkout the latest stable release
-<span class="dollar">$</span> sudo -u git -H git checkout 6-1-stable
+$ sudo -u git -H git checkout 6-1-stable
 
 # Rename the config file and edit the domain name to your machine's name.
-<span class="dollar">$</span> sudo -u git -H cp config/gitlab.yml.example config/gitlab.yml
-<span class="dollar">$</span> sudo -u git -H editor config/gitlab.yml
+$ sudo -u git -H cp config/gitlab.yml.example config/gitlab.yml
+$ sudo -u git -H editor config/gitlab.yml
 
 # Rename the Unicorn config file.
-<span class="dollar">$</span> sudo -u git -H cp config/unicorn.rb.example config/unicorn.rb
-</code></pre>
+$ sudo -u git -H cp config/unicorn.rb.example config/unicorn.rb
+```
 
 The next step is to update permissions and create the satellites folder. I'm leaving the bash prompt out of these so that you can copy-paste all commands and they will just run in order.
 
-<pre class="highlight"><code class="bash"># Create satellites directory and update permissions.
-sudo -u git -H mkdir /home/git/gitlab-satellites
+```bash
+# Create satellites directory and update permissions.sudo -u git -H mkdir /home/git/gitlab-satellites
 sudo chown -R git log/
 sudo chown -R git tmp/
 sudo chmod -R u+rwX log/
@@ -161,75 +169,77 @@ sudo chmod -R u+rwX public/uploads
 sudo -u git -H git config --global user.name "GitLab"
 sudo -u git -H git config --global user.email "gitlab@localhost"
 sudo -u git -H git config --global core.autocrlf input
-</code></pre>
+```
 
 Now you'll want to configure the database. Rename the database.yml file and edit the file with the proper username and password that you created for the MySQL connection. The username should be _gitlab_ and whatever password you specified.
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> sudo -u git cp config/database.yml.mysql config/database.yml
-<span class="dollar">$</span> sudo -u git -H editor config/database.yml
-<span class="dollar">$</span> sudo -u git -H chmod o-rwx config/database.yml
-</code></pre>
+```bash
+$ sudo -u git cp config/database.yml.mysql config/database.yml$ sudo -u git -H editor config/database.yml
+$ sudo -u git -H chmod o-rwx config/database.yml
+```
 
 Then install the required gems.
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> cd /home/git/gitlab
-<span class="dollar">$</span> sudo gem install charlock_holmes --version '0.6.9.4'
-<span class="dollar">$</span> sudo -u git -H bundle install --deployment --without development test postgres aws
-</code></pre>
+```bash
+$ cd /home/git/gitlab$ sudo gem install charlock_holmes --version '0.6.9.4'
+$ sudo -u git -H bundle install --deployment --without development test postgres aws
+```
 
 ### Initialize the Application
 
 Now you can proceed to initialize the database and to activate GitLab's features, as well as make it start on system bootup. Type `yes` at the prompt to continue with this command.
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production
+```bash
+$ sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production
 
 # Download the init script.
-<span class="dollar">$</span> sudo cp lib/support/init.d/gitlab /etc/init.d/gitlab
-<span class="dollar">$</span> sudo chmod +x /etc/init.d/gitlab
+$ sudo cp lib/support/init.d/gitlab /etc/init.d/gitlab
+$ sudo chmod +x /etc/init.d/gitlab
 
 # Make GitLab start on bootup.
-<span class="dollar">$</span> sudo update-rc.d gitlab defaults 21
-</code></pre>
+$ sudo update-rc.d gitlab defaults 21
+```
 
 Now just to check the status of your application and start the GitLab instance.
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production
-<span class="dollar">$</span> sudo service gitlab start
+```bash
+$ sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production$ sudo service gitlab start
 
 # Make sure everything is green!
-<span class="dollar">$</span> sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
-</code></pre>
+$ sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production
+```
 
 ### Setting up Nginx
 
 The final step is to install your webserver and have it serve your application. The officially supported webserver for GitLab is Nginx, so we'll be using that.
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> sudo apt-get install -y nginx
-<span class="dollar">$</span> sudo cp lib/support/nginx/gitlab /etc/nginx/sites-available/gitlab
-<span class="dollar">$</span> sudo ln -s /etc/nginx/sites-available/gitlab /etc/nginx/sites-enabled/gitlab
+```bash
+$ sudo apt-get install -y nginx$ sudo cp lib/support/nginx/gitlab /etc/nginx/sites-available/gitlab
+$ sudo ln -s /etc/nginx/sites-available/gitlab /etc/nginx/sites-enabled/gitlab
 
 # Edit the site file with your domain name.
-<span class="dollar">$</span> sudo editor /etc/nginx/sites-available/gitlab
+$ sudo editor /etc/nginx/sites-available/gitlab
 
 # Then restart the server!
-<span class="dollar">$</span> sudo service nginx restart
-</code></pre>
+$ sudo service nginx restart
+```
 
 ### Finishing Up
 
 You should now navigate in your browser to the URL of your GitLab server. If your server does not yet have an [FQDN](http://en.wikipedia.org/wiki/Fully_qualified_domain_name), you can get this by running the `ifconfig` command on your server. If all went well, you should be greeted with the GitLab login page! You can then proceed to login with the default credentials:
 
-</code></pre>admin@local.host
+```
+admin@local.host
 5iveL!fe
-</code></pre>
+```
 If you have any issues with the installation, feel free to leave a comment below, or check out the [GitLab Troubleshooting Guide](https://github.com/gitlabhq/gitlab-public-wiki/wiki/Trouble-Shooting-Guide).
 
 ### Note
 
 On each installation I've performed with GitLab I was unable to push to the remote repository via SSH. Every time I tried, the following error occurred:
 
-<pre class="highlight"><code class="bash"><span class="dollar">$</span> git push -u origin master
-/usr/local/lib/ruby/2.0.0/net/http.rb:878:in `initialize': Connection timed out - connect(2) (Errno::ETIMEDOUT)
+```bash
+$ git push -u origin master/usr/local/lib/ruby/2.0.0/net/http.rb:878:in `initialize': Connection timed out - connect(2) (Errno::ETIMEDOUT)
   from /usr/local/lib/ruby/2.0.0/net/http.rb:878:in `open'
   from /usr/local/lib/ruby/2.0.0/net/http.rb:878:in `block in connect'
   from /usr/local/lib/ruby/2.0.0/timeout.rb:52:in `timeout'
@@ -245,14 +255,18 @@ fatal: Could not read from remote repository.
 
 Please make sure you have the correct access rights
 and the repository exists.
-</code></pre>
+```
 
 This happened when I my SSH keys were added and everything was set up properly. After much research, I finally resolved the issue by editing the `/etc/hosts` file and replacing the following line:
 
-<pre class="highlight"><code class="bash">127.0.0.1       localhost</code></pre>
+```bash
+127.0.0.1       localhost
+```
 
 with (replace `gitlab.example.com` with your server's name):
 
-<pre class="highlight"><code class="bash">127.0.0.1       gitlab.example.com</code></pre>
+```bash
+127.0.0.1       gitlab.example.com
+```
 
 If you encounter this issue, this should resolve it for you.

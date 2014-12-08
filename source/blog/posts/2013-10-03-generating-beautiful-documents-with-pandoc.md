@@ -15,7 +15,9 @@ To install Pandoc, begin by visiting the [Downloads](http://johnmacfarlane.net/p
 
 After the installation, you should be able to execute the following command in your terminal:
 
-<pre class="no-highlight"><code><span class="dollar">$</span> pandoc --version</code></pre>
+```bash
+$ pandoc --version
+```
 
 If Pandoc is properly installed, then you'll receive a message with the version that you've installed, along with some other useful information.
 
@@ -23,7 +25,8 @@ If Pandoc is properly installed, then you'll receive a message with the version 
 
 Pandoc has support for many different formats, but I've found writing documents using [Markdown](http://en.wikipedia.org/wiki/Markdown) and converting them to the format you require makes life quite easy. Open up your favorite text editor and add the following to it.
 
-<pre class="no-highlight"><code>% Getting Started with Pandoc
+```
+% Getting Started with Pandoc
 % Oct. 3, 2013
 
 This is a test of [Pandoc](http://johnmacfarlane.net/pandoc/).
@@ -39,11 +42,13 @@ This is a test of [Pandoc](http://johnmacfarlane.net/pandoc/).
 > _Wow, this is awesome!_
 
 Pandoc is the __greatest__.
-</code></pre>
+```
 
 Save the file as `pandoc_test.md` in the directory of your choice, and fire up the terminal. `cd` to the folder containing your markdown file and issue the following command:
 
-<pre class="no-highlight"><code><span class="dollar">$</span> pandoc pandoc_test.md -o pandoc_test.pdf</code></pre>
+```bash
+$ pandoc pandoc_test.md -o pandoc_test.pdf
+```
 
 This will generate a PDF of the previously written `pandoc_test.md` markdown file in the same directory. This is the general output for any format that you'd like to convert to, such as `.docx`, `.pdf`, `.epub`, `.md`, `.html`, and `.tex` to name a few.
 

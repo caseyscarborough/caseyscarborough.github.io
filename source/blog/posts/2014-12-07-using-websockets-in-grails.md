@@ -11,14 +11,15 @@ categories: [grails]
 
 You'll want to begin by adding the necessary dependency to your `grails-app/conf/BuildConfig.groovy` file. Add the following dependency to your `dependencies` block:
 
-<pre class="highlight"><code class="java">dependencies {
+```java
+dependencies {
   bundle('javax.websocket:javax.websocket-api:1.1') {
     // This line is necessary for deployment to Tomcat, since
     // Tomcat comes with its own version of javax.websocket-api.
     export = false
   }  
 }
-</code></pre>
+```
 
 ## Creating Your WebSocket
 
@@ -26,7 +27,8 @@ You'll want to create your WebSocket in your `src/groovy/{package-name}` directo
 
 Here is our WebSocket class:
 
-<pre class="highlight"><code class="java">package chatroom
+```java
+package chatroom
 
 import grails.util.Environment
 import org.apache.log4j.Logger
@@ -47,7 +49,7 @@ import javax.websocket.server.ServerEndpoint
 class ChatroomEndpoint implements ServletContextListener {
 
   private static final Logger log = Logger.getLogger(ChatroomEndpoint.class)
-  private static final Set&lt;Session&gt; users = ([] as Set).asSynchronized()
+  private static final Set<Session> users = ([] as Set).asSynchronized()
 
   @Override
   void contextInitialized(ServletContextEvent servletContextEvent) {
@@ -135,35 +137,38 @@ class ChatroomEndpoint implements ServletContextListener {
       message = String.format(
         "%s: %s", userSession.userProperties.get("username"), message)
     }
-    Iterator&lt;Session&gt; iterator = users.iterator()
+    Iterator<Session>; iterator = users.iterator()
     while(iterator.hasNext()) {
       iterator.next().basicRemote.sendText(message)
     }
   }
 }
-</code></pre>
+```
 
 ## Registering the WebSocket Listener
 
 Next, you'll need to register your newly created WebSocket class in Grails' `web.xml` file. By default, this file is not created in your Grails application directory, but you can create it by running the following command:
 
-<pre class="highlight"><code class="bash">grails install-templates</code></pre>
+```bash
+grails install-templates
+```
 
 This will install the `web.xml` file in the `src/templates/war` directory. You can feel free to delete the other templates if you don't have a use for them. You'll want to add the following listener to that file:
 
-<pre class="highlight"><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;web-app version=&quot;3.0&quot;
-         metadata-complete=&quot;true&quot;
-         xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;
-         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-         xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot;&gt;
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+         metadata-complete="true"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-    &lt;!-- Add the following lines: --&gt;
-    &lt;listener&gt;
-        &lt;listener-class&gt;chatroom.ChatroomEndpoint&lt;/listener-class&gt;
-    &lt;/listener&gt;
-&lt;/web-app&gt;
-</code></pre>
+    <!-- Add the following lines: -->
+    <listener>
+        <listener-class>chatroom.ChatroomEndpoint</listener-class>
+    </listener>
+</web-app>
+```
 
 Now your WebSocket should be ready to go when your application starts up. Now we just need to connect to it via JavaScript.
 
@@ -171,11 +176,12 @@ Now your WebSocket should be ready to go when your application starts up. Now we
 
 First, we'll want to create an example page to test out the chatroom. In your `grails-app/views/index.gsp` (or wherever you'd like to connect to your endpoint), replace the contents with the following:
 
-<pre class="highlight"><code class="gsp">&lt;html&gt;
-&lt;head&gt;
-  &lt;meta name=&quot;layout&quot; content=&quot;main&quot;&gt;
-  &lt;title&gt;WebSocket Example&lt;/title&gt;
-  &lt;style&gt;
+```gsp
+<html>
+<head>
+  <meta name="layout" content="main">
+  <title>WebSocket Example</title>
+  <style>
   #chatroom {
     padding: 10px;
   }
@@ -192,58 +198,58 @@ First, we'll want to create an example page to test out the chatroom. In your `g
     overflow: auto;
     padding: 10px;
   }
-  &lt;/style&gt;
-  &lt;script&gt;
+  </style>
+  <script>
     $(document).ready(function () {
-      var log = $(&quot;#log&quot;),
-          message = $(&quot;#message&quot;),
-          sendMessageButton = $(&quot;#send-message-button&quot;),
+      var log = $("#log"),
+          message = $("#message"),
+          sendMessageButton = $("#send-message-button"),
 
       // Create the WebSocket URL link. This URI maps to the URI you specified
       // in the @ServerEndpoint annotation in ChatroomEndpoint.groovy.
-          webSocketUrl = &quot;${createLink(uri: &#39;/chatroom&#39;, absolute: true).replaceFirst(/http/, /ws/)}&quot;,
+          webSocketUrl = "${createLink(uri: '/chatroom', absolute: true).replaceFirst(/http/, /ws/)}",
 
       // Connect to the WebSocket.
           socket = new WebSocket(webSocketUrl);
 
       socket.onopen = function () {
-        log.append(&quot;&lt;p&gt;Connected to server. Enter your username.&lt;/p&gt;&quot;);
+        log.append("<p>Connected to server. Enter your username.</p>");
       };
 
       socket.onmessage = function (message) {
-        log.append(&quot;&lt;p&gt;&quot; + message.data + &quot;&lt;/p&gt;&quot;);
+        log.append("<p>" + message.data + "</p>");
       };
 
       socket.onclose = function () {
-        log.append(&quot;&lt;p&gt;Connection to server was lost.&lt;/p&gt;&quot;);
+        log.append("<p>Connection to server was lost.</p>");
       };
 
-      sendMessageButton.on(&#39;click&#39;, function () {
+      sendMessageButton.on('click', function () {
         var text = message.val();
-        if ($.trim(text) !== &#39;&#39;) {
+        if ($.trim(text) !== '') {
           // Send the message and clear the text.
           socket.send(text);
 
-          message.val(&quot;&quot;);
+          message.val("");
           message.focus();
           return;
         }
         message.focus();
       });
     });
-  &lt;/script&gt;
-&lt;/head&gt;
+  </script>
+</head>
 
-&lt;body&gt;
-&lt;div id=&quot;chatroom&quot;&gt;
-  &lt;input type=&quot;text&quot; id=&quot;message&quot; placeholder=&quot;Enter your username first, then chat&quot;&gt;&lt;br&gt;
+<body>
+<div id="chatroom">
+  <input type="text" id="message" placeholder="Enter your username first, then chat"><br>
 
-  &lt;div id=&quot;log&quot;&gt;&lt;/div&gt;&lt;br&gt;
-  &lt;button id=&quot;send-message-button&quot;&gt;Send&lt;/button&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+  <div id="log"></div><br>
+  <button id="send-message-button">Send</button>
+</div>
+</body>
+</html>
+```
 
 You can then run the application using `grails run-app` to see it in action.
 

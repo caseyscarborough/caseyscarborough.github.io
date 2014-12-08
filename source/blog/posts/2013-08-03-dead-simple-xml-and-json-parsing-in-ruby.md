@@ -9,21 +9,23 @@ Parsing large or complicated XML or JSON files is never fun, and just plain suck
 
 Take the following XML for an example:
 
-<pre class="highlight"><code class="xml">&lt;menu&gt;
-  &lt;food&gt;
-    &lt;name&gt;Waffles&lt;/name&gt;
-    &lt;price&gt;5.95&lt;/price&gt;
-  &lt;/food&gt;
-  &lt;food&gt;
-    &lt;name&gt;French Toast&lt;/name&gt;
-    &lt;price&gt;4.50&lt;/price&gt;
-  &lt;/food&gt;
-&lt;/menu&gt;
-</code></pre>
+```xml
+<menu>
+  <food>
+    <name>Waffles</name>
+    <price>5.95</price>
+  </food>
+  <food>
+    <name>French Toast</name>
+    <price>4.50</price>
+  </food>
+</menu>
+```
 
 And it's equivalent JSON:
 
-<pre class="highlight"><code class="bash">{
+```json
+{
   "menu": {
     "food": [
       {
@@ -36,12 +38,13 @@ And it's equivalent JSON:
       }
     ]
   }
-}</code></pre>
+}
+```
 
 These XML and JSON files can be parsed and the result returned as a Ruby hash with the following code:
 
-<pre class="highlight"><code class="ruby">require 'crack' # XML and JSON parsing
-require 'crack/json' # Only JSON parsing
+```ruby
+require 'crack' # XML and JSON parsingrequire 'crack/json' # Only JSON parsing
 require 'crack/xml' # Only XML parsing
 
 response = Crack::XML.parse(File.read('food.xml'))
@@ -49,13 +52,15 @@ response = Crack::XML.parse(File.read('food.xml'))
 
 response = Crack::JSON.parse(File.read('food.json'))
 # => {"menu"=>{"food"=>[{"name"=>"Waffles", "price"=>"5.95"}, {"name"=>"French Toast", "price"=>"4.50"}]}}
-</code></pre>
+```
 
 These examples are obviously simple for the sake of this post, but this gem makes life so much simpler when parsing larger and more complicated XML or JSON.
 
 You can install the [Crack](https://github.com/jnunemaker/crack) gem by issuing the following command:
 
-<pre class="highlight"><code>$ gem install crack</code></pre>
+```bash
+gem install crack
+```
 
 ### Resources
 

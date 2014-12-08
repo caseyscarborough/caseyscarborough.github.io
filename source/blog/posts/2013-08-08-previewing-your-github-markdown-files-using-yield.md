@@ -13,7 +13,9 @@ When working with multiple projects on GitHub, I've noticed that it is sometimes
 
 Installing the gem requires Ruby v1.9.3 or greater, so be sure to have that installed before the installation. To get started with [`yield`](http://caseyscarborough.github.io/yield), you can begin by running the following command to install the latest version:
 
-<pre class="no-highlight"><code><span class="dollar">$</span> gem install yield</code></pre>
+```bash
+gem install yield
+```
 
 This will install the [`yield`](http://caseyscarborough.github.io/yield) gem, and will give you access to its executable.
 
@@ -21,9 +23,10 @@ This will install the [`yield`](http://caseyscarborough.github.io/yield) gem, an
 
 After installation, from any repository with a README.md file, issue the yield command to fire up the server and parse your markdown file:
 
-<pre class="no-highlight"><code><span class="dollar">$</span> yield
+```bash
+yield
 =* Yield is serving your markdown at http://localhost:4000/
-</code></pre>
+```
 
 This will start up a server instance using Thin, and open your browser to [localhost:4000](http://localhost:4000). You should see something in your browser similar to the following, which is the [`README.md`](https://github.com/caseyscarborough/yield/blob/master/README.md) file for the [`yield`](http://caseyscarborough.github.io/yield) gem.
 
@@ -31,7 +34,9 @@ This will start up a server instance using Thin, and open your browser to [local
 
 You can render markdown files that are not named `README.md` by specifying the name of the file as an argument to `yield`.
 
-<pre class="no-highlight"><code><span class="dollar">$</span> yield updates.md</code></pre>
+```bash
+yield updates.md
+```
 
 This will render the contents of the `updates.md` file in the browser at [localhost:4000](http://localhost:4000).
 
@@ -39,10 +44,11 @@ Yield also supports relative URLs, so you can render markdown files just by navi
 
 Finally, you can set the port for the server to start on by using the `-p` or `--port` option, shown below.
 
-<pre class="no-highlight"><code><span class="dollar"># Specify the port to serve on
-$</span> yield -p 8080
+```bash
+# Specify the port to serve on
+yield -p 8080
 =* Yield is serving your markdown at http://localhost:8080/
-</code></pre>
+```
 
 Check out the repository on GitHub for the latest updates and to view the source for the gem. This gem is still in development so many updates and improvements are likely to come.
 
