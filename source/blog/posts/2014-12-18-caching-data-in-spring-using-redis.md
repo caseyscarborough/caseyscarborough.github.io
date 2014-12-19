@@ -5,7 +5,7 @@ date: 2014-12-18
 categories: [java, redis]
 ---
 
-[Caching] is a way for applications to store data so that future requests to the same data are returned faster and do not require repeating computationally expensive operations. The [Spring Framework](http://projects.spring.io/spring-framework/) provides a simple way to cache the results of method calls with little to no configuration.
+[Caching](http://en.wikipedia.org/wiki/Cache_%28computing%29) is a way for applications to store data so that future requests to the same data are returned faster and do not require repeating computationally expensive operations. The [Spring Framework](http://projects.spring.io/spring-framework/) provides a simple way to cache the results of method calls with little to no configuration.
 
 The examples in this post use Spring 4.1.3 and [Spring Data Redis](http://projects.spring.io/spring-data-redis/) 1.4.1, the latest versions at the time of this writing. Full source code for this post can be found [here](https://github.com/caseyscarborough/spring-redis-caching-example).
 
