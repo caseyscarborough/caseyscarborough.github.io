@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Caching Data in Spring Using Redis &middot; caseyscarborough.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/favicon.ico" type="image/png">
+
+    <link href="/assets/stylesheets/app-d69b7bfe.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/javascripts/app-693e4d68.js" type="text/javascript"></script>
+</head>
+    <body>
+
+    <div id="wrap">
+      <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".cs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">CASEY SCARBOROUGH</a>
+    </div>
+    <nav class="collapse navbar-collapse cs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/activity/">Activity</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+      <div class="content">
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-2 hidden-sm"></div>
+            <div class="col-md-8">
+              <h2>Caching Data in Spring Using Redis</h2>
+              <p class="meta">18 Dec 2014 &middot; By <a href="mailto:caseyscarborough@gmail.com">Casey Scarborough</a></p>
+
+              <div class="post">
+                <p>[Caching] is a way for applications to store data so that future requests to the same data are returned faster and do not require repeating computationally expensive operations. The <a href="http://projects.spring.io/spring-framework/">Spring Framework</a> provides a simple way to cache the results of method calls with little to no configuration.</p>
+
+<p>The examples in this post use Spring 4.1.3 and <a href="http://projects.spring.io/spring-data-redis/">Spring Data Redis</a> 1.4.1, the latest versions at the time of this writing. Full source code for this post can be found <a href="https://github.com/caseyscarborough/spring-redis-caching-example">here</a>.</p>
+
+<h2>Installing Dependencies</h2>
+
+<p>You&#39;ll need to install the <code>spring-data-redis</code> and <code>jedis</code> plugins. Add the following to your <code>pom.xml</code> file in your Spring project if you&#39;re using Maven:</p>
+
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-data-redis&lt;/artifactId&gt;
+    &lt;version&gt;1.4.1.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;redis.clients&lt;/groupId&gt;
+    &lt;artifactId&gt;jedis&lt;/artifactId&gt;
+    &lt;version&gt;2.6.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>If you&#39;re using Gradle, you can add the following to your <code>build.gradle</code> file:</p>
+
+<pre><code class="java">compile &quot;org.springframework.data:spring-data-redis:1.4.1.RELEASE&quot;
+compile &quot;redis.clients:jedis:2.6.1&quot;
+</code></pre>
+
+<h2>Enabling Cache Support in Your Spring Application</h2>
+
+<p>To enable support for caching in your application, you&#39;ll want to create a new <code>CacheManager</code> bean. There are many different implementations of the <code>CacheManager</code> interface, but for this post we&#39;ll be using <code>RedisCacheManager</code> to allow integration with <a href="http://redis.io/">Redis</a>.</p>
+
+<h3>Java-based Configuration</h3>
+
+<p>If you&#39;re using Java-based configuration, you&#39;ll want to annotate one of your configuration classes with the <code>@EnableCaching</code> annotation and expose a <code>CacheManager</code> bean. You&#39;ll also need a connection factory and a <code>RedisTemplate</code> bean for Spring to communicate with your Redis database. An example <code>CacheConfig</code> class is shown below:</p>
+
+<pre><code class="java">import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+
+@Configuration
+@EnableCaching
+public class CacheConfig {
+
+  @Bean
+  public JedisConnectionFactory redisConnectionFactory() {
+    JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory();
+
+    // Defaults
+    redisConnectionFactory.setHostName(&quot;127.0.0.1&quot;);
+    redisConnectionFactory.setPort(6379);
+    return redisConnectionFactory;
+  }
+
+  @Bean
+  public RedisTemplate&lt;String, String&gt; redisTemplate(RedisConnectionFactory cf) {
+    RedisTemplate&lt;String, String&gt; redisTemplate = new RedisTemplate&lt;String, String&gt;();
+    redisTemplate.setConnectionFactory(cf);
+    return redisTemplate;
+  }
+
+  @Bean
+  public CacheManager cacheManager(RedisTemplate redisTemplate) {
+    RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
+
+    // Number of seconds before expiration. Defaults to unlimited (0)
+    cacheManager.setDefaultExpiration(300);
+    return cacheManager;
+  }
+}
+</code></pre>
+
+<h2>Using the @Cacheable Annotation</h2>
+
+<p>After setting up your caching configuration, you can then begin to start caching method results with the <code>@Cacheable</code> annotation. Putting this annotation on a method will cause it&#39;s results to be cached in your Redis database for the length specified in your expiration, or until it is manually expired.</p>
+
+<p>See the following example:</p>
+
+<pre><code class="java">import org.apache.log4j.Logger;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class ExampleController {
+
+  private static final Logger log = Logger.getLogger(ExampleController.class);
+
+  @RequestMapping(value = &quot;/&quot;, method = RequestMethod.GET)
+  @ResponseBody
+  @Cacheable(&quot;calculateResult&quot;)
+  public String calculateResult() {
+    log.debug(&quot;Performing expensive calculation...&quot;);
+    // perform computationally expensive calculation
+    return &quot;result&quot;;
+  }
+}
+</code></pre>
+
+<p>Executing this method multiple times causes only one log output:</p>
+
+<pre><code>2014-12-18 19:24:30 DEBUG ExampleController:19 - Performing expensive calculation...
+</code></pre>
+
+<p>And you can see the cached item in your Redis instance:</p>
+
+<p><img src="/assets/images/redis-caching-bdb7dcdc.png" /></p>
+
+<h2>Conclusion</h2>
+
+<p>This is a simple example of how to cache application data in your Redis instance. For more information such as specifically putting items into the cache, and manually expiring, <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cache.html">Spring&#39;s caching documentation</a> is very thorough.</p>
+
+              </div>
+              <br>
+                <div class="comments">
+                  <div id="disqus_thread"></div>
+                  <script type="text/javascript">
+                    var disqus_shortname = 'caseyscarboroughcom'; 
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                  </script>
+                  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3 hidden-sm"></div>
+    <div class="col-md-6">
+      <div class="footer">
+        <p class="pull-left icons">
+          <a target="_blank" class="tooltip-link" title="Email" href="mailto:caseyscarborough@gmail.com"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="GitHub" href="https://github.com/caseyscarborough/"><i class="fa fa-github"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="BitBucket" href="https://bitbucket.org/caseyscarborough/"><i class="fa fa-bitbucket"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="LinkedIn" href="https://linkedin.com/in/caseyscarborough"><i class="fa fa-linkedin"></i></a>&nbsp;&nbsp;
+          <a target="_blank" class="tooltip-link" title="Google+" href="https://plus.google.com/103526747321763836028?rel=author"><i class="fa fa-google-plus"></i></a>
+        </p>
+        <p class="pull-right">
+          <small class="meta">Contribute to this site on <a target="_blank" href="https://github.com/caseyscarborough/caseyscarborough.github.io">GitHub</a>.</small><br>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+    </body>
+</html>
