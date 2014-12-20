@@ -122,7 +122,7 @@ public class CacheConfig {
 }
 </code></pre>
 
-<h2>Using the @Cacheable Annotation</h2>
+<h2>Caching the Results of a Method</h2>
 
 <p>After setting up your caching configuration, you can then begin to start caching method results with the <code>@Cacheable</code> annotation. Putting this annotation on a method will cause it&#39;s results to be cached in your Redis database for the length specified in your expiration, or until it is manually expired.</p>
 
@@ -160,9 +160,25 @@ public class ExampleController {
 
 <p><img src="/assets/images/redis-caching-bdb7dcdc.png" /></p>
 
+<h2>Updating and Evicting Cached Data</h2>
+
+<p>In addition to the <code>@Cacheable</code> annotation, Spring provides the <code>@CachePut</code> and <code>@CacheEvict</code> annotations for manually managing cached data. The <code>@CachePut</code> annotation allows you to update the cache without interfering with the execution of the method. For example, if you updated a user, you would want to place the result into the cache to be looked up later:</p>
+
+<pre><code class="java">@CachePut(value = &#39;user&#39;, key = &quot;#id&quot;)
+public User updateUser(Long id, UserDescriptor descriptor)
+</code></pre>
+
+<p>This method will always be executed and its results stored in your cache.</p>
+
+<p>On the other hand, there will be times where you will want to &#39;evict&#39; data from your cache, that is, to remove it. For example, when deleting a user:</p>
+
+<pre><code class="java">@CacheEvict(value = &#39;user&#39;, key = &quot;#id&quot;)
+public void deleteUser(Long id)
+</code></pre>
+
 <h2>Conclusion</h2>
 
-<p>This is a simple example of how to cache application data in your Redis instance. For more information such as specifically putting items into the cache, and manually expiring, <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cache.html">Spring&#39;s caching documentation</a> is very thorough.</p>
+<p>This is a simple example of how to cache application data in your Redis instance. Although this post focuses on caching with Redis, caching with other providers is very straight forward and the caching concepts remain the same. For more information and complete documentation, see <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cache.html">Spring&#39;s caching reference</a>. Feel free to leave a comment if you have any questions or run into any problems.</p>
 
               </div>
               <br>
