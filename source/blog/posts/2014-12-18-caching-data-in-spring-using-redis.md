@@ -44,6 +44,7 @@ If you're using Java-based configuration, you'll want to annotate one of your co
 
 ```java
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -54,7 +55,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 @Configuration
 @EnableCaching
-public class CacheConfig {
+public class CacheConfig extends CachingConfigurerSupport {
 
   @Bean
   public JedisConnectionFactory redisConnectionFactory() {
@@ -142,7 +143,60 @@ On the other hand, there will be times where you will want to 'evict' data from 
 public void deleteUser(Long id)
 ```
 
+## Implementing a Custom Key Generator
+
+For basic purposes, the default key generation system for cached data works. The parameters to your method become the key in your cache store. For example, in the following method, the value for the parameter `username` would become the key in your store:
+
+```java
+@Cacheable("users")
+public User findByUsername(String username)
+```
+
+But this becomes problematic when you want cache the result of another method that also takes in the same value, for instance:
+
+```java
+@Cacheable("users")
+public Integer getLoginCountByUsername(String username)
+````
+
+You could easily just specify a different key for each `@Cacheable` annotation, but that becomes tedious and hard to maintain. The solution is to implement a custom key generator that will generate the key for each method to be unique by default. Adding a `keyGenerator` bean to your `CacheConfig` class (shown above) will give you this functionality. Note that for your custom key generator to work by default, this class must implement the `CachingConfigurer` interface. Extending `CachingConfigurerSupport` will provide this for you.
+
+```java
+// Previous imports omitted
+import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.interceptor.KeyGenerator;
+
+import java.lang.reflect.Method;
+
+@Configuration
+@EnableCaching
+public class CacheConfig extends CachingConfigurerSupport {
+
+  // Previous methods omitted
+
+  @Bean
+  public KeyGenerator keyGenerator() {
+    return new KeyGenerator() {
+      @Override
+      public Object generate(Object o, Method method, Object... objects) {
+        // This will generate a unique key of the class name, the method name,
+        // and all method parameters appended.
+        StringBuilder sb = new StringBuilder();
+        sb.append(o.getClass().getName());
+        sb.append(method.getName());
+        for (Object obj : objects) {
+          sb.append(obj.toString());
+        }
+        return sb.toString();
+      }
+    };
+  }
+}
+```
+
+Now when your method results are cached, they will be cached with your custom key generator implementation.
+
 ## Conclusion
 
-This is a simple example of how to cache application data in your Redis instance. Although this post focuses on caching with Redis, caching with other providers is very straight forward and the caching concepts remain the same. For more information and complete documentation, see [Spring's caching reference](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cache.html). Feel free to leave a comment if you have any questions or run into any problems.
+This is a simple example of how to cache application data in your Redis instance. Although this post focuses on caching with Redis, caching with other providers is very straightforward and the caching concepts remain the same. For more information and complete documentation, see [Spring's caching reference](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cache.html). Feel free to leave a comment if you have any questions or run into any problems.
 
