@@ -84,7 +84,7 @@ public class CacheConfig {
 }
 ```
 
-## Using the @Cacheable Annotation
+## Caching the Results of a Method
 
 After setting up your caching configuration, you can then begin to start caching method results with the `@Cacheable` annotation. Putting this annotation on a method will cause it's results to be cached in your Redis database for the length specified in your expiration, or until it is manually expired.
 
@@ -124,7 +124,25 @@ And you can see the cached item in your Redis instance:
 
 ![](/assets/images/redis-caching.png)
 
+## Updating and Evicting Cached Data
+
+In addition to the `@Cacheable` annotation, Spring provides the `@CachePut` and `@CacheEvict` annotations for manually managing cached data. The `@CachePut` annotation allows you to update the cache without interfering with the execution of the method. For example, if you updated a user, you would want to place the result into the cache to be looked up later:
+
+```java
+@CachePut(value = 'user', key = "#id")
+public User updateUser(Long id, UserDescriptor descriptor)
+```
+
+This method will always be executed and its results stored in your cache.
+
+On the other hand, there will be times where you will want to 'evict' data from your cache, that is, to remove it. For example, when deleting a user:
+
+```java
+@CacheEvict(value = 'user', key = "#id")
+public void deleteUser(Long id)
+```
+
 ## Conclusion
 
-This is a simple example of how to cache application data in your Redis instance. For more information such as specifically putting items into the cache, and manually expiring, [Spring's caching documentation](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cache.html) is very thorough.
+This is a simple example of how to cache application data in your Redis instance. Although this post focuses on caching with Redis, caching with other providers is very straight forward and the caching concepts remain the same. For more information and complete documentation, see [Spring's caching reference](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cache.html). Feel free to leave a comment if you have any questions or run into any problems.
 
