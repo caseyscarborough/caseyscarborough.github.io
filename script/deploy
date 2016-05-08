@@ -5,6 +5,11 @@ if [ ! -d "build/.git" ]; then
   exit
 fi
 
+if [ -z "$1" ]; then
+    echo "Usage: script/deploy 'Commit message'"
+    exit
+fi
+
 git add . --all
 git commit -m "$1" --allow-empty
 git push origin +develop
