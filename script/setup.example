@@ -3,4 +3,4 @@
 mkdir -p build && cd build
 
 git init
-git remote add prod ssh://user@server:port/path
+git remote add origin ssh://user@server:port/path
